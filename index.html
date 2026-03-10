@@ -188,8 +188,15 @@ nav {
   width:340px; height:510px; border-radius:18px; overflow:hidden;
   position:absolute; left:52%; top:50%;
   margin-left:-170px; margin-top:-255px;
-  transition:filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition:filter 0.3s ease, box-shadow 0.3s ease;
   cursor:pointer;
+  animation:hcfFloat 4s ease-in-out infinite;
+}
+.hcf-item:nth-child(odd)  { animation-duration:4.2s; animation-delay:0s; }
+.hcf-item:nth-child(even) { animation-duration:3.8s; animation-delay:-1.5s; }
+@keyframes hcfFloat {
+  0%,100% { transform: var(--hcf-base-transform, translateY(0px)); }
+  50%      { transform: var(--hcf-base-transform, translateY(0px)) translateY(-10px); }
 }
 .hcf-item img { width:100%; height:100%; object-fit:cover; pointer-events:none; }
 #heroCfDesktop:hover .hcf-item { filter:brightness(0.45) contrast(1.1) saturate(1.2); transition:filter 0.3s ease; }
@@ -410,10 +417,11 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
 @media(max-width:768px){
   nav { height:52px; padding:0 16px; }
-  .nav-logo img { height:26px !important; }
-  .nav-logo { font-size:12px !important; gap:6px !important; letter-spacing:2px !important; }
-  .nav-btn { font-size:9px !important; padding:8px 14px !important; letter-spacing:1.5px !important; }
+  .nav-logo img { height:22px !important; }
+  .nav-logo { font-size:11px !important; gap:6px !important; letter-spacing:1.5px !important; }
+  .nav-btn { font-size:9px !important; padding:8px 12px !important; letter-spacing:1px !important; }
   .nav-countdown { display:none !important; }
+  .urgency-banner { margin-top:52px; }
 
   .urgency-banner { margin-top:52px; font-size:11px; padding:8px 14px; }
 
@@ -466,6 +474,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .faq-a { font-size:12px; }
 
   .pricing-section { padding:60px 16px; }
+  .pricing-countdown { display:none !important; }
   .pricing-card { padding:32px 20px 28px; }
   .pricing-value { font-size:68px; }
   .btn-buy { font-size:11px; padding:18px 16px; }
@@ -479,7 +488,36 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .foot-bar-inner { flex-direction:column; align-items:center; text-align:center; gap:8px; }
   .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
 }
+
+@keyframes cardFloat {
+  0%,100% { translate: 0 0px; }
+  50%      { translate: 0 -8px; }
+}
+#heroCfDesktop .hcf-item {
+  animation: cardFloat 5s ease-in-out infinite;
+  will-change: translate;
+}
+#heroCfDesktop .hcf-item:nth-child(2n) { animation-duration:5.4s; animation-delay:-1s; }
+#heroCfDesktop .hcf-item:nth-child(3n) { animation-duration:4.8s; animation-delay:-2s; }
+#heroCfDesktop .hcf-item:nth-child(4n) { animation-duration:5.8s; animation-delay:-3s; }
 </style>
+<script>
+(function(){
+  function applyZoom(){
+    var baseWidth = 1440;
+    var w = window.innerWidth;
+    if(w > 768){
+      var scale = w / baseWidth;
+      if(scale > 1) scale = 1; // never zoom in, only keep at 1:1 or smaller
+      document.documentElement.style.zoom = scale;
+    } else {
+      document.documentElement.style.zoom = '';
+    }
+  }
+  applyZoom();
+  window.addEventListener('resize', applyZoom);
+})();
+</script>
 </head>
 <body>
 
@@ -497,7 +535,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
       <div class="nav-timer-block"><div class="nav-timer-num" id="nav-ss">00</div><div class="nav-timer-sub">seg</div></div>
     </div>
   </div>
-  <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
+  <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
 </nav>
 
 <script>
@@ -544,7 +582,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
     </p>
 
     <div class="hero-ctas">
-      <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" class="btn-hero">🦴 Quero Começar Agora — R$89,99</a>
+      <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero">🦴 Quero Começar Agora — R$89,99</a>
     </div>
 
     <div class="hero-microtrust">
@@ -716,7 +754,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   </div>
 </section>
 
-<div class="section-cta"><a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Quero Começar Agora</a></div>
+<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Quero Começar Agora</a></div>
 
 <!-- ═══ FOR WHOM ═══ -->
 <section class="section">
@@ -757,7 +795,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   </div>
 </section>
 
-<div class="section-cta"><a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Garantir Minha Vaga</a></div>
+<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Garantir Minha Vaga</a></div>
 
 <!-- ═══ TOOLS ═══ -->
 <div class="tools-bg">
@@ -818,12 +856,28 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
   <div class="pricing-card reveal">
     <div class="pricing-badge">🔥 Desconto de Lançamento — Encerra em Breve</div>
+
+    <!-- Pricing countdown -->
+    <div class="pricing-countdown" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:28px;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(240,232,216,0.4);">⚡ Oferta expira em</span>
+      <div style="display:flex;align-items:center;gap:4px;">
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,69,0,0.1);border:1px solid rgba(255,69,0,0.25);padding:6px 12px;min-width:46px;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);">
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px;" id="price-mm">15</div>
+          <div style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">min</div>
+        </div>
+        <div style="font-size:24px;font-weight:900;color:var(--o1);margin-bottom:12px;opacity:0.7;">:</div>
+        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,69,0,0.1);border:1px solid rgba(255,69,0,0.25);padding:6px 12px;min-width:46px;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%);">
+          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px;" id="price-ss">00</div>
+          <div style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">seg</div>
+        </div>
+      </div>
+    </div>
     <div class="pricing-title">Acesso Completo ao Curso</div>
     <div class="pricing-from">De R$197,00</div>
     <div class="pricing-value">R$<em>89</em><span style="font-size:0.42em;letter-spacing:0;">,99</span></div>
     <div class="pricing-installment">ou <strong>6x de R$15,00</strong> sem juros no cartão</div>
 
-    <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" class="btn-buy">
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy">
       🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA
     </a>
 
@@ -841,9 +895,12 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
 <!-- ═══ SOCIAL PROOF POPUP ═══ -->
 <!-- WhatsApp Button -->
-<a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.45),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
+<div style="position:fixed;bottom:24px;right:24px;z-index:700;display:flex;align-items:flex-end;gap:10px;">
+
+  <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.45),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+</div>
 <script>
 (function(){
   var btn=document.getElementById('whatsappBtn');
@@ -954,7 +1011,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
     var offset=i-current,absOff=Math.abs(offset),sign=offset<0?-1:1;
     var sc=offset===0?1:Math.max(0.58,1-absOff*0.14);
     el.style.transform='translateX('+(offset*240)+'px) rotateY('+(offset===0?0:sign*-45)+'deg) scale('+sc+')';
-    el.style.opacity=absOff>2?0:absOff===0?1:absOff===1?0.7:0.4;
+    el.style.opacity=absOff>2?0:absOff===0?1:offset<0?(absOff===1?0.3:0.15):absOff===1?0.7:0.4;
     el.style.pointerEvents=absOff>2?'none':'auto';
     el.style.zIndex=total-absOff;
     el.style.filter='brightness('+(offset===0?1:Math.max(0.45,1-absOff*0.15))+') contrast(1.1) saturate(1.2)';
@@ -997,6 +1054,24 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   window.addEventListener('mouseup',()=>{isDragging=false;track.style.cursor='grab';});
   track.style.cursor='grab';
   track.addEventListener('wheel',e=>{e.preventDefault();pos-=e.deltaX||e.deltaY;if(pos<=-totalW)pos+=totalW;if(pos>0)pos-=totalW;update();},{passive:false});
+})();
+
+// PRICING TIMER — syncs with nav countdown
+(function(){
+  const KEY='ev_countdown_end';
+  const pmm=document.getElementById('price-mm');
+  const pss=document.getElementById('price-ss');
+  if(!pmm||!pss)return;
+  function tick(){
+    let end=parseInt(sessionStorage.getItem(KEY));
+    if(!end||end<Date.now()){end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
+    const diff=Math.max(0,end-Date.now());
+    const m=Math.floor(diff/60000),s=Math.floor((diff%60000)/1000);
+    pmm.textContent=String(m).padStart(2,'0');
+    pss.textContent=String(s).padStart(2,'0');
+    if(diff>0)setTimeout(tick,500);
+  }
+  tick();
 })();
 
 // SOCIAL PROOF POPUP
