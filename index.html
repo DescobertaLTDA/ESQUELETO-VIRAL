@@ -433,40 +433,13 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
     position:relative;
     background: var(--dark);
   }
-  /* BG image layer — fades in from top transparent to visible */
-  .hero::before {
-    content:'';
-    position:absolute;
-    inset:0;
-    background-image: url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg');
-    background-size:cover;
-    background-position:center top;
-    z-index:0;
-    pointer-events:none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.85) 60%, black 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.85) 60%, black 100%);
-  }
-  /* Dark overlay at bottom for text contrast */
-  .hero::after {
-    content:'';
-    position:absolute;
-    inset:0;
-    background: linear-gradient(to bottom,
-      transparent 0%,
-      transparent 20%,
-      rgba(8,8,8,0.4) 38%,
-      rgba(8,8,8,0.75) 52%,
-      rgba(8,8,8,0.95) 65%,
-      rgba(8,8,8,1) 80%);
-    z-index:0;
-    pointer-events:none;
-  }
+  .hero::before { display:none !important; }
+  .hero::after  { display:none !important; }
   .hero > * { position:relative; z-index:1; }
-  /* Reset on desktop */
-  @media(min-width:769px){
-    .hero::before { background-image:none; opacity:0; }
-    .hero::after  { background:none; }
-  }
+  /* Show bg layers on mobile via CSS — JS controls opacity for swap */
+  #bgSkeleton { display:block !important; }
+  #bgOwl      { display:block !important; }
+  #bgDark     { display:block !important; }
   .hero-content { width:100% !important; text-align:center; }
   .hero-eyebrow { justify-content:center; font-size:8px; }
   .hero-title { font-size:clamp(44px,13vw,62px); letter-spacing:-1.5px; line-height:.92; }
@@ -521,9 +494,14 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
   .coverflow-section { display:none; }
 
-  footer { padding:40px 16px 0; }
-  .foot-top { flex-direction:column; align-items:flex-start; gap:24px; }
-  .foot-links { gap:20px; }
+  footer { padding:24px 16px 0; }
+  .foot-inner { padding:0 !important; }
+  #footInner { padding:24px 16px 0 !important; }
+  .foot-top { flex-direction:column; align-items:center; gap:12px; text-align:center; }
+  .foot-brand { align-items:center; width:100%; display:flex; justify-content:center; }
+  .foot-brand img { height:40px !important; opacity:0.5 !important; }
+  .foot-links { gap:14px; justify-content:center; flex-wrap:nowrap; width:100%; }
+  .foot-links a, .foot-links span { font-size:11px; }
   .foot-bar { padding:16px; margin:0 -16px; }
   .foot-bar-inner { flex-direction:column; align-items:center; text-align:center; gap:8px; }
   .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
@@ -549,33 +527,44 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .urg-mobile  { display: inline; }
 }
 
-/* ── BANNER FLOAT (mobile only) ── */
+/* ── BANNER FLOAT (mobile only) — applied to nav, not banner ── */
 @keyframes bannerFloat {
   0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}
-@media(max-width:768px) {
-  .urgency-banner { animation: bannerFloat 3s ease-in-out infinite; }
+  50%      { transform: translateY(-3px); }
 }
 
 /* ── OWL THEME ── */
-body.owl-theme { --o1:#3d8b3d; --o2:#4ea84e; --o3:#6abf6a; }
-@media(max-width:768px) {
-  body.owl-theme .hero::before {
-    background-image: url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773095545/Owl_staring_intensely_at_camera_e1542ec1be_xebrff.jpg') !important;
-    background-position: center 10% !important;
-  }
-  body.owl-theme .hero::after {
-    background: linear-gradient(to bottom, transparent 0%, transparent 20%, rgba(0,20,0,0.5) 45%, rgba(5,20,5,0.95) 70%, rgba(8,8,8,1) 85%) !important;
-  }
-  body.owl-theme .btn-hero       { background: linear-gradient(135deg,#2d6e2d,#4ea84e) !important; box-shadow: 0 8px 40px rgba(61,139,61,0.45) !important; }
-  body.owl-theme .hook-highlight { color: #4ea84e !important; }
-  body.owl-theme .hero-eyebrow   { color: #4ea84e !important; border-color: rgba(61,139,61,0.3) !important; background: rgba(61,139,61,0.1) !important; }
-  body.owl-theme .urgency-banner { background: linear-gradient(90deg,#001500,#002000,#001500) !important; border-color: rgba(61,139,61,0.25) !important; }
+
+
+
+/* ════ OWL THEME ════ */
+body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
+@media(max-width:768px){
+  body.owl-theme .btn-hero       { background:linear-gradient(135deg,#2d6e2d,#4db84d)!important; box-shadow:0 8px 40px rgba(60,138,60,0.5)!important; }
+  body.owl-theme .hook-highlight { color:#4db84d!important; }
+  body.owl-theme .hero-eyebrow   { color:#4db84d!important; border-color:rgba(60,138,60,0.3)!important; background:rgba(60,138,60,0.1)!important; }
+  body.owl-theme .urgency-banner { background:linear-gradient(90deg,#001a00,#002500,#001a00)!important; border-color:rgba(60,138,60,0.25)!important; }
   body.owl-theme .urgency-banner strong,
-  body.owl-theme #mobUrgTimer    { color: #4ea84e !important; }
-  body.owl-theme nav             { border-bottom-color: rgba(61,139,61,0.15) !important; }
+  body.owl-theme #mobUrgTimer    { color:#4db84d!important; }
+  body.owl-theme nav             { border-bottom-color:rgba(60,138,60,0.2)!important; }
+  body.owl-theme #bgDark         { background:linear-gradient(to bottom,transparent 0%,transparent 18%,rgba(0,18,0,0.5) 42%,rgba(4,18,4,0.94) 68%,rgba(8,8,8,1) 82%)!important; }
 }
+
+/* Float animation for mobile bg layers */
+@keyframes bgFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@media(max-width:768px){
+  #bgSkeleton, #bgOwl {
+    animation: bgFloat 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  #bgOwl { animation-delay: -3s; }
+}
+
+
+
 </style>
 <script>
 (function(){
@@ -641,6 +630,26 @@ body.owl-theme { --o1:#3d8b3d; --o2:#4ea84e; --o3:#6abf6a; }
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <!-- MOBILE BG LAYERS -->
+  <div id="bgSkeleton" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg') center 15%/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    opacity:1;transition:opacity 1.2s ease;display:none;
+  "></div>
+  <div id="bgOwl" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773095545/Owl_staring_intensely_at_camera_e1542ec1be_xebrff.jpg') center 10%/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    opacity:0;transition:opacity 1.2s ease;display:none;
+  "></div>
+  <div id="bgDark" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(to bottom,transparent 0%,transparent 18%,rgba(8,8,8,0.45) 42%,rgba(8,8,8,0.92) 68%,rgba(8,8,8,1) 82%);
+    display:none;
+  "></div>
   <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
     <div class="hero-eyebrow"><span class="dot"></span>Sem aparecer na câmera · 100% com IA</div>
     <h1 class="hero-title">
@@ -993,14 +1002,10 @@ body.owl-theme { --o1:#3d8b3d; --o2:#4ea84e; --o3:#6abf6a; }
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-  <div class="foot-inner" style="padding:48px 60px 0;">
+  <div class="foot-inner" style="padding:48px 60px 0;" id="footInner">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="foot-logo">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:32px;width:auto;display:block;opacity:0.7;">
-          ESQUELETO<span>VIRAL</span>
-        </div>
-        <p class="foot-tagline">O método de criação de vídeos virais com IA sem aparecer na câmera.</p>
+        <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773235629/compra-Segura-vetor-branco1-1_hw95bq.png" alt="Compra Segura" style="height:64px;width:auto;opacity:0.7;">
       </div>
       <div class="foot-links">
         <span>Suporte</span>
@@ -1193,12 +1198,33 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   tick();
 })();
 
-// MOBILE IMAGE + PALETTE ALTERNATOR
+// ════ MOBILE: URGENCY TIMER ════
+(function(){
+  var el = document.getElementById('mobUrgTimer');
+  if(!el) return;
+  var KEY = 'ev_cd_end';
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var end = parseInt(sessionStorage.getItem(KEY));
+    if(!end || end < Date.now()){ end = Date.now()+15*60*1000; sessionStorage.setItem(KEY,end); }
+    var d = Math.max(0, end-Date.now());
+    el.textContent = pad(Math.floor(d/3600000))+':'+pad(Math.floor((d%3600000)/60000))+':'+pad(Math.floor((d%60000)/1000));
+    if(d>0) setTimeout(tick,500);
+  }
+  tick();
+})();
+
+// ════ MOBILE ONLY: IMAGE + PALETTE ALTERNATOR ════
 (function(){
   if(window.innerWidth > 768) return;
+  var bgSkel = document.getElementById('bgSkeleton');
+  var bgOwl  = document.getElementById('bgOwl');
+  if(!bgSkel || !bgOwl) return;
   var isOwl = false;
   setInterval(function(){
     isOwl = !isOwl;
+    bgOwl.style.opacity  = isOwl ? '1' : '0';
+    bgSkel.style.opacity = isOwl ? '0' : '1';
     if(isOwl) document.body.classList.add('owl-theme');
     else       document.body.classList.remove('owl-theme');
   }, 7000);
