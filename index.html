@@ -1214,21 +1214,7 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   tick();
 })();
 
-// ════ MOBILE ONLY: IMAGE + PALETTE ALTERNATOR ════
-(function(){
-  if(window.innerWidth > 768) return;
-  var bgSkel = document.getElementById('bgSkeleton');
-  var bgOwl  = document.getElementById('bgOwl');
-  if(!bgSkel || !bgOwl) return;
-  var isOwl = false;
-  setInterval(function(){
-    isOwl = !isOwl;
-    bgOwl.style.opacity  = isOwl ? '1' : '0';
-    bgSkel.style.opacity = isOwl ? '0' : '1';
-    if(isOwl) document.body.classList.add('owl-theme');
-    else       document.body.classList.remove('owl-theme');
-  }, 7000);
-})();
+
 
 </script>
 </body>
