@@ -425,8 +425,48 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
   .urgency-banner { margin-top:52px; font-size:11px; padding:8px 14px; }
 
-  .hero { flex-direction:column; padding:72px 20px 48px; min-height:100svh; gap:0; background:radial-gradient(ellipse 120% 60% at 50% 100%, rgba(255,69,0,0.28) 0%, transparent 65%), radial-gradient(ellipse 100% 50% at 50% 0%, rgba(0,0,0,0.5) 0%, transparent 60%), var(--dark); }
-  .hero::before { background:radial-gradient(ellipse 100% 55% at 50% 95%, rgba(255,80,0,0.32) 0%, rgba(255,40,0,0.12) 40%, transparent 70%) !important; }
+  .hero {
+    flex-direction:column;
+    padding:180px 20px 48px;
+    min-height:100svh;
+    gap:0;
+    position:relative;
+    background: var(--dark);
+  }
+  /* BG image layer — fades in from top transparent to visible */
+  .hero::before {
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image: url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg');
+    background-size:cover;
+    background-position:center top;
+    z-index:0;
+    pointer-events:none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.85) 60%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.85) 60%, black 100%);
+  }
+  /* Dark overlay at bottom for text contrast */
+  .hero::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      transparent 20%,
+      rgba(8,8,8,0.4) 38%,
+      rgba(8,8,8,0.75) 52%,
+      rgba(8,8,8,0.95) 65%,
+      rgba(8,8,8,1) 80%);
+    z-index:0;
+    pointer-events:none;
+  }
+  .hero > * { position:relative; z-index:1; }
+  /* Reset on desktop */
+  @media(min-width:769px){
+    .hero::before { background-image:none; opacity:0; }
+    .hero::after  { background:none; }
+  }
   .hero-content { width:100% !important; text-align:center; }
   .hero-eyebrow { justify-content:center; font-size:8px; }
   .hero-title { font-size:clamp(44px,13vw,62px); letter-spacing:-1.5px; line-height:.92; }
@@ -500,6 +540,42 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 #heroCfDesktop .hcf-item:nth-child(2n) { animation-duration:5.4s; animation-delay:-1s; }
 #heroCfDesktop .hcf-item:nth-child(3n) { animation-duration:4.8s; animation-delay:-2s; }
 #heroCfDesktop .hcf-item:nth-child(4n) { animation-duration:5.8s; animation-delay:-3s; }
+
+/* ── MOBILE URGENCY TIMER DISPLAY ── */
+.urg-mobile { display: none; }
+.urg-desktop { display: inline; }
+@media(max-width:768px) {
+  .urg-desktop { display: none; }
+  .urg-mobile  { display: inline; }
+}
+
+/* ── BANNER FLOAT (mobile only) ── */
+@keyframes bannerFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@media(max-width:768px) {
+  .urgency-banner { animation: bannerFloat 3s ease-in-out infinite; }
+}
+
+/* ── OWL THEME ── */
+body.owl-theme { --o1:#3d8b3d; --o2:#4ea84e; --o3:#6abf6a; }
+@media(max-width:768px) {
+  body.owl-theme .hero::before {
+    background-image: url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773095545/Owl_staring_intensely_at_camera_e1542ec1be_xebrff.jpg') !important;
+    background-position: center 10% !important;
+  }
+  body.owl-theme .hero::after {
+    background: linear-gradient(to bottom, transparent 0%, transparent 20%, rgba(0,20,0,0.5) 45%, rgba(5,20,5,0.95) 70%, rgba(8,8,8,1) 85%) !important;
+  }
+  body.owl-theme .btn-hero       { background: linear-gradient(135deg,#2d6e2d,#4ea84e) !important; box-shadow: 0 8px 40px rgba(61,139,61,0.45) !important; }
+  body.owl-theme .hook-highlight { color: #4ea84e !important; }
+  body.owl-theme .hero-eyebrow   { color: #4ea84e !important; border-color: rgba(61,139,61,0.3) !important; background: rgba(61,139,61,0.1) !important; }
+  body.owl-theme .urgency-banner { background: linear-gradient(90deg,#001500,#002000,#001500) !important; border-color: rgba(61,139,61,0.25) !important; }
+  body.owl-theme .urgency-banner strong,
+  body.owl-theme #mobUrgTimer    { color: #4ea84e !important; }
+  body.owl-theme nav             { border-bottom-color: rgba(61,139,61,0.15) !important; }
+}
 </style>
 <script>
 (function(){
@@ -559,32 +635,29 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 
 <!-- ═══ URGENCY BANNER ═══ -->
 <div class="urgency-banner">
-  🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$89,99</strong> — apenas até o contador zerar
+  <span class="urg-desktop">🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$89,99</strong> — apenas até o contador zerar</span>
+  <span class="urg-mobile">🔥 Oferta expira em <strong id="mobUrgTimer">00:15:00</strong></span>
 </div>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-content">
+  <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
     <div class="hero-eyebrow"><span class="dot"></span>Sem aparecer na câmera · 100% com IA</div>
-
     <h1 class="hero-title">
-      Sem câmera.
-      <span class="line-orange">Sem rosto.</span>
-      <span class="line-outline">Viral.</span>
+      <span style="color:#fff; display:block;">SEM</span>
+      <span style="color:#fff; display:block;">CÂMERA.</span>
+      <span class="line-orange">SEM ROSTO.</span>
+      <span class="line-orange">VIRAL.</span>
     </h1>
-
     <p class="hero-hook">
       Aprenda o método exato que está gerando <span class="hook-highlight">300 milhões de visualizações</span> com o personagem esqueleto — do roteiro ao vídeo publicado, do zero.
     </p>
-
     <p class="hero-sub">
       Usando ChatGPT, Flow AI, ElevenLabs e CapCut. Qualquer pessoa consegue. Nenhuma experiência necessária.
     </p>
-
     <div class="hero-ctas">
       <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero">🦴 Quero Começar Agora — R$89,99</a>
     </div>
-
     <div class="hero-microtrust">
       <div class="microtrust-item"><span>🔒</span> Garantia de 7 dias</div>
       <div class="microtrust-item"><span>⚡</span> Acesso imediato</div>
@@ -613,8 +686,8 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
       <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773112517/Skeleton_behind_tribal_elder_76853a5816_rpoxya.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">7.8M</span></div></div>
       <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">9.2M</span></div></div>
       <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773095545/Owl_staring_intensely_at_camera_e1542ec1be_xebrff.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">8.1M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773092669/Skeleton_fighting_lion_in_colosseum_1d2ca827f5_qeaunj.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">13M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773117681/Skeleton_pulling_pizza_from_oven_3fd6200423_a7suqm.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">6.4M</span></div></div>
+      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773092669/Skeleton_fighting_lion_in_colosseum_1d2ca827f5_qeaunj.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">6.4M</span></div></div>
+      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773117681/Skeleton_pulling_pizza_from_oven_3fd6200423_a7suqm.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">5M</span></div></div>
     </div>
   </div>
 </section>
@@ -1104,6 +1177,33 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   }
   setTimeout(show,6000+Math.random()*6000);
 })();
+// MOB URGENCY TIMER
+(function(){
+  var el = document.getElementById('mobUrgTimer');
+  if(!el) return;
+  var KEY = 'ev_cd_end';
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var end = parseInt(sessionStorage.getItem(KEY));
+    if(!end || end < Date.now()){ end = Date.now() + 15*60*1000; sessionStorage.setItem(KEY, end); }
+    var d = Math.max(0, end - Date.now());
+    el.textContent = pad(Math.floor(d/3600000))+':'+pad(Math.floor((d%3600000)/60000))+':'+pad(Math.floor((d%60000)/1000));
+    if(d > 0) setTimeout(tick, 500);
+  }
+  tick();
+})();
+
+// MOBILE IMAGE + PALETTE ALTERNATOR
+(function(){
+  if(window.innerWidth > 768) return;
+  var isOwl = false;
+  setInterval(function(){
+    isOwl = !isOwl;
+    if(isOwl) document.body.classList.add('owl-theme');
+    else       document.body.classList.remove('owl-theme');
+  }, 7000);
+})();
+
 </script>
 </body>
 </html>
