@@ -436,6 +436,15 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .hero::before { display:none !important; }
   .hero::after  { display:none !important; }
   .hero > * { position:relative; z-index:1; }
+  /* Dark overlay behind text only */
+  .hero-content::before {
+    content:'';
+    position:absolute;
+    inset:-24px -20px;
+    background:linear-gradient(to bottom, transparent 0%, rgba(8,8,8,0.7) 15%, rgba(8,8,8,0.92) 40%, rgba(8,8,8,1) 70%);
+    z-index:-1;
+    pointer-events:none;
+  }
   /* Show bg layers on mobile via CSS — JS controls opacity for swap */
   #bgSkeleton { display:block !important; }
   #bgOwl      { display:block !important; }
@@ -633,9 +642,9 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   <!-- MOBILE BG LAYERS -->
   <div id="bgSkeleton" style="
     position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg') center 15%/cover no-repeat;
-    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
-    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg') center -80px/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
     opacity:1;transition:opacity 1.2s ease;display:none;
   "></div>
   <div id="bgOwl" style="
@@ -647,7 +656,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   "></div>
   <div id="bgDark" style="
     position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:linear-gradient(to bottom,transparent 0%,transparent 18%,rgba(8,8,8,0.45) 42%,rgba(8,8,8,0.92) 68%,rgba(8,8,8,1) 82%);
+    background:linear-gradient(to bottom,transparent 0%,transparent 55%,rgba(8,8,8,0.7) 68%,rgba(8,8,8,0.95) 80%,rgba(8,8,8,1) 90%);
     display:none;
   "></div>
   <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
@@ -656,7 +665,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       <span style="color:#fff; display:block;">SEM</span>
       <span style="color:#fff; display:block;">CÂMERA.</span>
       <span class="line-orange">SEM ROSTO.</span>
-      <span class="line-orange">VIRAL.</span>
+      <span class="line-orange" style="background:linear-gradient(180deg,#FFE500 0%,#FF6B00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">VIRAL.</span>
     </h1>
     <p class="hero-hook">
       Aprenda o método exato que está gerando <span class="hook-highlight">300 milhões de visualizações</span> com o personagem esqueleto — do roteiro ao vídeo publicado, do zero.
