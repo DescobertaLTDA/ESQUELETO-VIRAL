@@ -445,10 +445,8 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
     z-index:-1;
     pointer-events:none;
   }
-  /* Show bg layers on mobile via CSS — JS controls opacity for swap */
-  #bgSkeleton { display:block !important; }
-  #bgOwl      { display:block !important; }
-  #bgDark     { display:block !important; }
+  /* Show bg on mobile */
+  #mobileBg { display:block !important; }
   .hero-content { width:100% !important; text-align:center; }
   .hero-eyebrow { justify-content:center; font-size:8px; }
   .hero-title { font-size:clamp(44px,13vw,62px); letter-spacing:-1.5px; line-height:.92; }
@@ -639,26 +637,13 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <!-- MOBILE BG LAYERS -->
-  <div id="bgSkeleton" style="
-    position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239470/Skeleton_gladiator_facing_lion_a6a725e9f2_qoyv1v.jpg') center -100px/100% no-repeat;
-    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
-    mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
-    opacity:1;transition:opacity 1.2s ease;display:none;
-  "></div>
-  <div id="bgOwl" style="
-    position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg') center 10%/cover no-repeat;
-    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
-    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
-    opacity:0;transition:opacity 1.2s ease;display:none;
-  "></div>
-  <div id="bgDark" style="
-    position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:linear-gradient(to bottom,transparent 0%,transparent 55%,rgba(8,8,8,0.7) 68%,rgba(8,8,8,0.95) 80%,rgba(8,8,8,1) 90%);
-    display:none;
-  "></div>
+  <!-- MOBILE BG -->
+  <div id="mobileBg" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;display:none;
+    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg') center -50px/100% no-repeat;
+  ">
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,rgba(8,8,8,0.6) 68%,rgba(8,8,8,0.95) 82%,rgba(8,8,8,1) 93%);pointer-events:none;"></div>
+  </div>
   <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
     <div class="hero-eyebrow"><span class="dot"></span>Sem aparecer na câmera · 100% com IA</div>
     <h1 class="hero-title">
