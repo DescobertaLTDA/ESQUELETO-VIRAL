@@ -285,18 +285,112 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
+
+  /* NAV */
   nav { height:52px; padding:0 16px; }
-  .nav-logo { font-size:12px; letter-spacing:1.5px; }
-  .nav-btn { font-size:9px; padding:8px 12px; letter-spacing:1px; }
-  .hero { padding:100px 20px 60px; }
+  .nav-logo { font-size:11px; letter-spacing:1.5px; gap:6px; }
+  .nav-logo img { height:24px !important; width:auto; }
+  .nav-btn { font-size:9px; padding:8px 14px; letter-spacing:1px; border-radius:6px; }
+
+  /* HERO */
+  .hero { padding:88px 20px 56px; min-height:auto; }
+  .hero-eyebrow { font-size:9px; letter-spacing:2px; padding:6px 14px; margin-bottom:20px; }
+  .hero-title { font-size:clamp(36px,11vw,54px); letter-spacing:-1.5px; line-height:.95; }
+  .hero-title .white, .hero-title .orange, .hero-title .gradient { display:block; }
+  .hero-sub { font-size:14px; line-height:1.7; margin-top:18px; max-width:100%; }
+
+  /* PRICE BLOCK */
+  .price-block { margin-top:32px; gap:6px; }
+  .price-old { font-size:13px; }
+  .price-main { font-size:clamp(52px,16vw,72px); letter-spacing:-2px; }
+  .price-main em { font-size:0.5em; margin-top:8px; }
+  .price-main .cents { font-size:0.4em; margin-top:12px; }
+  .price-label { font-size:10px; letter-spacing:2px; }
+
+  /* CTA BUTTON */
+  .btn-cta {
+    margin-top:24px;
+    font-size:13px; letter-spacing:1.5px;
+    padding:18px 28px; width:100%; max-width:320px;
+    text-align:center; border-radius:12px;
+    display:block; margin-left:auto; margin-right:auto;
+  }
+
+  /* TRUST ROW */
+  .trust-row { gap:12px; margin-top:16px; }
+  .trust-item { font-size:10px; gap:4px; }
+
+  /* SECTION / WRAP */
+  .section { padding:56px 0; }
   .wrap { padding:0 16px; }
-  .prompts-grid { grid-template-columns:repeat(2,1fr); }
-  .bonus-block { flex-direction:column; padding:28px 20px; gap:20px; }
-  .bonus-value { width:100%; display:flex; align-items:center; gap:16px; }
-  .section { padding:60px 0; }
-  .cta-section { padding:60px 20px; }
-  footer { padding:32px 16px; }
+  .big-title { font-size:clamp(26px,8vw,36px); letter-spacing:-1px; }
+  .label { font-size:9px; letter-spacing:3px; }
+
+  /* PROMPTS GRID — 2 colunas no mobile */
+  .prompts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap:6px;
+    margin-top:32px;
+  }
+  .prompt-card-bg { font-size:52px; }
+  .prompt-card-body { padding:14px 12px; }
+  .prompt-card-num { font-size:8px; letter-spacing:2px; }
+  .prompt-card-name { font-size:12px; }
+  .prompt-card-color { font-size:8px; padding:3px 8px; margin-top:6px; }
+
+  /* BONUS BLOCK */
+  .bonus-block {
+    flex-direction:column;
+    padding:24px 16px;
+    gap:16px;
+    margin-top:6px;
+  }
+  .bonus-icon { font-size:44px; }
+  .bonus-title { font-size:18px; }
+  .bonus-desc { font-size:13px; line-height:1.6; }
+  .bonus-value {
+    width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px;
+    border-top:1px solid rgba(255,69,0,0.15);
+  }
+  .bonus-value .val-free { font-size:22px; }
+
+  /* FOR WHOM SECTION */
+  .forwho-grid {
+    grid-template-columns: 1fr !important;
+    gap:32px !important;
+  }
+  .checklist { gap:14px; margin-top:24px; }
+  .checklist li { font-size:14px; gap:12px; }
+  .check-icon { width:20px; height:20px; font-size:10px; border-radius:5px; }
+
+  /* O QUE VOCÊ RECEBE BOX */
+  .forwho-section .wrap > div > div:last-child {
+    padding:28px 20px !important;
+  }
+
+  /* CTA SECTION */
+  .cta-section { padding:64px 20px; }
+  .cta-section .big-title { font-size:clamp(28px,9vw,42px); }
+  .cta-section p { font-size:14px; }
+  .cta-section .btn-cta { width:100%; max-width:320px; font-size:13px; }
+
+  /* FOOTER */
+  footer { padding:28px 16px; }
+  .foot-logo { font-size:13px; letter-spacing:2px; }
+  .foot-copy { font-size:10px; line-height:1.6; }
 }
+
+/* Extra small — abaixo de 380px */
+@media(max-width:380px){
+  .hero-title { font-size:32px; letter-spacing:-1px; }
+  .price-main { font-size:56px; }
+  .prompts-grid { grid-template-columns: repeat(2, 1fr); gap:4px; }
+  .btn-cta { font-size:12px; padding:16px 20px; }
+  .trust-item { font-size:9px; }
+}
+
 </style>
 </head>
 <body>
@@ -307,7 +401,7 @@ footer {
     <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:34px;width:auto;">
     ESQUELETO<span>VIRAL</span>
   </a>
-  <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">🦴 Comprar Agora</a>
+  <a href="#" target="_blank" rel="noopener" class="nav-btn">🦴 Comprar Agora</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
@@ -315,22 +409,22 @@ footer {
   <div class="hero-eyebrow"><span class="dot"></span>Pack Digital · Entrega Imediata</div>
   <h1 class="hero-title">
     <span class="white">10 PROMPTS</span>
-    <span class="orange">DE PERSONAGEM</span>
+    <span class="orange">DO ESQUELETO</span>
     <span class="gradient">+ MÚSICA</span>
   </h1>
   <p class="hero-sub">
-    Os prompts exatos usados para gerar o esqueleto viral — <strong>cada um com uma cor diferente</strong>, prontos para usar no Flow AI ou qualquer gerador de imagem IA. Inclui a música do canal.
+    Os prompts exatos para gerar o personagem esqueleto — <strong>10 cores únicas</strong>, prontos para Flow AI ou qualquer gerador de imagem IA. Com a música do canal inclusa.
   </p>
 
   <div class="price-block">
-    <span class="price-old">De R$57,00</span>
+    <span class="price-old">De R$27,00</span>
     <div class="price-main">
-      <em>R$</em>27<span class="cents">,99</span>
+      <em>R$</em>9<span class="cents">,99</span>
     </div>
     <span class="price-label">pagamento único · acesso imediato</span>
   </div>
 
-  <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$27,99</a>
+  <a href="#" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$9,99</a>
 
   <div class="trust-row">
     <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
@@ -484,7 +578,7 @@ footer {
 <!-- ═══ PARA QUEM É ═══ -->
 <section class="section forwho-section">
   <div class="wrap">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+    <div class="forwho-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
       <div class="reveal">
         <div class="label">Para quem é</div>
         <h2 class="big-title">Você vai usar<br><span style="color:var(--o1);">se...</span></h2>
@@ -519,7 +613,7 @@ footer {
         </div>
         <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,69,0,0.15);display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(240,232,216,0.3);">Total</span>
-          <span style="font-size:28px;font-weight:900;color:#fff;">R$27<span style="font-size:16px;color:var(--o2);">,99</span></span>
+          <span style="font-size:28px;font-weight:900;color:#fff;">R$9<span style="font-size:16px;color:var(--o2);">,99</span></span>
         </div>
       </div>
     </div>
@@ -530,12 +624,12 @@ footer {
 <section class="cta-section">
   <div style="position:relative;z-index:1;">
     <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
-    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$27,99</span></h2>
+    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$9,99</span></h2>
     <p style="margin-top:20px;font-size:15px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;" class="reveal">
       10 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
     </p>
-    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-cta reveal" style="margin-top:40px;">
-      🦴 Quero o Pack Agora — R$27,99
+    <a href="#" target="_blank" rel="noopener" class="btn-cta reveal" style="margin-top:40px;">
+      🦴 Quero o Pack Agora — R$9,99
     </a>
     <div class="trust-row reveal" style="margin-top:20px;">
       <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
