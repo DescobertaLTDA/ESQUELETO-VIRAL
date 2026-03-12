@@ -78,6 +78,7 @@ nav {
   font-size:12px; font-weight:700; letter-spacing:1.5px;
   color:rgba(240,232,216,0.7);
   margin-top:68px;
+  white-space:nowrap; overflow:hidden;
 }
 .urgency-banner strong { color:var(--o2); }
 
@@ -115,6 +116,24 @@ nav {
   animation:fadeUp .7s .1s ease both;
 }
 .hero-title .line-orange { color:var(--o1); display:block; }
+/* SEM ROSTO — amarelo quente → laranja */
+.hero-title .line-warm {
+  display:block;
+  background:linear-gradient(90deg, #FFE000 0%, #FFAA00 55%, #FF6600 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 2px 16px rgba(255,180,0,0.4));
+}
+/* VIRAL — laranja → vermelho brasa */
+.hero-title .line-fire {
+  display:block;
+  background:linear-gradient(90deg, #FF6600 0%, #FF2200 55%, #CC0000 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 2px 24px rgba(220,30,0,0.55));
+}
 .hero-title .line-outline {
   display:block;
   background:linear-gradient(90deg, var(--o1) 0%, var(--o3) 40%, #fff 100%);
@@ -129,7 +148,7 @@ nav {
   color:var(--text);
   animation:fadeUp .7s .15s ease both;
 }
-.hero-hook .hook-highlight { color:var(--o2); }
+.hero-hook .hook-highlight { color:#D4952A; font-weight:700; }
 
 .hero-sub {
   margin-top:16px; font-size:14px; line-height:1.8;
@@ -144,14 +163,14 @@ nav {
 
 .btn-hero {
   position:relative; overflow:hidden;
-  background:linear-gradient(135deg, var(--o1) 0%, var(--o3) 100%);
+  background:linear-gradient(135deg, #CC2200 0%, #E84800 100%);
   color:#fff; font-family:'Montserrat',sans-serif;
   font-weight:900; font-size:14px; letter-spacing:2px;
   text-transform:uppercase; padding:18px 40px;
   border:none; cursor:pointer; text-decoration:none; display:inline-block;
   border-radius:12px;
   transition:transform .2s, box-shadow .2s;
-  box-shadow:0 8px 40px rgba(255,69,0,0.4);
+  box-shadow:0 8px 40px rgba(180,30,0,0.5);
 }
 .btn-hero::before {
   content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
@@ -206,10 +225,35 @@ nav {
 .cf-badge span:last-child { color:#fff; font-size:18px; font-weight:400; font-family:Montserrat,sans-serif; text-shadow:0 2px 10px rgba(0,0,0,0.9); letter-spacing:.5px; }
 
 /* ─── MOBILE CAROUSEL ─── */
-.mobile-carousel { display:none; width:100%; overflow:hidden; margin-top:32px; position:relative; cursor:grab; pointer-events:all; }
-.carousel-track { display:flex; gap:12px; padding:0 20px 16px; will-change:transform; user-select:none; }
-.carousel-card { flex-shrink:0; width:160px; aspect-ratio:2/3; border-radius:14px; overflow:hidden; position:relative; box-shadow:8px 12px 30px rgba(0,0,0,0.7); }
-.carousel-card img { width:100%; height:100%; object-fit:cover; pointer-events:none; filter:contrast(1.12) saturate(1.25) brightness(1.05); }
+.mobile-carousel { display:none; width:100%; overflow:hidden; margin-top:32px; position:relative; pointer-events:all; }
+.carousel-track {
+  display:flex; gap:0; padding:0; will-change:transform; user-select:none;
+  align-items:center; justify-content:center;
+  height:320px; position:relative;
+  perspective:1000px; perspective-origin:50% 50%;
+}
+.carousel-card {
+  flex-shrink:0;
+  width:54vw; max-width:210px;
+  aspect-ratio:2/3;
+  border-radius:20px; overflow:hidden;
+  position:absolute;
+  box-shadow:
+    0 30px 60px rgba(0,0,0,0.9),
+    0 8px 20px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transition:transform .45s cubic-bezier(.25,.46,.45,.94), filter .45s, opacity .45s, box-shadow .45s;
+  cursor:pointer;
+  border:1.5px solid rgba(255,255,255,0.06);
+}
+.carousel-card::after {
+  content:'';
+  position:absolute; inset:0;
+  border-radius:20px;
+  background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events:none;
+}
+.carousel-card img { width:100%; height:100%; object-fit:cover; pointer-events:none; filter:contrast(1.1) saturate(1.2) brightness(1.05); }
 
 /* ─── FILM STRIP ─── */
 .film-strip { width:100%; overflow:hidden; background:var(--dark2); padding:14px 0; border-top:1px solid rgba(255,69,0,0.08); border-bottom:1px solid rgba(255,69,0,0.08); display:flex; }
@@ -401,6 +445,21 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 .sp-dot { width:5px; height:5px; border-radius:50%; background:#3ecf4c; flex-shrink:0; box-shadow:0 0 6px rgba(62,207,76,0.8); animation:pulse 2s infinite; }
 .sp-time { font-size:10px; color:rgba(240,232,216,0.22); }
 
+/* ─── BOTÃO PROMPTS MOBILE ─── */
+.hero-prompts-btn { display:none; }
+.btn-prompts-mobile {
+  display:block; width:100%; max-width:320px; margin:0 auto;
+  background:transparent;
+  border:1.5px solid rgba(255,69,0,0.5);
+  color:var(--o2);
+  font-family:'Montserrat',sans-serif;
+  font-weight:800; font-size:12px; letter-spacing:1.5px;
+  text-transform:uppercase; text-decoration:none; text-align:center;
+  padding:14px 20px; border-radius:12px;
+  transition:background .2s, border-color .2s;
+}
+.btn-prompts-mobile:hover { background:rgba(255,69,0,0.08); border-color:var(--o1); }
+
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
@@ -420,14 +479,16 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .nav-logo img { height:22px !important; }
   .nav-logo { font-size:11px !important; gap:6px !important; letter-spacing:1.5px !important; }
   .nav-btn { font-size:9px !important; padding:8px 12px !important; letter-spacing:1px !important; }
+  .nav-prompts { display:none !important; }
   .nav-countdown { display:none !important; }
   .urgency-banner { margin-top:52px; }
 
-  .urgency-banner { margin-top:52px; font-size:11px; padding:8px 14px; }
+  .urgency-banner .urg-desktop { display:none !important; }
+  .urgency-banner .urg-mobile { display:inline !important; }
 
   .hero {
     flex-direction:column;
-    padding:180px 20px 48px;
+    padding:240px 20px 48px;
     min-height:100svh;
     gap:0;
     position:relative;
@@ -445,17 +506,35 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
     z-index:-1;
     pointer-events:none;
   }
-  /* Show bg on mobile */
-  #mobileBg { display:block !important; }
+  /* Show bg layers on mobile via CSS — JS controls opacity for swap */
+  #bgSkeleton { display:block !important; }
+  #bgOwl      { display:block !important; }
+  #bgDark     { display:block !important; }
   .hero-content { width:100% !important; text-align:center; }
-  .hero-eyebrow { justify-content:center; font-size:8px; }
-  .hero-title { font-size:clamp(44px,13vw,62px); letter-spacing:-1.5px; line-height:.92; }
-  .hero-sub { font-size:13px; margin:16px auto 0; max-width:320px; }
-  .hero-hook { font-size:15px; }
-  .hero-ctas { flex-direction:column; align-items:center; gap:14px; margin-top:28px; }
-  .btn-hero { font-size:12px; padding:17px 28px; letter-spacing:2px; width:100%; max-width:320px; text-align:center; }
+  .hero-eyebrow { display:none !important; }
+  .hero-title {
+    font-size:clamp(48px,14vw,68px);
+    letter-spacing:-2px; line-height:.90;
+    text-shadow:none;
+  }
+  .hero-title .line-warm {
+    filter:drop-shadow(0 4px 18px rgba(0,0,0,0.85)) drop-shadow(0 2px 12px rgba(255,160,0,0.45));
+  }
+  .hero-title .line-fire {
+    filter:drop-shadow(0 4px 18px rgba(0,0,0,0.85)) drop-shadow(0 2px 14px rgba(220,30,0,0.55));
+  }
+  .hero-hook {
+    font-size:14px; line-height:1.6;
+    margin:16px auto 0; max-width:300px;
+    text-align:center;
+  }
+  .hero-sub { display:none; }
+  .hero-ctas { flex-direction:column; align-items:center; gap:14px; margin-top:24px; }
+  .btn-hero { font-size:13px; padding:18px 28px; letter-spacing:1.5px; width:100%; max-width:320px; text-align:center; border-radius:14px; }
   .hero-proof { justify-content:center; }
-  .hero-microtrust { justify-content:center; }
+  .hero-microtrust { justify-content:center; gap:12px; }
+  .microtrust-item { font-size:10px; }
+  .hero-prompts-btn { display:block; margin-top:10px; margin-bottom:4px; width:100%; }
   .hero-cf-desktop { display:none !important; }
   .mobile-carousel { display:block; }
 
@@ -599,58 +678,70 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:38px;width:auto;display:block;">
     ESQUELETO<span>VIRAL</span>
   </div>
-  <div class="nav-countdown">
-    <div class="nav-countdown-label">⚡ Oferta expira em <span>:</span></div>
-    <div class="nav-timer">
-      <div class="nav-timer-block"><div class="nav-timer-num" id="nav-mm">15</div><div class="nav-timer-sub">min</div></div>
-      <div class="nav-timer-sep">:</div>
-      <div class="nav-timer-block"><div class="nav-timer-num" id="nav-ss">00</div><div class="nav-timer-sub">seg</div></div>
-    </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="/prompts" class="nav-btn nav-prompts" style="background:transparent;border:none;color:rgba(240,232,216,0.7);">📄 Pack de Prompts</a>
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
   </div>
-  <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
 </nav>
 
 <script>
-(function(){
-  const KEY='ev_countdown_end';
-  let end=parseInt(sessionStorage.getItem(KEY));
-  if(!end||end<Date.now()){end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
-  const mm=document.getElementById('nav-mm'),ss=document.getElementById('nav-ss');
-  function tick(){
-    const diff=Math.max(0,end-Date.now());
-    const m=Math.floor(diff/60000),s=Math.floor((diff%60000)/1000);
-    const nMM=String(m).padStart(2,'0'),nSS=String(s).padStart(2,'0');
-    if(mm.textContent!==nMM){mm.textContent=nMM;mm.classList.add('flash');setTimeout(()=>mm.classList.remove('flash'),300);}
-    if(ss.textContent!==nSS){ss.textContent=nSS;ss.classList.add('flash');setTimeout(()=>ss.classList.remove('flash'),300);}
-    if(diff>0)setTimeout(tick,500);
-    else{end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
-  }
-  tick();
-})();
+// nav countdown removed
+
 </script>
 
 <!-- ═══ URGENCY BANNER ═══ -->
 <div class="urgency-banner">
-  <span class="urg-desktop">🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$89,99</strong> — apenas até o contador zerar</span>
+  <span class="urg-desktop" style="display:inline-flex;align-items:center;gap:14px;">
+    🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$89,99</strong> — apenas até o contador zerar
+    <span style="display:flex;align-items:center;gap:4px;margin-left:4px;font-variant-numeric:tabular-nums;">
+      <span style="display:flex;flex-direction:column;align-items:center;min-width:28px;">
+        <span style="font-size:16px;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;" id="ban-hh">00</span>
+        <span style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">HH</span>
+      </span>
+      <span style="font-size:16px;font-weight:900;color:var(--o1);opacity:0.6;margin-bottom:10px;">:</span>
+      <span style="display:flex;flex-direction:column;align-items:center;min-width:28px;">
+        <span style="font-size:16px;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;" id="ban-mm">15</span>
+        <span style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">MM</span>
+      </span>
+      <span style="font-size:16px;font-weight:900;color:var(--o1);opacity:0.6;margin-bottom:10px;">:</span>
+      <span style="display:flex;flex-direction:column;align-items:center;min-width:28px;">
+        <span style="font-size:16px;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;" id="ban-ss">00</span>
+        <span style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">SS</span>
+      </span>
+    </span>
+  </span>
   <span class="urg-mobile">🔥 Oferta expira em <strong id="mobUrgTimer">00:15:00</strong></span>
 </div>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
-  <!-- MOBILE BG -->
-  <div id="mobileBg" style="
-    position:absolute;inset:0;z-index:0;pointer-events:none;display:none;
+  <!-- MOBILE BG LAYERS -->
+  <div id="bgSkeleton" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
     background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096323/Skeleton_holding_soda_can_8f4f359f62_ro1vq8.jpg') center -50px/100% no-repeat;
-  ">
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,transparent 50%,rgba(8,8,8,0.6) 68%,rgba(8,8,8,0.95) 82%,rgba(8,8,8,1) 93%);pointer-events:none;"></div>
-  </div>
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,1) 0%,rgba(0,0,0,1) 50%,rgba(0,0,0,0.5) 75%,transparent 95%);
+    opacity:1;transition:opacity 1.2s ease;display:none;
+  "></div>
+  <div id="bgOwl" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:url('https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg') center 10%/cover no-repeat;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.65) 28%,rgba(0,0,0,0.88) 55%,black 75%);
+    opacity:0;transition:opacity 1.2s ease;display:none;
+  "></div>
+  <div id="bgDark" style="
+    position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(to bottom,transparent 0%,transparent 55%,rgba(8,8,8,0.7) 68%,rgba(8,8,8,0.95) 80%,rgba(8,8,8,1) 90%);
+    display:none;
+  "></div>
   <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
     <div class="hero-eyebrow"><span class="dot"></span>Sem aparecer na câmera · 100% com IA</div>
     <h1 class="hero-title">
-      <span style="color:#fff; display:block;">SEM</span>
-      <span style="color:#fff; display:block;">CÂMERA.</span>
-      <span class="line-orange">SEM ROSTO.</span>
-      <span class="line-orange" style="background:linear-gradient(180deg,#FFE500 0%,#FF6B00 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">VIRAL.</span>
+      <span style="color:#fff; display:block; filter:drop-shadow(0 2px 20px rgba(255,255,255,0.15));">SEM</span>
+      <span style="color:#fff; display:block; filter:drop-shadow(0 2px 20px rgba(255,255,255,0.15));">CÂMERA.</span>
+      <span class="line-warm">SEM ROSTO.</span>
+      <span class="line-fire">VIRAL.</span>
     </h1>
     <p class="hero-hook">
       Aprenda o método exato que está gerando <span class="hook-highlight">300 milhões de visualizações</span> com o personagem esqueleto — do roteiro ao vídeo publicado, do zero.
@@ -660,6 +751,10 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     </p>
     <div class="hero-ctas">
       <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero">🦴 Quero Começar Agora — R$89,99</a>
+    </div>
+    <!-- Botão prompts mobile -->
+    <div class="hero-prompts-btn">
+      <a href="/prompts" class="btn-prompts-mobile">📄 Pack de Prompts</a>
     </div>
     <div class="hero-microtrust">
       <div class="microtrust-item"><span>🔒</span> Garantia de 7 dias</div>
@@ -973,15 +1068,15 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 <!-- WhatsApp Button -->
 <div style="position:fixed;bottom:24px;right:24px;z-index:700;display:flex;align-items:flex-end;gap:10px;">
 
-  <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#25D366,#128C7E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.45),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
+  <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 </div>
 <script>
 (function(){
   var btn=document.getElementById('whatsappBtn');
-  btn.addEventListener('mouseover',function(){btn.style.transform='scale(1.12)';btn.style.boxShadow='0 8px 32px rgba(37,211,102,0.65),0 2px 8px rgba(0,0,0,0.5)';});
-  btn.addEventListener('mouseout',function(){btn.style.transform='scale(1)';btn.style.boxShadow='0 4px 24px rgba(37,211,102,0.45),0 2px 8px rgba(0,0,0,0.5)';});
+  btn.addEventListener('mouseover',function(){btn.style.transform='scale(1.12)';btn.style.boxShadow='0 8px 32px rgba(255,69,0,0.7),0 2px 8px rgba(0,0,0,0.5)';});
+  btn.addEventListener('mouseout',function(){btn.style.transform='scale(1)';btn.style.boxShadow='0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5)';});
 })();
 </script>
 
@@ -1108,24 +1203,90 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 })();
 
-// MOBILE CAROUSEL
+// MOBILE COVERFLOW
 (function(){
-  const track=document.getElementById('carouselTrack');
-  if(!track)return;
-  const cards=Array.from(track.children);
-  cards.forEach(c=>track.appendChild(c.cloneNode(true)));
-  let pos=0,isDragging=false,startX=0,startPos=0;
-  const cardW=160+12,totalW=cards.length*cardW;
-  function update(){track.style.transform=`translateX(${pos}px)`;}
-  update();
-  track.addEventListener('touchstart',e=>{isDragging=true;startX=e.touches[0].clientX;startPos=pos;},{passive:true});
-  track.addEventListener('touchmove',e=>{if(!isDragging)return;const dx=e.touches[0].clientX-startX;pos=startPos+dx;if(pos<=-totalW)pos+=totalW;if(pos>0)pos-=totalW;update();},{passive:true});
-  track.addEventListener('touchend',()=>{isDragging=false;});
-  track.addEventListener('mousedown',e=>{isDragging=true;startX=e.clientX;startPos=pos;track.style.cursor='grabbing';});
-  window.addEventListener('mousemove',e=>{if(!isDragging)return;const dx=e.clientX-startX;pos=startPos+dx;if(pos<=-totalW)pos+=totalW;if(pos>0)pos-=totalW;update();});
-  window.addEventListener('mouseup',()=>{isDragging=false;track.style.cursor='grab';});
-  track.style.cursor='grab';
-  track.addEventListener('wheel',e=>{e.preventDefault();pos-=e.deltaX||e.deltaY;if(pos<=-totalW)pos+=totalW;if(pos>0)pos-=totalW;update();},{passive:false});
+  const carousel = document.getElementById('mobileCarousel');
+  if(!carousel) return;
+  const track = document.getElementById('carouselTrack');
+  const origCards = Array.from(track.children);
+  const total = origCards.length;
+
+  // Clonar 3x antes e 3x depois (total = original * 7)
+  for(var r = 0; r < 3; r++) origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+  for(var r = 0; r < 3; r++) origCards.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+
+  const cards = Array.from(track.children);
+  const allTotal = cards.length; // total * 7
+  let current = total * 3; // começa bem no meio
+  let startX = 0, isDragging = false;
+
+  function apply(){
+    cards.forEach(function(card, i){
+      const offset = i - current;
+      const absOff = Math.abs(offset);
+      const sign = offset < 0 ? -1 : 1;
+      const tx = offset * 52;
+      const tz = offset === 0 ? 0 : -80 * absOff;
+      const ry = offset === 0 ? 0 : sign * -42;
+      const sc = offset === 0 ? 1 : Math.max(0.7, 1 - absOff * 0.15);
+      const br = offset === 0 ? 1.05 : Math.max(0.35, 1 - absOff * 0.3);
+      const op = absOff > 2 ? 0 : 1;
+      const shadow = offset === 0
+        ? '0 40px 80px rgba(0,0,0,0.95), 0 8px 24px rgba(0,0,0,0.7)'
+        : (sign*12)+'px 20px 40px rgba(0,0,0,0.8)';
+      card.style.transform = 'translateX('+tx+'%) translateZ('+tz+'px) rotateY('+ry+'deg) scale('+sc+')';
+      card.style.filter = 'brightness('+br+') contrast(1.1) saturate('+(offset===0?1.25:1)+')';
+      card.style.opacity = op;
+      card.style.zIndex = 10 - absOff;
+      card.style.boxShadow = shadow;
+      card.style.border = offset===0 ? '1.5px solid rgba(255,100,0,0.25)' : '1.5px solid rgba(255,255,255,0.04)';
+    });
+  }
+
+  function goTo(idx){
+    current = idx;
+    apply();
+    // Recentrar silenciosamente só se chegar muito perto das bordas (usuário arrastou muito)
+    setTimeout(function(){
+      if(current < total * 1.5){
+        cards.forEach(c => c.style.transition = 'none');
+        current += total * 3;
+        apply();
+        setTimeout(function(){ cards.forEach(c => c.style.transition = ''); }, 50);
+      } else if(current > allTotal - total * 1.5){
+        cards.forEach(c => c.style.transition = 'none');
+        current -= total * 3;
+        apply();
+        setTimeout(function(){ cards.forEach(c => c.style.transition = ''); }, 50);
+      }
+    }, 450);
+  }
+
+  apply();
+
+  carousel.addEventListener('touchstart', function(e){
+    isDragging = true; startX = e.touches[0].clientX;
+  }, {passive:true});
+  carousel.addEventListener('touchmove', function(e){
+    if(!isDragging) return;
+    e.preventDefault();
+  }, {passive:false});
+  carousel.addEventListener('touchend', function(e){
+    if(!isDragging) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 35) goTo(current + (dx < 0 ? 1 : -1));
+    isDragging = false;
+  }, {passive:true});
+  carousel.addEventListener('mousedown', function(e){ isDragging=true; startX=e.clientX; });
+  window.addEventListener('mouseup', function(e){
+    if(!isDragging) return;
+    const dx = e.clientX - startX;
+    if(Math.abs(dx) > 35) goTo(current + (dx < 0 ? 1 : -1));
+    isDragging = false;
+  });
+  cards.forEach(function(card, i){
+    card.addEventListener('click', function(){ if(i !== current) goTo(i); });
+  });
 })();
 
 // PRICING TIMER — syncs with nav countdown
@@ -1176,6 +1337,25 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   }
   setTimeout(show,6000+Math.random()*6000);
 })();
+// BANNER COUNTDOWN — syncs with nav
+(function(){
+  const KEY='ev_countdown_end';
+  const bhh=document.getElementById('ban-hh');
+  const bmm=document.getElementById('ban-mm');
+  const bss=document.getElementById('ban-ss');
+  if(!bmm||!bss)return;
+  function tick(){
+    let end=parseInt(sessionStorage.getItem(KEY));
+    if(!end||end<Date.now()){end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
+    const diff=Math.max(0,end-Date.now());
+    if(bhh) bhh.textContent=String(Math.floor(diff/3600000)).padStart(2,'0');
+    bmm.textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    bss.textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    if(diff>0)setTimeout(tick,500);
+  }
+  tick();
+})();
+
 // MOB URGENCY TIMER
 (function(){
   var el = document.getElementById('mobUrgTimer');
