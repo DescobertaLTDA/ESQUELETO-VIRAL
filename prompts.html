@@ -44,7 +44,7 @@ nav {
   display:flex; align-items:center; justify-content:space-between;
   background:rgba(8,8,8,0.92);
   backdrop-filter:blur(20px);
-  border-bottom:1px solid rgba(255,69,0,0.12);
+  border-bottom:1px solid rgba(255,69,0,0.15);
 }
 .nav-logo { font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
 .nav-logo span { color:var(--o1); }
@@ -76,7 +76,7 @@ nav {
 
 .hero-eyebrow {
   display:inline-flex; align-items:center; gap:8px;
-  background:rgba(255,69,0,0.1); border:1px solid rgba(255,69,0,0.25);
+  background:rgba(255,69,0,0.08); border:1px solid rgba(255,69,0,0.25);
   padding:7px 18px; margin-bottom:28px;
   font-size:11px; font-weight:700; letter-spacing:3px;
   text-transform:uppercase; color:var(--o2);
@@ -155,7 +155,7 @@ nav {
 .trust-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; letter-spacing:.5px; color:rgba(240,232,216,0.3); }
 
 /* ─── DIVIDER ─── */
-.divider { height:1px; background:linear-gradient(90deg, transparent, rgba(255,69,0,0.2), transparent); margin:0; }
+.divider { height:1px; background:linear-gradient(90deg, transparent, rgba(255,69,0,0.25), transparent); margin:0; }
 
 /* ─── WHAT'S INSIDE ─── */
 .section { padding:100px 0; }
@@ -186,6 +186,19 @@ nav {
   transition:transform .3s ease, z-index 0s;
 }
 .prompt-card:hover { transform:scale(1.04); z-index:10; }
+
+.prompt-card-badge {
+  position:absolute; top:12px; left:12px; z-index:10;
+  background:linear-gradient(135deg, var(--o1), var(--o3));
+  color:#fff; font-size:9px; font-weight:800;
+  letter-spacing:1.5px; text-transform:uppercase;
+  padding:4px 10px; border-radius:20px;
+  box-shadow:0 2px 12px rgba(255,69,0,0.5);
+}
+  font-size:9px; font-weight:700; letter-spacing:1px;
+  color:rgba(255,255,255,0.4); margin-top:5px;
+  display:flex; align-items:center; gap:4px;
+}
 
 .prompt-card-bg {
   position:absolute; inset:0;
@@ -268,14 +281,14 @@ nav {
 
 /* ─── FOOTER ─── */
 footer {
-  background:var(--dark2);
-  border-top:1px solid rgba(255,255,255,0.04);
+  background:#E8E8EC;
+  border-top:1px solid rgba(0,0,0,0.06);
   padding:40px 60px;
   text-align:center;
 }
-.foot-copy { font-size:11px; color:rgba(240,232,216,0.15); }
-.foot-logo { font-weight:900; font-size:16px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,232,216,0.2); margin-bottom:12px; }
-.foot-logo span { color:rgba(255,69,0,0.4); }
+.foot-copy { font-size:11px; color:rgba(240,232,216,0.3); }
+.foot-logo { font-weight:900; font-size:16px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,232,216,0.3); margin-bottom:12px; }
+.foot-logo span { color:rgba(255,69,0,0.7); }
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
@@ -401,30 +414,30 @@ footer {
     <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:34px;width:auto;">
     ESQUELETO<span>VIRAL</span>
   </a>
-  <a href="#" target="_blank" rel="noopener" class="nav-btn">🦴 Comprar Agora</a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="nav-btn">🦴 Comprar Agora</a>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-eyebrow"><span class="dot"></span>Pack Digital · Entrega Imediata</div>
   <h1 class="hero-title">
-    <span class="white">10 PROMPTS</span>
+    <span class="white">9 PROMPTS</span>
     <span class="orange">DO ESQUELETO</span>
     <span class="gradient">+ MÚSICA</span>
   </h1>
   <p class="hero-sub">
-    Os prompts exatos para gerar o personagem esqueleto — <strong>10 cores únicas</strong>, prontos para Flow AI ou qualquer gerador de imagem IA. Com a música do canal inclusa.
+    Os prompts exatos para gerar o personagem esqueleto — <strong>9 cores únicas</strong>, prontos para Flow AI ou qualquer gerador de imagem IA. Com a música do canal inclusa.
   </p>
 
   <div class="price-block">
-    <span class="price-old">De R$27,00</span>
+    <span class="price-old">De R$9,99</span>
     <div class="price-main">
-      <em>R$</em>9<span class="cents">,99</span>
+      <em>R$</em>5<span class="cents">,00</span>
     </div>
     <span class="price-label">pagamento único · acesso imediato</span>
   </div>
 
-  <a href="#" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$9,99</a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$5,00</a>
 
   <div class="trust-row">
     <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
@@ -440,24 +453,29 @@ footer {
 <section class="section">
   <div class="wrap">
     <div class="label reveal">O que está incluído</div>
-    <h2 class="big-title reveal">10 personagens.<br><span style="color:var(--o1);">10 cores únicas.</span></h2>
+    <h2 class="big-title reveal">9 personagens.<br><span style="color:var(--o1);">9 cores únicas.</span></h2>
 
     <div class="prompts-grid reveal">
 
-      <!-- Card 1 -->
+      <!-- Card 1 — MAIS VENDIDO -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#1a0a00,#3d0f00);">🦴</div>
+        <div class="prompt-card-bg" style="background:#0a0a0a;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/TRANSPARENTE_x3uto3.jpg" alt="Esqueleto Transparente" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-badge">⭐ Mais Usado</div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 01</div>
-          <div class="prompt-card-name">Esqueleto Laranja</div>
-          <span class="prompt-card-color" style="background:rgba(255,69,0,0.2);color:#FF6B00;">#FF4500</span>
+          <div class="prompt-card-name">Esqueleto Transparente</div>
+          <span class="prompt-card-color" style="background:rgba(255,255,255,0.1);color:#e0e0e0;">#TRANSPARENT</span>
         </div>
       </div>
 
       <!-- Card 2 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#000d1a,#001f3d);">🦴</div>
+        <div class="prompt-card-bg" style="background:#000d1a;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/AZUL_bil1k7.jpg" alt="Esqueleto Azul" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 02</div>
@@ -468,7 +486,9 @@ footer {
 
       <!-- Card 3 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#0a001a,#1e0040);">🦴</div>
+        <div class="prompt-card-bg" style="background:#0a001a;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROXO_t21m9z.jpg" alt="Esqueleto Roxo" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 03</div>
@@ -479,7 +499,9 @@ footer {
 
       <!-- Card 4 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#001a05,#003d0f);">🦴</div>
+        <div class="prompt-card-bg" style="background:#001a05;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERDE_vmqwys.jpg" alt="Esqueleto Verde" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 04</div>
@@ -490,7 +512,9 @@ footer {
 
       <!-- Card 5 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#1a0010,#3d0025);">🦴</div>
+        <div class="prompt-card-bg" style="background:#1a0010;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROSA_a5xvt1.jpg" alt="Esqueleto Rosa" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 05</div>
@@ -501,7 +525,9 @@ footer {
 
       <!-- Card 6 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#1a1500,#3d3000);">🦴</div>
+        <div class="prompt-card-bg" style="background:#1a1500;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/DOURADO_hfhtsf.jpg" alt="Esqueleto Dourado" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 06</div>
@@ -512,7 +538,9 @@ footer {
 
       <!-- Card 7 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#001517,#003d42);">🦴</div>
+        <div class="prompt-card-bg" style="background:#001517;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/CIANO_mfhw0f.jpg" alt="Esqueleto Ciano" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 07</div>
@@ -523,7 +551,9 @@ footer {
 
       <!-- Card 8 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#150500,#3d1200);">🦴</div>
+        <div class="prompt-card-bg" style="background:#150500;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERMELHO_dcpoyy.jpg" alt="Esqueleto Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 08</div>
@@ -532,20 +562,25 @@ footer {
         </div>
       </div>
 
-      <!-- Card 9 -->
+      <!-- Card 9 — LARANJA -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#0a0a0a,#1e1e1e);">🦴</div>
+        <div class="prompt-card-bg" style="background:#1a0a00;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/LARANJA_vjzoia.jpg" alt="Esqueleto Laranja" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
+
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 09</div>
-          <div class="prompt-card-name">Esqueleto Branco</div>
-          <span class="prompt-card-color" style="background:rgba(255,255,255,0.1);color:#e0e0e0;">#F0F0F0</span>
+          <div class="prompt-card-name">Esqueleto Laranja</div>
+          <span class="prompt-card-color" style="background:rgba(255,69,0,0.2);color:#FF6B00;">#FF4500</span>
         </div>
       </div>
 
       <!-- Card 10 -->
       <div class="prompt-card">
-        <div class="prompt-card-bg" style="background:linear-gradient(135deg,#100a00,#2a1500);">🦴</div>
+        <div class="prompt-card-bg" style="background:#100a00;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/BRONZE_nuhn8s.jpg" alt="Esqueleto Bronze" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 10</div>
@@ -595,11 +630,11 @@ footer {
         <div style="font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--o2);margin-bottom:16px;">O que você recebe</div>
         <div style="display:flex;flex-direction:column;gap:12px;">
           <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
-            <span style="font-size:14px;color:var(--muted);">10 prompts de personagem</span>
+            <span style="font-size:14px;color:var(--muted);">9 prompts de personagem</span>
             <span style="font-size:13px;font-weight:800;color:#fff;">✓</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
-            <span style="font-size:14px;color:var(--muted);">10 cores únicas</span>
+            <span style="font-size:14px;color:var(--muted);">9 cores únicas</span>
             <span style="font-size:13px;font-weight:800;color:#fff;">✓</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
@@ -613,7 +648,7 @@ footer {
         </div>
         <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,69,0,0.15);display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(240,232,216,0.3);">Total</span>
-          <span style="font-size:28px;font-weight:900;color:#fff;">R$9<span style="font-size:16px;color:var(--o2);">,99</span></span>
+          <span style="font-size:28px;font-weight:900;color:#fff;">R$5<span style="font-size:16px;color:var(--o2);">,00</span></span>
         </div>
       </div>
     </div>
@@ -624,12 +659,12 @@ footer {
 <section class="cta-section">
   <div style="position:relative;z-index:1;">
     <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
-    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$9,99</span></h2>
+    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$5,00</span></h2>
     <p style="margin-top:20px;font-size:15px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;" class="reveal">
-      10 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
+      9 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
     </p>
-    <a href="#" target="_blank" rel="noopener" class="btn-cta reveal" style="margin-top:40px;">
-      🦴 Quero o Pack Agora — R$9,99
+    <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="btn-cta reveal" style="margin-top:40px;">
+      🦴 Quero o Pack Agora — R$5,00
     </a>
     <div class="trust-row reveal" style="margin-top:20px;">
       <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
