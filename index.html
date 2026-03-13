@@ -116,7 +116,6 @@ nav {
   animation:fadeUp .7s .1s ease both;
 }
 .hero-title .line-orange { color:var(--o1); display:block; }
-/* SEM ROSTO — amarelo quente → laranja */
 .hero-title .line-warm {
   display:block;
   background:linear-gradient(90deg, #FFE000 0%, #FFAA00 55%, #FF6600 100%);
@@ -125,7 +124,6 @@ nav {
   background-clip:text;
   filter:drop-shadow(0 2px 16px rgba(255,180,0,0.4));
 }
-/* VIRAL — laranja → vermelho brasa */
 .hero-title .line-fire {
   display:block;
   background:linear-gradient(90deg, #FF6600 0%, #FF2200 55%, #CC0000 100%);
@@ -141,7 +139,6 @@ nav {
   filter:drop-shadow(0 4px 24px rgba(255,100,0,0.35));
 }
 
-/* The hero pain/benefit statement — new */
 .hero-hook {
   margin-top:22px;
   font-size:17px; font-weight:700; line-height:1.5;
@@ -183,7 +180,6 @@ nav {
 .hero-proof { font-size:12px; color:var(--muted); line-height:1.6; }
 .hero-proof strong { display:block; font-size:28px; font-weight:900; color:var(--text); line-height:1; }
 
-/* trust micro-copy */
 .hero-microtrust {
   margin-top:20px;
   display:flex; align-items:center; gap:16px; flex-wrap:wrap;
@@ -209,13 +205,6 @@ nav {
   margin-left:-170px; margin-top:-255px;
   transition:filter 0.3s ease, box-shadow 0.3s ease;
   cursor:pointer;
-  animation:hcfFloat 4s ease-in-out infinite;
-}
-.hcf-item:nth-child(odd)  { animation-duration:4.2s; animation-delay:0s; }
-.hcf-item:nth-child(even) { animation-duration:3.8s; animation-delay:-1.5s; }
-@keyframes hcfFloat {
-  0%,100% { transform: var(--hcf-base-transform, translateY(0px)); }
-  50%      { transform: var(--hcf-base-transform, translateY(0px)) translateY(-10px); }
 }
 .hcf-item img { width:100%; height:100%; object-fit:cover; object-position:center top; pointer-events:none; }
 #heroCfDesktop:hover .hcf-item { filter:brightness(0.45) contrast(1.1) saturate(1.2); transition:filter 0.3s ease; }
@@ -225,35 +214,78 @@ nav {
 .cf-badge span:last-child { color:#fff; font-size:18px; font-weight:400; font-family:Montserrat,sans-serif; text-shadow:0 2px 10px rgba(0,0,0,0.9); letter-spacing:.5px; }
 
 /* ─── MOBILE CAROUSEL ─── */
-.mobile-carousel { display:none; width:100%; overflow:hidden; margin-top:32px; position:relative; pointer-events:all; }
-.carousel-track {
-  display:flex; gap:0; padding:0; will-change:transform; user-select:none;
-  align-items:center; justify-content:center;
-  height:320px; position:relative;
-  perspective:1000px; perspective-origin:50% 50%;
+.mobile-carousel {
+  display: none;
+  width: 100%;
+  /* SEM overflow:hidden — precisa mostrar as cartas rotacionadas nas laterais */
+  overflow: visible;
+  margin-top: 32px;
+  position: relative;
+  pointer-events: all;
 }
+
+.carousel-stage {
+  width: 100%;
+  height: 320px;
+  position: relative;
+  /* perspective no elemento pai para o 3D funcionar */
+  perspective: 800px;
+  perspective-origin: 50% 50%;
+  /* preserve-3d obrigatório para rotateY + translateZ juntos */
+  transform-style: preserve-3d;
+  overflow: visible;
+}
+
+/* Cada card: ancoragem pelo centro via left/top + translate(-50%,-50%) no CSS,
+   o JS só aplica o transform adicional por cima via var(--card-t) */
 .carousel-card {
-  flex-shrink:0;
-  width:54vw; max-width:210px;
-  aspect-ratio:2/3;
-  border-radius:20px; overflow:hidden;
-  position:absolute;
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.9),
-    0 8px 20px rgba(0,0,0,0.6),
-    inset 0 1px 0 rgba(255,255,255,0.08);
-  transition:transform .45s cubic-bezier(.25,.46,.45,.94), filter .45s, opacity .45s, box-shadow .45s;
-  cursor:pointer;
-  border:1.5px solid rgba(255,255,255,0.06);
+  position: absolute;
+  /* centro exato do stage */
+  top: 50%;
+  left: 50%;
+  /* largura fixa em px — JS lê isso para calcular o espaçamento correto */
+  width: 210px;
+  height: 315px;
+  margin-top: -157px;
+  margin-left: -105px;
+  border-radius: 20px;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  cursor: pointer;
 }
+
 .carousel-card::after {
-  content:'';
-  position:absolute; inset:0;
-  border-radius:20px;
-  background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
-  pointer-events:none;
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 2;
 }
-.carousel-card img { width:100%; height:100%; object-fit:cover; pointer-events:none; filter:contrast(1.1) saturate(1.2) brightness(1.05); }
+.carousel-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+  filter: contrast(1.1) saturate(1.2) brightness(1.05);
+}
+.carousel-card .card-badge {
+  position: absolute; bottom: 14px; left: 14px;
+  z-index: 10;
+  display: flex; align-items: center; gap: 7px;
+}
+.carousel-card .card-badge .cb-icon {
+  color: #fff; font-size: 16px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+}
+.carousel-card .card-badge .cb-views {
+  color: #fff; font-size: 18px; font-weight: 400;
+  letter-spacing: .5px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+  font-family: Montserrat, sans-serif;
+}
 
 /* ─── FILM STRIP ─── */
 .film-strip { width:100%; overflow:hidden; background:var(--dark2); padding:14px 0; border-top:1px solid rgba(255,69,0,0.08); border-bottom:1px solid rgba(255,69,0,0.08); display:flex; }
@@ -261,7 +293,7 @@ nav {
 .film-item { padding:0 28px; font-size:10px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,69,0,0.45); border-right:1px solid rgba(255,69,0,0.1); display:flex; align-items:center; gap:10px; }
 .film-item span { color:rgba(240,232,216,0.2); }
 
-/* ─── PAIN SECTION (new) ─── */
+/* ─── PAIN SECTION ─── */
 .pain-section {
   padding:90px 0 80px;
   background:linear-gradient(180deg, var(--dark) 0%, #0c0300 50%, var(--dark) 100%);
@@ -322,11 +354,6 @@ nav {
 .mod-tag { display:inline-block; margin-top:20px; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--o2); border-bottom:1px solid rgba(255,107,0,0.3); padding-bottom:2px; }
 
 /* ─── STATS ─── */
-.stats-bar {
-  background:linear-gradient(135deg, #0E0600 0%, #110400 50%, #080808 100%);
-  border-top:1px solid rgba(255,69,0,0.1); border-bottom:1px solid rgba(255,69,0,0.1);
-  padding:64px 0;
-}
 .stats-inner { max-width:1140px; margin:0 auto; padding:0 60px; display:grid; grid-template-columns:repeat(4,1fr); gap:40px; }
 .stat { text-align:center; position:relative; }
 .stat::after { content:''; position:absolute; right:0; top:10%; height:80%; width:1px; background:rgba(255,69,0,0.1); }
@@ -414,24 +441,6 @@ nav {
 .btn-inline { display:inline-block; background:linear-gradient(135deg, var(--o1) 0%, var(--o3) 100%); color:#fff; font-family:'Montserrat',sans-serif; font-weight:900; font-size:13px; letter-spacing:2px; text-transform:uppercase; padding:16px 44px; text-decoration:none; border-radius:12px; box-shadow:0 8px 40px rgba(255,69,0,0.4); transition:transform .2s, box-shadow .2s; }
 .btn-inline:hover { transform:translateY(-3px); box-shadow:0 16px 50px rgba(255,69,0,0.55); }
 
-/* ─── FOOTER ─── */
-footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padding:0; }
-.foot-inner { max-width:1140px; margin:0 auto; display:flex; flex-direction:column; gap:36px; }
-.foot-top { display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap; }
-.foot-brand { display:flex; flex-direction:column; gap:10px; align-self:flex-start; margin-right:auto; }
-.foot-logo { display:flex; align-items:center; gap:10px; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; }
-.foot-logo span { color:var(--o1); }
-.foot-tagline { font-size:12px; color:rgba(240,232,216,0.25); line-height:1.6; max-width:280px; }
-.foot-links { display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
-.foot-links a, .foot-links span { font-size:12px; color:rgba(240,232,216,0.3); text-decoration:none; letter-spacing:.3px; transition:color .2s; white-space:nowrap; }
-.foot-links a:hover { color:rgba(240,232,216,0.65); }
-.foot-divider { height:1px; background:rgba(255,255,255,0.04); }
-.foot-bar { background:rgba(0,0,0,0.4); border-top:1px solid rgba(255,255,255,0.03); padding:18px 60px; margin:0 -60px; }
-.foot-bar-inner { max-width:1140px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
-.foot-copy { font-size:11px; color:rgba(240,232,216,0.15); letter-spacing:.3px; }
-.foot-badges { display:flex; align-items:center; gap:20px; }
-.foot-badge { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(240,232,216,0.12); }
-
 /* ─── SOCIAL PROOF POPUP ─── */
 .sp-popup { position:fixed; bottom:24px; left:20px; z-index:600; display:flex; align-items:center; gap:10px; background:rgba(10,10,10,0.97); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:10px 14px 10px 10px; max-width:255px; box-shadow:0 16px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,69,0,0.08), 0 0 40px rgba(255,69,0,0.06); backdrop-filter:blur(24px); opacity:0; transform:translateY(16px) scale(0.97); transition:opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); pointer-events:none; }
 .sp-popup.sp-show { opacity:1; transform:translateY(0) scale(1); }
@@ -460,13 +469,65 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
 }
 .btn-prompts-mobile:hover { background:rgba(255,69,0,0.08); border-color:var(--o1); }
 
+/* ─── FOOTER ─── */
+footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padding:0; }
+.foot-inner { max-width:1140px; margin:0 auto; display:flex; flex-direction:column; gap:36px; }
+.foot-top { display:flex; justify-content:space-between; align-items:center; gap:40px; flex-wrap:wrap; }
+.foot-brand { display:flex; flex-direction:column; gap:10px; align-self:flex-start; margin-right:auto; }
+.foot-logo { display:flex; align-items:center; gap:10px; font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; }
+.foot-logo span { color:var(--o1); }
+.foot-tagline { font-size:12px; color:rgba(240,232,216,0.25); line-height:1.6; max-width:280px; }
+.foot-links { display:flex; gap:40px; align-items:center; flex-wrap:wrap; }
+.foot-links a, .foot-links span { font-size:12px; color:rgba(240,232,216,0.3); text-decoration:none; letter-spacing:.3px; transition:color .2s; white-space:nowrap; }
+.foot-links a:hover { color:rgba(240,232,216,0.65); }
+.foot-divider { height:1px; background:rgba(255,255,255,0.04); }
+.foot-bar { background:rgba(0,0,0,0.4); border-top:1px solid rgba(255,255,255,0.03); padding:18px 60px; margin:0 -60px; }
+.foot-bar-inner { max-width:1140px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.foot-copy { font-size:11px; color:rgba(240,232,216,0.15); letter-spacing:.3px; }
+.foot-badges { display:flex; align-items:center; gap:20px; }
+.foot-badge { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(240,232,216,0.12); }
+
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+@keyframes cardFloat {
+  0%,100% { translate: 0 0px; }
+  50%      { translate: 0 -8px; }
+}
 
 .reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
+
+#heroCfDesktop .hcf-item {
+  animation: cardFloat 5s ease-in-out infinite;
+  will-change: translate;
+}
+#heroCfDesktop .hcf-item:nth-child(2n) { animation-duration:5.4s; animation-delay:-1s; }
+#heroCfDesktop .hcf-item:nth-child(3n) { animation-duration:4.8s; animation-delay:-2s; }
+#heroCfDesktop .hcf-item:nth-child(4n) { animation-duration:5.8s; animation-delay:-3s; }
+
+/* ─── OWL THEME ─── */
+body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
+@media(max-width:768px){
+  body.owl-theme .btn-hero       { background:linear-gradient(135deg,#2d6e2d,#4db84d)!important; box-shadow:0 8px 40px rgba(60,138,60,0.5)!important; }
+  body.owl-theme .hook-highlight { color:#4db84d!important; }
+  body.owl-theme .hero-eyebrow   { color:#4db84d!important; border-color:rgba(60,138,60,0.3)!important; background:rgba(60,138,60,0.1)!important; }
+  body.owl-theme .urgency-banner { background:linear-gradient(90deg,#001a00,#002500,#001a00)!important; border-color:rgba(60,138,60,0.25)!important; }
+  body.owl-theme .urgency-banner strong,
+  body.owl-theme #mobUrgTimer    { color:#4db84d!important; }
+  body.owl-theme nav             { border-bottom-color:rgba(60,138,60,0.2)!important; }
+  body.owl-theme #bgDark         { background:linear-gradient(to bottom,transparent 0%,transparent 18%,rgba(0,18,0,0.5) 42%,rgba(4,18,4,0.94) 68%,rgba(8,8,8,1) 82%)!important; }
+}
+
+@keyframes bgFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* ── MOBILE URGENCY ── */
+.urg-mobile { display: none; }
+.urg-desktop { display: inline; }
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:1100px){
@@ -482,9 +543,8 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .nav-prompts { display:none !important; }
   .nav-countdown { display:none !important; }
   .urgency-banner { margin-top:52px; }
-
-  .urgency-banner .urg-desktop { display:none !important; }
-  .urgency-banner .urg-mobile { display:inline !important; }
+  .urg-desktop { display: none; }
+  .urg-mobile  { display: inline; }
 
   .hero {
     flex-direction:column;
@@ -497,7 +557,6 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .hero::before { display:none !important; }
   .hero::after  { display:none !important; }
   .hero > * { position:relative; z-index:1; }
-  /* Dark overlay behind text only */
   .hero-content::before {
     content:'';
     position:absolute;
@@ -506,7 +565,6 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
     z-index:-1;
     pointer-events:none;
   }
-  /* Show bg layers on mobile via CSS — JS controls opacity for swap */
   #bgSkeleton { display:block !important; }
   #bgOwl      { display:block !important; }
   #bgDark     { display:block !important; }
@@ -515,7 +573,6 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .hero-title {
     font-size:clamp(48px,14vw,68px);
     letter-spacing:-2px; line-height:.90;
-    text-shadow:none;
   }
   .hero-title .line-warm {
     filter:drop-shadow(0 4px 18px rgba(0,0,0,0.85)) drop-shadow(0 2px 12px rgba(255,160,0,0.45));
@@ -591,57 +648,7 @@ footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padd
   .foot-bar { padding:16px; margin:0 -16px; }
   .foot-bar-inner { flex-direction:column; align-items:center; text-align:center; gap:8px; }
   .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
-}
 
-@keyframes cardFloat {
-  0%,100% { translate: 0 0px; }
-  50%      { translate: 0 -8px; }
-}
-#heroCfDesktop .hcf-item {
-  animation: cardFloat 5s ease-in-out infinite;
-  will-change: translate;
-}
-#heroCfDesktop .hcf-item:nth-child(2n) { animation-duration:5.4s; animation-delay:-1s; }
-#heroCfDesktop .hcf-item:nth-child(3n) { animation-duration:4.8s; animation-delay:-2s; }
-#heroCfDesktop .hcf-item:nth-child(4n) { animation-duration:5.8s; animation-delay:-3s; }
-
-/* ── MOBILE URGENCY TIMER DISPLAY ── */
-.urg-mobile { display: none; }
-.urg-desktop { display: inline; }
-@media(max-width:768px) {
-  .urg-desktop { display: none; }
-  .urg-mobile  { display: inline; }
-}
-
-/* ── BANNER FLOAT (mobile only) — applied to nav, not banner ── */
-@keyframes bannerFloat {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-3px); }
-}
-
-/* ── OWL THEME ── */
-
-
-
-/* ════ OWL THEME ════ */
-body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
-@media(max-width:768px){
-  body.owl-theme .btn-hero       { background:linear-gradient(135deg,#2d6e2d,#4db84d)!important; box-shadow:0 8px 40px rgba(60,138,60,0.5)!important; }
-  body.owl-theme .hook-highlight { color:#4db84d!important; }
-  body.owl-theme .hero-eyebrow   { color:#4db84d!important; border-color:rgba(60,138,60,0.3)!important; background:rgba(60,138,60,0.1)!important; }
-  body.owl-theme .urgency-banner { background:linear-gradient(90deg,#001a00,#002500,#001a00)!important; border-color:rgba(60,138,60,0.25)!important; }
-  body.owl-theme .urgency-banner strong,
-  body.owl-theme #mobUrgTimer    { color:#4db84d!important; }
-  body.owl-theme nav             { border-bottom-color:rgba(60,138,60,0.2)!important; }
-  body.owl-theme #bgDark         { background:linear-gradient(to bottom,transparent 0%,transparent 18%,rgba(0,18,0,0.5) 42%,rgba(4,18,4,0.94) 68%,rgba(8,8,8,1) 82%)!important; }
-}
-
-/* Float animation for mobile bg layers */
-@keyframes bgFloat {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
-}
-@media(max-width:768px){
   #bgSkeleton, #bgOwl {
     animation: bgFloat 6s ease-in-out infinite;
     will-change: transform;
@@ -649,8 +656,9 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   #bgOwl { animation-delay: -3s; }
 }
 
-
-
+@media(min-width:769px){
+  .mobile-carousel { display:none !important; }
+}
 </style>
 <script>
 (function(){
@@ -659,7 +667,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     var w = window.innerWidth;
     if(w > 768){
       var scale = w / baseWidth;
-      if(scale > 1) scale = 1; // never zoom in, only keep at 1:1 or smaller
+      if(scale > 1) scale = 1;
       document.documentElement.style.zoom = scale;
     } else {
       document.documentElement.style.zoom = '';
@@ -683,11 +691,6 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
   </div>
 </nav>
-
-<script>
-// nav countdown removed
-
-</script>
 
 <!-- ═══ URGENCY BANNER ═══ -->
 <div class="urgency-banner">
@@ -735,6 +738,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     background:linear-gradient(to bottom,transparent 0%,transparent 55%,rgba(8,8,8,0.7) 68%,rgba(8,8,8,0.95) 80%,rgba(8,8,8,1) 90%);
     display:none;
   "></div>
+
   <div class="hero-content" style="width:45%; flex-shrink:0; position:relative; z-index:2;">
     <div class="hero-eyebrow"><span class="dot"></span>Sem aparecer na câmera · 100% com IA</div>
     <h1 class="hero-title">
@@ -752,7 +756,6 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="hero-ctas">
       <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero">🦴 Quero Começar Agora — R$89,99</a>
     </div>
-    <!-- Botão prompts mobile -->
     <div class="hero-prompts-btn">
       <a href="/prompts" class="btn-prompts-mobile">📄 Pack de Prompts</a>
     </div>
@@ -777,15 +780,15 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="hcf-item"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773096319/Select__prompt_must_remain_exact_do_not_summarize__802a0afd03_ws9osx.jpg" alt="" loading="lazy"><div class="cf-badge"><span>&#9654;</span><span>13M</span></div></div>
   </div>
 
-  <!-- MOBILE CAROUSEL -->
+  <!-- MOBILE CAROUSEL — estrutura limpa, JS cuida de tudo -->
   <div class="mobile-carousel" id="mobileCarousel">
-    <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239470/Skeleton_fighting_crocodile_arena_3f79033286_oxq4vs.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">10M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239473/Skeleton_gladiator_facing_lion_3ff9df0268_arfznu.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">7.8M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239417/Skeleton_fighting_tiger_in_arena_60b1495361_oaneao.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">9.2M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773112517/Skeleton_behind_tribal_elder_76853a5816_rpoxya.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">8.1M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">6.4M</span></div></div>
-      <div class="carousel-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239402/Skeleton_fighting_tiger_in_arena_5ce90e67ff_jhtvcp.jpg" alt="" loading="lazy"><div style="position:absolute;bottom:14px;left:14px;z-index:10;display:flex;align-items:center;gap:7px;"><span style="color:#fff;font-size:16px;text-shadow:0 2px 8px rgba(0,0,0,0.9);">&#9654;</span><span style="color:#fff;font-size:18px;font-weight:400;letter-spacing:.5px;text-shadow:0 2px 10px rgba(0,0,0,0.9);font-family:Montserrat,sans-serif;">5M</span></div></div>
+    <div class="carousel-stage" id="carouselStage">
+      <div class="carousel-card" data-views="10M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239470/Skeleton_fighting_crocodile_arena_3f79033286_oxq4vs.jpg" alt="" loading="eager"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">10M</span></div></div>
+      <div class="carousel-card" data-views="7.8M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239473/Skeleton_gladiator_facing_lion_3ff9df0268_arfznu.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">7.8M</span></div></div>
+      <div class="carousel-card" data-views="9.2M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239417/Skeleton_fighting_tiger_in_arena_60b1495361_oaneao.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">9.2M</span></div></div>
+      <div class="carousel-card" data-views="8.1M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773112517/Skeleton_behind_tribal_elder_76853a5816_rpoxya.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">8.1M</span></div></div>
+      <div class="carousel-card" data-views="6.4M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">6.4M</span></div></div>
+      <div class="carousel-card" data-views="5M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239402/Skeleton_fighting_tiger_in_arena_5ce90e67ff_jhtvcp.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">5M</span></div></div>
     </div>
   </div>
 </section>
@@ -814,7 +817,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
 </div>
 
-<!-- ═══ PAIN SECTION (NEW) ═══ -->
+<!-- ═══ PAIN SECTION ═══ -->
 <section class="pain-section">
   <div class="pain-header reveal">
     <div class="label" style="justify-content:center;">O problema que ninguém resolve</div>
@@ -843,22 +846,10 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 <!-- ═══ STATS ═══ -->
 <div style="background:linear-gradient(180deg, var(--dark3) 0%, #0e0500 100%); border-top:1px solid rgba(255,69,0,0.12); border-bottom:1px solid rgba(255,69,0,0.12);">
   <div class="stats-inner" style="padding-top:60px; padding-bottom:60px;">
-    <div class="stat reveal">
-      <div class="stat-n">300<em>M+</em></div>
-      <div class="stat-l">views com<br>esse método</div>
-    </div>
-    <div class="stat reveal">
-      <div class="stat-n">10<em>K+</em></div>
-      <div class="stat-l">inscritos novos<br>por dia</div>
-    </div>
-    <div class="stat reveal">
-      <div class="stat-n">6<em>M+</em></div>
-      <div class="stat-l">views nas<br>últimas 48h</div>
-    </div>
-    <div class="stat reveal">
-      <div class="stat-n">R$<em>1K</em></div>
-      <div class="stat-l">por dia possível<br>postando Shorts</div>
-    </div>
+    <div class="stat reveal"><div class="stat-n">300<em>M+</em></div><div class="stat-l">views com<br>esse método</div></div>
+    <div class="stat reveal"><div class="stat-n">10<em>K+</em></div><div class="stat-l">inscritos novos<br>por dia</div></div>
+    <div class="stat reveal"><div class="stat-n">6<em>M+</em></div><div class="stat-l">views nas<br>últimas 48h</div></div>
+    <div class="stat reveal"><div class="stat-n">R$<em>1K</em></div><div class="stat-l">por dia possível<br>postando Shorts</div></div>
   </div>
 </div>
 
@@ -873,54 +864,14 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       <p>Cada aula foi construída em cima de vídeos reais que viralizaram. Não é teoria — é o passo a passo exato de como o conteúdo é criado, do roteiro até a publicação.</p>
     </div>
     <div class="modules-grid">
-      <div class="module reveal">
-        <div class="mod-num">01</div>
-        <div class="mod-title">Como Criar o Roteiro</div>
-        <p class="mod-desc">Usando o ChatGPT, você vai montar roteiros irresistíveis em minutos. A estrutura exata que faz o algoritmo empurrar seu vídeo para milhões de pessoas.</p>
-        <div class="mod-tag">ChatGPT · Storytelling</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">02</div>
-        <div class="mod-title">Prompt de Imagem + Consistência Visual</div>
-        <p class="mod-desc">O segredo que 99% não sabe: como criar um prompt que mantém o mesmo personagem em todas as cenas, com identidade visual única e reconhecível.</p>
-        <div class="mod-tag">Flow AI · Prompt Engineering</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">03</div>
-        <div class="mod-title">Como Separar as Cenas</div>
-        <p class="mod-desc">Aprenda a dividir seu roteiro em cenas cinematográficas que criam ritmo, tensão e mantêm o espectador preso até o final — a técnica que gera replay.</p>
-        <div class="mod-tag">Estrutura Narrativa · IA</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">04</div>
-        <div class="mod-title">Como Gerar as Imagens</div>
-        <p class="mod-desc">Do prompt à imagem final: geração em massa com consistência visual usando o Flow AI. Cenas épicas, personagem idêntico em todos os frames.</p>
-        <div class="mod-tag">Flow AI · Geração de Imagens</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">05</div>
-        <div class="mod-title">Como Gerar as Animações</div>
-        <p class="mod-desc">Transforme imagens estáticas em vídeos com movimento fluido e cinematográfico usando o Flow AI. Sem precisar saber nada de animação.</p>
-        <div class="mod-tag">Flow AI · Animação</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">06</div>
-        <div class="mod-title">Como Gerar a Narração <span style="color:var(--o1);font-size:18px;">🔒</span></div>
-        <p class="mod-desc">A voz certa faz o vídeo viralizar. Descubra qual configuração exata usar no ElevenLabs para criar uma narração que parece humana e gruda na memória.</p>
-        <div class="mod-tag">ElevenLabs · Voz IA</div>
-      </div>
-      <div class="module reveal">
-        <div class="mod-num">07</div>
-        <div class="mod-title">Como Editar o Vídeo Final <span style="color:var(--o1);font-size:18px;">🔒</span></div>
-        <p class="mod-desc">A montagem que faz a diferença entre 300 views e 10 milhões. Trilha, cortes, legendas e o template secreto de edição no CapCut — revelado só para alunos.</p>
-        <div class="mod-tag">CapCut · Edição Final</div>
-      </div>
-      <div class="module reveal" style="background:linear-gradient(135deg, rgba(255,69,0,0.08), rgba(255,149,0,0.05)); border:1px solid rgba(255,69,0,0.2);">
-        <div class="mod-num" style="color:rgba(255,149,0,0.15);">🔒</div>
-        <div class="mod-title">Bônus: Método de Escala + Comunidade Exclusiva <span style="color:var(--o3);font-size:18px;">🔒</span></div>
-        <p class="mod-desc"><strong style="color:var(--text);">Grupo VIP no WhatsApp</strong> exclusivo para alunos: troque experiências, faça collabs e siga o desafio de crescer um canal para <strong style="color:var(--o3);">100.000 seguidores em 45 dias.</strong></p>
-        <div class="mod-tag" style="color:var(--o3);">Exclusivo · Só para Alunos · WhatsApp VIP</div>
-      </div>
+      <div class="module reveal"><div class="mod-num">01</div><div class="mod-title">Como Criar o Roteiro</div><p class="mod-desc">Usando o ChatGPT, você vai montar roteiros irresistíveis em minutos. A estrutura exata que faz o algoritmo empurrar seu vídeo para milhões de pessoas.</p><div class="mod-tag">ChatGPT · Storytelling</div></div>
+      <div class="module reveal"><div class="mod-num">02</div><div class="mod-title">Prompt de Imagem + Consistência Visual</div><p class="mod-desc">O segredo que 99% não sabe: como criar um prompt que mantém o mesmo personagem em todas as cenas, com identidade visual única e reconhecível.</p><div class="mod-tag">Flow AI · Prompt Engineering</div></div>
+      <div class="module reveal"><div class="mod-num">03</div><div class="mod-title">Como Separar as Cenas</div><p class="mod-desc">Aprenda a dividir seu roteiro em cenas cinematográficas que criam ritmo, tensão e mantêm o espectador preso até o final — a técnica que gera replay.</p><div class="mod-tag">Estrutura Narrativa · IA</div></div>
+      <div class="module reveal"><div class="mod-num">04</div><div class="mod-title">Como Gerar as Imagens</div><p class="mod-desc">Do prompt à imagem final: geração em massa com consistência visual usando o Flow AI. Cenas épicas, personagem idêntico em todos os frames.</p><div class="mod-tag">Flow AI · Geração de Imagens</div></div>
+      <div class="module reveal"><div class="mod-num">05</div><div class="mod-title">Como Gerar as Animações</div><p class="mod-desc">Transforme imagens estáticas em vídeos com movimento fluido e cinematográfico usando o Flow AI. Sem precisar saber nada de animação.</p><div class="mod-tag">Flow AI · Animação</div></div>
+      <div class="module reveal"><div class="mod-num">06</div><div class="mod-title">Como Gerar a Narração <span style="color:var(--o1);">🔒</span></div><p class="mod-desc">A voz certa faz o vídeo viralizar. Descubra qual configuração exata usar no ElevenLabs para criar uma narração que parece humana e gruda na memória.</p><div class="mod-tag">ElevenLabs · Voz IA</div></div>
+      <div class="module reveal"><div class="mod-num">07</div><div class="mod-title">Como Editar o Vídeo Final <span style="color:var(--o1);">🔒</span></div><p class="mod-desc">A montagem que faz a diferença entre 300 views e 10 milhões. Trilha, cortes, legendas e o template secreto de edição no CapCut — revelado só para alunos.</p><div class="mod-tag">CapCut · Edição Final</div></div>
+      <div class="module reveal" style="background:linear-gradient(135deg, rgba(255,69,0,0.08), rgba(255,149,0,0.05)); border:1px solid rgba(255,69,0,0.2);"><div class="mod-num" style="color:rgba(255,149,0,0.15);">🔒</div><div class="mod-title">Bônus: Método de Escala + Comunidade Exclusiva <span style="color:var(--o3);">🔒</span></div><p class="mod-desc"><strong style="color:var(--text);">Grupo VIP no WhatsApp</strong> exclusivo para alunos: troque experiências, faça collabs e siga o desafio de crescer um canal para <strong style="color:var(--o3);">100.000 seguidores em 45 dias.</strong></p><div class="mod-tag" style="color:var(--o3);">Exclusivo · Só para Alunos · WhatsApp VIP</div></div>
     </div>
   </div>
 </section>
@@ -991,30 +942,12 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="label reveal">Dúvidas Frequentes</div>
     <h2 class="big-title reveal" style="margin-bottom:0;">FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item reveal">
-        <div class="faq-q">Preciso ter experiência com IA ou edição?</div>
-        <div class="faq-a">Não! O curso começa do absoluto zero. Mostramos cada ferramenta passo a passo, com exemplos práticos que você replica imediatamente. Se você sabe usar o celular, consegue fazer.</div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q">Preciso aparecer na câmera?</div>
-        <div class="faq-a">Em hipótese alguma. Esse é o ponto central do método — tudo é criado com IA, do personagem à narração. Você não aparece, não fala, não grava nada com câmera.</div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q">As ferramentas são pagas?</div>
-        <div class="faq-a">A maioria tem plano gratuito suficiente para começar. No curso indicamos as versões ideais e as alternativas gratuitas para cada etapa.</div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q">Em quanto tempo vejo resultado?</div>
-        <div class="faq-a">Alunos publicaram o primeiro vídeo ainda na primeira semana. Viral depende de consistência, mas o método está testado e os números estão nos vídeos.</div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q">Por quanto tempo tenho acesso?</div>
-        <div class="faq-a">Acesso vitalício, incluindo todas as atualizações futuras do curso sem custo adicional.</div>
-      </div>
-      <div class="faq-item reveal">
-        <div class="faq-q">E se eu não gostar? Tem garantia?</div>
-        <div class="faq-a">Sim. Você tem 7 dias de garantia total. Se por qualquer motivo não ficar satisfeito, basta pedir o reembolso — sem perguntas, sem burocracia.</div>
-      </div>
+      <div class="faq-item reveal"><div class="faq-q">Preciso ter experiência com IA ou edição?</div><div class="faq-a">Não! O curso começa do absoluto zero. Mostramos cada ferramenta passo a passo, com exemplos práticos que você replica imediatamente.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Preciso aparecer na câmera?</div><div class="faq-a">Em hipótese alguma. Esse é o ponto central do método — tudo é criado com IA, do personagem à narração.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">As ferramentas são pagas?</div><div class="faq-a">A maioria tem plano gratuito suficiente para começar. No curso indicamos as versões ideais e as alternativas gratuitas para cada etapa.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Em quanto tempo vejo resultado?</div><div class="faq-a">Alunos publicaram o primeiro vídeo ainda na primeira semana. Viral depende de consistência, mas o método está testado.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">Por quanto tempo tenho acesso?</div><div class="faq-a">Acesso vitalício, incluindo todas as atualizações futuras do curso sem custo adicional.</div></div>
+      <div class="faq-item reveal"><div class="faq-q">E se eu não gostar? Tem garantia?</div><div class="faq-a">Sim. Você tem 7 dias de garantia total. Se por qualquer motivo não ficar satisfeito, basta pedir o reembolso — sem perguntas, sem burocracia.</div></div>
     </div>
   </div>
 </section>
@@ -1027,8 +960,6 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
   <div class="pricing-card reveal">
     <div class="pricing-badge">🔥 Desconto de Lançamento — Encerra em Breve</div>
-
-    <!-- Pricing countdown -->
     <div class="pricing-countdown" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:28px;">
       <span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(240,232,216,0.4);">⚡ Oferta expira em</span>
       <div style="display:flex;align-items:center;gap:4px;">
@@ -1047,39 +978,24 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="pricing-from">De R$197,00</div>
     <div class="pricing-value">R$<em>89</em><span style="font-size:0.42em;letter-spacing:0;">,99</span></div>
     <div class="pricing-installment">ou <strong>6x de R$15,00</strong> sem juros no cartão</div>
-
-    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy">
-      🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA
-    </a>
-
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy">🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA</a>
     <div class="pricing-guarantee">🔒 &nbsp;Garantia de 7 dias · Reembolso sem perguntas</div>
-
     <div class="pricing-includes">
       <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">7 aulas completas</strong> — do roteiro à edição final</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">4 ferramentas de IA</strong> ensinadas do zero: ChatGPT, Flow AI, ElevenLabs e CapCut</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">O prompt secreto</strong> de consistência visual — personagem idêntico em todas as cenas</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Grupo VIP no WhatsApp</strong> — collabs, troca de experiências e desafio 100K em 45 dias</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Acesso vitalício</strong> — incluindo todas as atualizações futuras sem custo adicional</span></div>
+      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">4 ferramentas de IA</strong> ensinadas do zero</span></div>
+      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">O prompt secreto</strong> de consistência visual</span></div>
+      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Grupo VIP no WhatsApp</strong> — desafio 100K em 45 dias</span></div>
+      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Acesso vitalício</strong> incluindo atualizações futuras</span></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SOCIAL PROOF POPUP ═══ -->
 <!-- WhatsApp Button -->
-<div style="position:fixed;bottom:24px;right:24px;z-index:700;display:flex;align-items:flex-end;gap:10px;">
-
-  <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
+<a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
-</div>
-<script>
-(function(){
-  var btn=document.getElementById('whatsappBtn');
-  btn.addEventListener('mouseover',function(){btn.style.transform='scale(1.12)';btn.style.boxShadow='0 8px 32px rgba(255,69,0,0.7),0 2px 8px rgba(0,0,0,0.5)';});
-  btn.addEventListener('mouseout',function(){btn.style.transform='scale(1)';btn.style.boxShadow='0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5)';});
-})();
-</script>
 
+<!-- Social Proof Popup -->
 <div class="sp-popup" id="spPopup">
   <div class="sp-avatar" id="spAvatar"></div>
   <div class="sp-body">
@@ -1121,275 +1037,279 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
 <!-- ═══ SCRIPTS ═══ -->
 <script>
-// DUST PARTICLES
+// ─── DUST PARTICLES ───
 (function(){
-  const hero=document.querySelector('.hero');
-  if(!hero)return;
-  const canvas=document.createElement('canvas');
-  canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;';
-  hero.style.position='relative';
-  hero.insertBefore(canvas,hero.firstChild);
-  const ctx=canvas.getContext('2d');
-  const NUM=120;
-  let W,H,particles;
-  function resize(){W=canvas.width=hero.offsetWidth;H=canvas.height=hero.offsetHeight;}
-  function randomParticle(){return{x:W*Math.random(),y:H*Math.random(),r:Math.random()*2.2+0.3,opacity:Math.random()*0.28+0.04,vx:(Math.random()-0.5)*0.12,vy:(Math.random()-0.5)*0.08};}
-  function init(){resize();particles=Array.from({length:NUM},randomParticle);}
+  var hero = document.querySelector('.hero');
+  if(!hero) return;
+  var canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;';
+  hero.style.position = 'relative';
+  hero.insertBefore(canvas, hero.firstChild);
+  var ctx = canvas.getContext('2d');
+  var NUM = 120, W, H, particles;
+  function resize(){ W = canvas.width = hero.offsetWidth; H = canvas.height = hero.offsetHeight; }
+  function rp(){ return { x:W*Math.random(), y:H*Math.random(), r:Math.random()*2.2+0.3, opacity:Math.random()*0.28+0.04, vx:(Math.random()-0.5)*0.12, vy:(Math.random()-0.5)*0.08 }; }
+  function init(){ resize(); particles = Array.from({length:NUM}, rp); }
   function draw(){
     ctx.clearRect(0,0,W,H);
-    particles.forEach(p=>{
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<-4)p.x=W+4;if(p.x>W+4)p.x=-4;
-      if(p.y<-4)p.y=H+4;if(p.y>H+4)p.y=-4;
-      const grd=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.5);
-      grd.addColorStop(0,`rgba(255,90,0,${p.opacity})`);
-      grd.addColorStop(0.5,`rgba(255,60,0,${p.opacity*0.5})`);
-      grd.addColorStop(1,`rgba(255,40,0,0)`);
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r*3.5,0,Math.PI*2);ctx.fillStyle=grd;ctx.fill();
+    particles.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<-4)p.x=W+4; if(p.x>W+4)p.x=-4;
+      if(p.y<-4)p.y=H+4; if(p.y>H+4)p.y=-4;
+      var g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.5);
+      g.addColorStop(0,'rgba(255,90,0,'+p.opacity+')');
+      g.addColorStop(0.5,'rgba(255,60,0,'+(p.opacity*0.5)+')');
+      g.addColorStop(1,'rgba(255,40,0,0)');
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3.5,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
     });
     requestAnimationFrame(draw);
   }
-  window.addEventListener('resize',resize);
-  init();draw();
+  window.addEventListener('resize', resize);
+  init(); draw();
 })();
 
-// INTERSECTION OBSERVER
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+// ─── INTERSECTION OBSERVER ───
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
 
-// FAQ
-document.querySelectorAll('.faq-item').forEach(item=>{
-  item.addEventListener('click',()=>{
-    const wasOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!wasOpen)item.classList.add('open');
+// ─── FAQ ───
+document.querySelectorAll('.faq-item').forEach(function(item){
+  item.addEventListener('click', function(){
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+    if(!wasOpen) item.classList.add('open');
   });
 });
 
-// HERO CF DESKTOP
+// ─── HERO CF DESKTOP ───
 (function(){
-  var wrap=document.getElementById('heroCfDesktop');
-  if(!wrap)return;
-  var items=Array.from(wrap.querySelectorAll('.hcf-item'));
-  var total=items.length,current=Math.floor(total/2);
-  items.forEach(function(el,i){
-    var offset=i-current,absOff=Math.abs(offset),sign=offset<0?-1:1;
-    var sc=offset===0?1:Math.max(0.58,1-absOff*0.14);
-    el.style.transform='translateX('+(offset*240)+'px) rotateY('+(offset===0?0:sign*-45)+'deg) scale('+sc+')';
-    el.style.opacity=absOff>2?0:absOff===0?1:offset<0?(absOff===1?0.3:0.15):absOff===1?0.7:0.4;
-    el.style.pointerEvents=absOff>2?'none':'auto';
-    el.style.zIndex=total-absOff;
-    el.style.filter='brightness('+(offset===0?1:Math.max(0.45,1-absOff*0.15))+') contrast(1.1) saturate(1.2)';
-    el.style.boxShadow=offset===0?'0 30px 80px rgba(255,69,0,0.5), 0 10px 30px rgba(0,0,0,0.8)':(sign*8)+'px 20px 40px rgba(0,0,0,0.7)';
-    el.style.border=offset===0?'2px solid rgba(255,100,0,0.7)':'2px solid transparent';
+  var wrap = document.getElementById('heroCfDesktop');
+  if(!wrap) return;
+  var items = Array.from(wrap.querySelectorAll('.hcf-item'));
+  var total = items.length, current = Math.floor(total/2);
+  items.forEach(function(el, i){
+    var offset = i-current, absOff = Math.abs(offset), sign = offset < 0 ? -1 : 1;
+    var sc = offset === 0 ? 1 : Math.max(0.58, 1-absOff*0.14);
+    el.style.transform = 'translateX('+(offset*240)+'px) rotateY('+(offset===0?0:sign*-45)+'deg) scale('+sc+')';
+    el.style.opacity = absOff > 2 ? 0 : absOff === 0 ? 1 : offset < 0 ? (absOff===1?0.3:0.15) : absOff===1?0.7:0.4;
+    el.style.pointerEvents = absOff > 2 ? 'none' : 'auto';
+    el.style.zIndex = total - absOff;
+    el.style.filter = 'brightness('+(offset===0?1:Math.max(0.45,1-absOff*0.15))+') contrast(1.1) saturate(1.2)';
+    el.style.boxShadow = offset===0 ? '0 30px 80px rgba(255,69,0,0.5), 0 10px 30px rgba(0,0,0,0.8)' : (sign*8)+'px 20px 40px rgba(0,0,0,0.7)';
+    el.style.border = offset===0 ? '2px solid rgba(255,100,0,0.7)' : '2px solid transparent';
   });
 })();
 
-// COVERFLOW
+// ─── COVERFLOW (desktop section) ───
 (function(){
-  const wrap=document.getElementById('cfWrap');
-  if(!wrap)return;
-  const items=Array.from(wrap.querySelectorAll('.cf-item'));
-  const total=items.length,current=Math.floor(total/2);
-  items.forEach(function(el,i){
-    const offset=i-current,absOff=Math.abs(offset),sign=offset<0?-1:1;
-    el.style.transform='translateX('+(offset*160)+'px) rotateY('+(offset===0?0:sign*-42)+'deg) scale('+(offset===0?1:Math.max(0.55,1-absOff*0.12))+')';
-    el.style.opacity=absOff>4?0:Math.max(0,1-absOff*0.18);
-    el.style.zIndex=total-absOff;
-    el.style.filter='brightness('+(offset===0?1:Math.max(0.45,1-absOff*0.15))+') contrast(1.1) saturate(1.2)';
-    el.style.boxShadow=offset===0?'0 30px 80px rgba(255,69,0,0.5), 0 10px 30px rgba(0,0,0,0.8)':(sign*8)+'px 20px 40px rgba(0,0,0,0.7)';
+  var wrap = document.getElementById('cfWrap');
+  if(!wrap) return;
+  var items = Array.from(wrap.querySelectorAll('.cf-item'));
+  var total = items.length, current = Math.floor(total/2);
+  items.forEach(function(el, i){
+    var offset = i-current, absOff = Math.abs(offset), sign = offset < 0 ? -1 : 1;
+    el.style.transform = 'translateX('+(offset*160)+'px) rotateY('+(offset===0?0:sign*-42)+'deg) scale('+(offset===0?1:Math.max(0.55,1-absOff*0.12))+')';
+    el.style.opacity = absOff > 4 ? 0 : Math.max(0, 1-absOff*0.18);
+    el.style.zIndex = total - absOff;
+    el.style.filter = 'brightness('+(offset===0?1:Math.max(0.45,1-absOff*0.15))+') contrast(1.1) saturate(1.2)';
+    el.style.boxShadow = offset===0 ? '0 30px 80px rgba(255,69,0,0.5), 0 10px 30px rgba(0,0,0,0.8)' : (sign*8)+'px 20px 40px rgba(0,0,0,0.7)';
   });
 })();
 
-// MOBILE COVERFLOW
+// ════════════════════════════════════════════════════
+// ─── MOBILE CAROUSEL — fluido com rotação 3D real ───
+// ════════════════════════════════════════════════════
 (function(){
-  const carousel = document.getElementById('mobileCarousel');
+  var carousel = document.getElementById('mobileCarousel');
   if(!carousel) return;
-  const track = document.getElementById('carouselTrack');
-  const origCards = Array.from(track.children);
-  const total = origCards.length;
+  var stage = document.getElementById('carouselStage');
+  var origCards = Array.from(stage.children);
+  var N = origCards.length;
 
-  // Clonar 3x antes e 3x depois (total = original * 7)
-  for(var r = 0; r < 3; r++) origCards.forEach(c => track.appendChild(c.cloneNode(true)));
-  for(var r = 0; r < 3; r++) origCards.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+  // Clona para loop infinito
+  var CLONES = 4;
+  for(var r = 0; r < CLONES; r++) origCards.forEach(function(c){ stage.appendChild(c.cloneNode(true)); });
+  for(var r = 0; r < CLONES; r++) origCards.forEach(function(c){ stage.insertBefore(c.cloneNode(true), stage.firstChild); });
 
-  const cards = Array.from(track.children);
-  const allTotal = cards.length; // total * 7
-  let current = total * 3; // começa bem no meio
-  let startX = 0, isDragging = false;
+  var cards = Array.from(stage.children);
+  var TOTAL = cards.length;
+  var CENTER = N * CLONES; // índice inicial no meio
 
-  function apply(){
+  // Espaçamento em px entre centros de cards (largura do card = 160px)
+  var CARD_W   = 210;
+  var SPACING  = 160; // distância px entre centros
+
+  var position  = CENTER;
+  var targetIdx = CENTER;
+  var velocity  = 0;
+  var isDragging = false;
+  var startX    = 0;
+  var startPos  = 0;
+  var lastX     = 0;
+  var lastTime  = 0;
+  var dragVel   = 0;
+
+  var STIFFNESS  = 0.032;  // mola muito suave
+  var DAMPING    = 0.94;   // quase sem rebote, desacelera lentamente
+  var DRAG_SCALE = 1 / SPACING;
+
+  function applyLayout(){
     cards.forEach(function(card, i){
-      const offset = i - current;
-      const absOff = Math.abs(offset);
-      const sign = offset < 0 ? -1 : 1;
-      const tx = offset * 52;
-      const tz = offset === 0 ? 0 : -80 * absOff;
-      const ry = offset === 0 ? 0 : sign * -42;
-      const sc = offset === 0 ? 1 : Math.max(0.7, 1 - absOff * 0.15);
-      const br = offset === 0 ? 1.05 : Math.max(0.35, 1 - absOff * 0.3);
-      const op = absOff > 2 ? 0 : 1;
-      const shadow = offset === 0
-        ? '0 40px 80px rgba(0,0,0,0.95), 0 8px 24px rgba(0,0,0,0.7)'
-        : (sign*12)+'px 20px 40px rgba(0,0,0,0.8)';
-      card.style.transform = 'translateX('+tx+'%) translateZ('+tz+'px) rotateY('+ry+'deg) scale('+sc+')';
-      card.style.filter = 'brightness('+br+') contrast(1.1) saturate('+(offset===0?1.25:1)+')';
-      card.style.opacity = op;
-      card.style.zIndex = 10 - absOff;
-      card.style.boxShadow = shadow;
-      card.style.border = offset===0 ? '1.5px solid rgba(255,100,0,0.25)' : '1.5px solid rgba(255,255,255,0.04)';
+      var offset = i - position;
+      var absOff = Math.abs(offset);
+      if(absOff > 3.5){ card.style.opacity = '0'; card.style.pointerEvents = 'none'; return; }
+
+      // translateX em px reais
+      var tx  = offset * SPACING;
+      // Afasta pro fundo conforme distância
+      var tz  = -Math.min(absOff, 2) * 80;
+      // Rotação: cards laterais giram até ±50°
+      var ry  = Math.max(-50, Math.min(50, offset * -38));
+      var sc  = Math.max(0.70, 1 - Math.min(absOff, 2) * 0.15);
+      var br  = Math.max(0.30, 1 - Math.min(absOff, 2) * 0.35);
+      var op  = Math.max(0, 1 - absOff * 0.38);
+      var sat = absOff < 0.5 ? 1.3 : 1.0;
+      var zi  = Math.round(50 - absOff * 15);
+
+      card.style.transform    = 'translateX('+tx.toFixed(2)+'px) translateZ('+tz.toFixed(2)+'px) rotateY('+ry.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
+      card.style.opacity      = op.toFixed(3);
+      card.style.zIndex       = zi;
+      card.style.pointerEvents = absOff < 1.5 ? 'auto' : 'none';
+      card.style.filter       = 'brightness('+br.toFixed(2)+') contrast(1.1) saturate('+sat+')';
+      card.style.boxShadow    = absOff < 0.5
+        ? '0 40px 80px rgba(0,0,0,0.95), 0 0 0 1.5px rgba(255,100,0,0.35)'
+        : '0 20px 40px rgba(0,0,0,0.7)';
     });
   }
 
-  function goTo(idx){
-    current = idx;
-    apply();
-    // Recentrar silenciosamente só se chegar muito perto das bordas (usuário arrastou muito)
-    setTimeout(function(){
-      if(current < total * 1.5){
-        cards.forEach(c => c.style.transition = 'none');
-        current += total * 3;
-        apply();
-        setTimeout(function(){ cards.forEach(c => c.style.transition = ''); }, 50);
-      } else if(current > allTotal - total * 1.5){
-        cards.forEach(c => c.style.transition = 'none');
-        current -= total * 3;
-        apply();
-        setTimeout(function(){ cards.forEach(c => c.style.transition = ''); }, 50);
+  function loop(){
+    if(!isDragging){
+      var diff = targetIdx - position;
+      velocity = velocity * DAMPING + diff * STIFFNESS;
+      position += velocity;
+
+      // Snap fino quando praticamente parado
+      if(Math.abs(velocity) < 0.0015 && Math.abs(diff) < 0.0015){
+        position = targetIdx;
+        velocity = 0;
+        // Recentra silenciosamente se chegou nas bordas
+        if(targetIdx < N * 2){
+          var s = N * 3; targetIdx += s; position += s;
+        } else if(targetIdx > TOTAL - N * 2){
+          var s = N * 3; targetIdx -= s; position -= s;
+        }
       }
-    }, 450);
+    }
+    applyLayout();
+    requestAnimationFrame(loop);
   }
 
-  apply();
+  applyLayout();
+  requestAnimationFrame(loop);
 
+  // Clique em card lateral → vai para ele
+  cards.forEach(function(card, i){
+    card.addEventListener('click', function(e){
+      var off = Math.round(i - position);
+      if(Math.abs(off) >= 1){ e.preventDefault(); targetIdx = Math.round(position) + off; }
+    });
+  });
+
+  // ─── Touch ───
   carousel.addEventListener('touchstart', function(e){
-    isDragging = true; startX = e.touches[0].clientX;
-  }, {passive:true});
+    isDragging = true;
+    startX = lastX = e.touches[0].clientX;
+    startPos = position;
+    lastTime = Date.now();
+    dragVel = velocity = 0;
+  }, { passive: true });
+
   carousel.addEventListener('touchmove', function(e){
     if(!isDragging) return;
-    e.preventDefault();
-  }, {passive:false});
-  carousel.addEventListener('touchend', function(e){
+    var x   = e.touches[0].clientX;
+    var dx  = x - startX;
+    var now = Date.now(), dt = now - lastTime;
+    if(dt > 0) dragVel = (x - lastX) / dt;
+    lastX = x; lastTime = now;
+    position = startPos - dx * DRAG_SCALE;
+    // Só bloqueia scroll se for gesto horizontal claro
+    if(Math.abs(dx) > 10) e.preventDefault();
+  }, { passive: false });
+
+  carousel.addEventListener('touchend', function(){
     if(!isDragging) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    if(Math.abs(dx) > 35) goTo(current + (dx < 0 ? 1 : -1));
     isDragging = false;
-  }, {passive:true});
-  carousel.addEventListener('mousedown', function(e){ isDragging=true; startX=e.clientX; });
-  window.addEventListener('mouseup', function(e){
-    if(!isDragging) return;
-    const dx = e.clientX - startX;
-    if(Math.abs(dx) > 35) goTo(current + (dx < 0 ? 1 : -1));
-    isDragging = false;
-  });
-  cards.forEach(function(card, i){
-    card.addEventListener('click', function(){ if(i !== current) goTo(i); });
-  });
+    // Apenas snap suave para o índice mais próximo, sem injetar velocity
+    var projected = position - dragVel * 3;
+    targetIdx = Math.round(projected);
+    var base = Math.round(startPos);
+    if(targetIdx > base + 1) targetIdx = base + 1;
+    if(targetIdx < base - 1) targetIdx = base - 1;
+    velocity = 0; // zera velocity — o spring cuida do resto sozinho
+  }, { passive: true });
 })();
 
-// PRICING TIMER — syncs with nav countdown
+// ─── TIMERS ───
 (function(){
-  const KEY='ev_countdown_end';
-  const pmm=document.getElementById('price-mm');
-  const pss=document.getElementById('price-ss');
-  if(!pmm||!pss)return;
+  var KEY='ev_countdown_end';
+  function pad(n){ return String(n).padStart(2,'0'); }
   function tick(){
-    let end=parseInt(sessionStorage.getItem(KEY));
-    if(!end||end<Date.now()){end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
-    const diff=Math.max(0,end-Date.now());
-    const m=Math.floor(diff/60000),s=Math.floor((diff%60000)/1000);
-    pmm.textContent=String(m).padStart(2,'0');
-    pss.textContent=String(s).padStart(2,'0');
-    if(diff>0)setTimeout(tick,500);
+    var end = parseInt(sessionStorage.getItem(KEY));
+    if(!end || end < Date.now()){ end = Date.now()+(15*60+45)*1000; sessionStorage.setItem(KEY, end); }
+    var diff = Math.max(0, end - Date.now());
+    var h = Math.floor(diff/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
+    var bhh=document.getElementById('ban-hh'), bmm=document.getElementById('ban-mm'), bss=document.getElementById('ban-ss');
+    var pmm=document.getElementById('price-mm'), pss=document.getElementById('price-ss');
+    var mob=document.getElementById('mobUrgTimer');
+    if(bhh) bhh.textContent=pad(h);
+    if(bmm) bmm.textContent=pad(m);
+    if(bss) bss.textContent=pad(s);
+    if(pmm) pmm.textContent=pad(m);
+    if(pss) pss.textContent=pad(s);
+    if(mob) mob.textContent=pad(h)+':'+pad(m)+':'+pad(s);
+    if(diff > 0) setTimeout(tick, 500);
   }
   tick();
 })();
 
-// SOCIAL PROOF POPUP
+// ─── SOCIAL PROOF POPUP ───
 (function(){
-  const people=[
+  var people=[
     {name:'Gabriel S.',city:'São Paulo, SP'},{name:'Larissa M.',city:'Belo Horizonte, MG'},
     {name:'Felipe R.',city:'Curitiba, PR'},{name:'Camila O.',city:'Fortaleza, CE'},
     {name:'Diego N.',city:'Rio de Janeiro, RJ'},{name:'Isabela T.',city:'Recife, PE'},
     {name:'Lucas A.',city:'Goiânia, GO'},{name:'Mariana C.',city:'Porto Alegre, RS'},
     {name:'Thiago B.',city:'Manaus, AM'},{name:'Juliana F.',city:'Salvador, BA'},
     {name:'Rafael P.',city:'Campinas, SP'},{name:'Amanda L.',city:'Natal, RN'},
-    {name:'Bruno V.',city:'Florianópolis, SC'},{name:'Fernanda K.',city:'Belém, PA'},
-    {name:'Vinícius G.',city:'Maceió, AL'},{name:'Rodrigo W.',city:'Campo Grande, MS'},
   ];
-  const times=['agora mesmo','há 1 min','há 2 min','há 3 min','há 5 min','há 7 min'];
-  const popup=document.getElementById('spPopup');
-  const avatar=document.getElementById('spAvatar');
-  const nameEl=document.getElementById('spName');
-  const timeEl=document.getElementById('spTime');
-  let lastIdx=-1;
+  var times=['agora mesmo','há 1 min','há 2 min','há 3 min','há 5 min','há 7 min'];
+  var popup=document.getElementById('spPopup');
+  var avatar=document.getElementById('spAvatar');
+  var nameEl=document.getElementById('spName');
+  var timeEl=document.getElementById('spTime');
+  var lastIdx=-1;
   function show(){
-    let idx;do{idx=Math.floor(Math.random()*people.length);}while(idx===lastIdx);
-    lastIdx=idx;const p=people[idx];
+    var idx; do{ idx=Math.floor(Math.random()*people.length); }while(idx===lastIdx);
+    lastIdx=idx; var p=people[idx];
     avatar.textContent=p.name.charAt(0);
     nameEl.textContent=p.name+' · '+p.city;
     timeEl.textContent=times[Math.floor(Math.random()*times.length)];
-    popup.classList.remove('sp-hide');popup.classList.add('sp-show');
-    setTimeout(()=>{popup.classList.remove('sp-show');popup.classList.add('sp-hide');},4500);
-    setTimeout(show,20000+Math.random()*15000);
+    popup.classList.remove('sp-hide'); popup.classList.add('sp-show');
+    setTimeout(function(){ popup.classList.remove('sp-show'); popup.classList.add('sp-hide'); }, 4500);
+    setTimeout(show, 20000+Math.random()*15000);
   }
-  setTimeout(show,6000+Math.random()*6000);
+  setTimeout(show, 6000+Math.random()*6000);
 })();
-// BANNER COUNTDOWN — syncs with nav
+
+// ─── WHATSAPP BTN ───
 (function(){
-  const KEY='ev_countdown_end';
-  const bhh=document.getElementById('ban-hh');
-  const bmm=document.getElementById('ban-mm');
-  const bss=document.getElementById('ban-ss');
-  if(!bmm||!bss)return;
-  function tick(){
-    let end=parseInt(sessionStorage.getItem(KEY));
-    if(!end||end<Date.now()){end=Date.now()+(15*60+45)*1000;sessionStorage.setItem(KEY,end);}
-    const diff=Math.max(0,end-Date.now());
-    if(bhh) bhh.textContent=String(Math.floor(diff/3600000)).padStart(2,'0');
-    bmm.textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-    bss.textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
-    if(diff>0)setTimeout(tick,500);
-  }
-  tick();
+  var btn=document.getElementById('whatsappBtn');
+  if(!btn) return;
+  btn.addEventListener('mouseover',function(){ btn.style.transform='scale(1.12)'; btn.style.boxShadow='0 8px 32px rgba(255,69,0,0.7),0 2px 8px rgba(0,0,0,0.5)'; });
+  btn.addEventListener('mouseout',function(){ btn.style.transform='scale(1)'; btn.style.boxShadow='0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5)'; });
 })();
-
-// MOB URGENCY TIMER
-(function(){
-  var el = document.getElementById('mobUrgTimer');
-  if(!el) return;
-  var KEY = 'ev_cd_end';
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function tick(){
-    var end = parseInt(sessionStorage.getItem(KEY));
-    if(!end || end < Date.now()){ end = Date.now() + 15*60*1000; sessionStorage.setItem(KEY, end); }
-    var d = Math.max(0, end - Date.now());
-    el.textContent = pad(Math.floor(d/3600000))+':'+pad(Math.floor((d%3600000)/60000))+':'+pad(Math.floor((d%60000)/1000));
-    if(d > 0) setTimeout(tick, 500);
-  }
-  tick();
-})();
-
-// ════ MOBILE: URGENCY TIMER ════
-(function(){
-  var el = document.getElementById('mobUrgTimer');
-  if(!el) return;
-  var KEY = 'ev_cd_end';
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function tick(){
-    var end = parseInt(sessionStorage.getItem(KEY));
-    if(!end || end < Date.now()){ end = Date.now()+15*60*1000; sessionStorage.setItem(KEY,end); }
-    var d = Math.max(0, end-Date.now());
-    el.textContent = pad(Math.floor(d/3600000))+':'+pad(Math.floor((d%3600000)/60000))+':'+pad(Math.floor((d%60000)/1000));
-    if(d>0) setTimeout(tick,500);
-  }
-  tick();
-})();
-
-
-
 </script>
 </body>
 </html>
