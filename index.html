@@ -1141,64 +1141,63 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   var CARD_W   = 210;
   var SPACING  = 160; // distância px entre centros
 
-  var position  = CENTER;
+  // posição visual (float, em unidades de índice)
+  var pos       = CENTER;
+  // alvo do snap (inteiro)
   var targetIdx = CENTER;
-  var velocity  = 0;
+  // inércia separada do snap — decai sozinha, não oscila
+  var inertia   = 0;
+
   var isDragging = false;
   var startX    = 0;
   var startPos  = 0;
   var lastX     = 0;
   var lastTime  = 0;
-  var dragVel   = 0;
+  var dragVel   = 0; // px/ms
 
-  var STIFFNESS  = 0.032;  // mola muito suave
-  var DAMPING    = 0.94;   // quase sem rebote, desacelera lentamente
-  var DRAG_SCALE = 1 / SPACING;
+  var DRAG_SCALE = 1 / SPACING; // px → índice
 
   function applyLayout(){
     cards.forEach(function(card, i){
-      var offset = i - position;
+      var offset = i - pos;
       var absOff = Math.abs(offset);
       if(absOff > 3.5){ card.style.opacity = '0'; card.style.pointerEvents = 'none'; return; }
-
-      // translateX em px reais
       var tx  = offset * SPACING;
-      // Afasta pro fundo conforme distância
       var tz  = -Math.min(absOff, 2) * 80;
-      // Rotação: cards laterais giram até ±50°
       var ry  = Math.max(-50, Math.min(50, offset * -38));
       var sc  = Math.max(0.70, 1 - Math.min(absOff, 2) * 0.15);
       var br  = Math.max(0.30, 1 - Math.min(absOff, 2) * 0.35);
       var op  = Math.max(0, 1 - absOff * 0.38);
       var sat = absOff < 0.5 ? 1.3 : 1.0;
       var zi  = Math.round(50 - absOff * 15);
-
-      card.style.transform    = 'translateX('+tx.toFixed(2)+'px) translateZ('+tz.toFixed(2)+'px) rotateY('+ry.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
-      card.style.opacity      = op.toFixed(3);
-      card.style.zIndex       = zi;
+      card.style.transform     = 'translateX('+tx.toFixed(2)+'px) translateZ('+tz.toFixed(2)+'px) rotateY('+ry.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
+      card.style.opacity       = op.toFixed(3);
+      card.style.zIndex        = zi;
       card.style.pointerEvents = absOff < 1.5 ? 'auto' : 'none';
-      card.style.filter       = 'brightness('+br.toFixed(2)+') contrast(1.1) saturate('+sat+')';
-      card.style.boxShadow    = absOff < 0.5
-        ? '0 40px 80px rgba(0,0,0,0.95), 0 0 0 1.5px rgba(255,100,0,0.35)'
-        : '0 20px 40px rgba(0,0,0,0.7)';
+      card.style.filter        = 'brightness('+br.toFixed(2)+') contrast(1.1) saturate('+sat+')';
+      card.style.boxShadow     = absOff < 0.5 ? '0 40px 80px rgba(0,0,0,0.95), 0 0 0 1.5px rgba(255,100,0,0.35)' : '0 20px 40px rgba(0,0,0,0.7)';
     });
   }
 
   function loop(){
     if(!isDragging){
-      var diff = targetIdx - position;
-      velocity = velocity * DAMPING + diff * STIFFNESS;
-      position += velocity;
-
-      // Snap fino quando praticamente parado
-      if(Math.abs(velocity) < 0.0015 && Math.abs(diff) < 0.0015){
-        position = targetIdx;
-        velocity = 0;
-        // Recentra silenciosamente se chegou nas bordas
-        if(targetIdx < N * 2){
-          var s = N * 3; targetIdx += s; position += s;
-        } else if(targetIdx > TOTAL - N * 2){
-          var s = N * 3; targetIdx -= s; position -= s;
+      // 1) aplica inércia (decai sozinha — sem oscilação)
+      if(Math.abs(inertia) > 0.001){
+        pos     += inertia;
+        inertia *= 0.88; // fricção: desacelera naturalmente
+        // atualiza o alvo de snap conforme desliza
+        targetIdx = Math.round(pos);
+      } else {
+        inertia = 0;
+        // 2) lerp para o snap — nunca oscila
+        var diff = targetIdx - pos;
+        if(Math.abs(diff) < 0.002){
+          pos = targetIdx;
+          // recentra silenciosamente nas bordas
+          if(targetIdx < N * 2){ var s = N*3; targetIdx += s; pos += s; }
+          else if(targetIdx > TOTAL - N*2){ var s = N*3; targetIdx -= s; pos -= s; }
+        } else {
+          pos += diff * 0.12;
         }
       }
     }
@@ -1209,45 +1208,43 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   applyLayout();
   requestAnimationFrame(loop);
 
-  // Clique em card lateral → vai para ele
   cards.forEach(function(card, i){
     card.addEventListener('click', function(e){
-      var off = Math.round(i - position);
-      if(Math.abs(off) >= 1){ e.preventDefault(); targetIdx = Math.round(position) + off; }
+      var off = Math.round(i - pos);
+      if(Math.abs(off) >= 1){ e.preventDefault(); inertia = 0; targetIdx = Math.round(pos) + off; }
     });
   });
 
   // ─── Touch ───
   carousel.addEventListener('touchstart', function(e){
     isDragging = true;
+    inertia    = 0;
     startX = lastX = e.touches[0].clientX;
-    startPos = position;
-    lastTime = Date.now();
-    dragVel = velocity = 0;
+    startPos   = pos;
+    lastTime   = Date.now();
+    dragVel    = 0;
   }, { passive: true });
 
   carousel.addEventListener('touchmove', function(e){
     if(!isDragging) return;
-    var x   = e.touches[0].clientX;
-    var dx  = x - startX;
+    var x  = e.touches[0].clientX;
+    var dx = x - startX;
     var now = Date.now(), dt = now - lastTime;
     if(dt > 0) dragVel = (x - lastX) / dt;
     lastX = x; lastTime = now;
-    position = startPos - dx * DRAG_SCALE;
-    // Só bloqueia scroll se for gesto horizontal claro
+    pos = startPos - dx * DRAG_SCALE;
     if(Math.abs(dx) > 10) e.preventDefault();
   }, { passive: false });
 
   carousel.addEventListener('touchend', function(){
     if(!isDragging) return;
     isDragging = false;
-    // Apenas snap suave para o índice mais próximo, sem injetar velocity
-    var projected = position - dragVel * 3;
-    targetIdx = Math.round(projected);
-    var base = Math.round(startPos);
-    if(targetIdx > base + 1) targetIdx = base + 1;
-    if(targetIdx < base - 1) targetIdx = base - 1;
-    velocity = 0; // zera velocity — o spring cuida do resto sozinho
+    // Converte velocidade do gesto em inércia (índices/frame)
+    // dragVel px/ms × (1/SPACING índices/px) × 16ms/frame
+    inertia = -(dragVel * 16) / SPACING;
+    // Limita máximo de inércia (evita voar longe demais)
+    inertia = Math.max(-0.45, Math.min(0.45, inertia));
+    targetIdx = Math.round(pos + inertia * 6);
   }, { passive: true });
 })();
 
