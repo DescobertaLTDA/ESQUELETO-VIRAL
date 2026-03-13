@@ -81,6 +81,15 @@ nav {
   white-space:nowrap; overflow:hidden;
 }
 .urgency-banner strong { color:var(--o2); }
+@media(max-width:768px){
+  .urgency-banner {
+    white-space:normal;
+    font-size:11px;
+    letter-spacing:0.5px;
+    padding:8px 12px;
+    line-height:1.5;
+  }
+}
 
 /* ─── HERO ─── */
 .hero {
@@ -543,8 +552,8 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   .nav-prompts { display:none !important; }
   .nav-countdown { display:none !important; }
   .urgency-banner { margin-top:52px; }
-  .urg-desktop { display: none; }
-  .urg-mobile  { display: inline; }
+  .urg-desktop { display: none !important; }
+  .urg-mobile  { display: inline !important; }
 
   .hero {
     flex-direction:column;
