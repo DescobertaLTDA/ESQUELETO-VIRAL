@@ -222,37 +222,34 @@ nav {
 .cf-badge span:first-child { color:#fff; font-size:15px; text-shadow:0 2px 8px rgba(0,0,0,0.9); }
 .cf-badge span:last-child { color:#fff; font-size:18px; font-weight:400; font-family:Montserrat,sans-serif; text-shadow:0 2px 10px rgba(0,0,0,0.9); letter-spacing:.5px; }
 
-/* ─── MOBILE CAROUSEL ─── */
+/* ─── MOBILE CAROUSEL — FAN STACK ─── */
 .mobile-carousel {
   display: none;
   width: 100%;
-  /* SEM overflow:hidden — precisa mostrar as cartas rotacionadas nas laterais */
   overflow: visible;
   margin-top: 32px;
   position: relative;
   pointer-events: all;
 }
 
+.carousel-perspective {
+  width: 100%;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+}
+
 .carousel-stage {
   width: 100%;
-  height: 320px;
+  height: 360px;
   position: relative;
-  /* perspective no elemento pai para o 3D funcionar */
-  perspective: 800px;
-  perspective-origin: 50% 50%;
-  /* preserve-3d obrigatório para rotateY + translateZ juntos */
   transform-style: preserve-3d;
   overflow: visible;
 }
 
-/* Cada card: ancoragem pelo centro via left/top + translate(-50%,-50%) no CSS,
-   o JS só aplica o transform adicional por cima via var(--card-t) */
 .carousel-card {
   position: absolute;
-  /* centro exato do stage */
   top: 50%;
   left: 50%;
-  /* largura fixa em px — JS lê isso para calcular o espaçamento correto */
   width: 210px;
   height: 315px;
   margin-top: -157px;
@@ -263,13 +260,14 @@ nav {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   cursor: pointer;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.06);
 }
 
 .carousel-card::after {
   content: '';
   position: absolute; inset: 0;
   border-radius: 20px;
-  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.55) 100%);
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
   pointer-events: none;
   z-index: 2;
 }
@@ -278,22 +276,38 @@ nav {
   object-fit: cover;
   pointer-events: none;
   display: block;
-  filter: contrast(1.1) saturate(1.2) brightness(1.05);
 }
-.carousel-card .card-badge {
+.card-badge {
   position: absolute; bottom: 14px; left: 14px;
+  display: flex; align-items: center; gap: 6px;
   z-index: 10;
-  display: flex; align-items: center; gap: 7px;
 }
-.carousel-card .card-badge .cb-icon {
-  color: #fff; font-size: 16px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-}
-.carousel-card .card-badge .cb-views {
+.cb-icon { color: #fff; font-size: 13px; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
+.cb-views {
   color: #fff; font-size: 18px; font-weight: 400;
-  letter-spacing: .5px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
   font-family: Montserrat, sans-serif;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+  letter-spacing: 0.5px;
+}
+
+/* Dots de navegação */
+.carousel-dots {
+  display: flex; justify-content: center;
+  gap: 8px; margin-top: 20px;
+}
+.carousel-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background .3s, transform .3s;
+  cursor: pointer;
+}
+.carousel-dot.active {
+  background: var(--o1);
+  transform: scale(1.4);
+}
+
+@media(max-width:768px){
+  .mobile-carousel { display: block; }
 }
 
 /* ─── FILM STRIP ─── */
@@ -450,7 +464,58 @@ nav {
 .btn-inline { display:inline-block; background:linear-gradient(135deg, var(--o1) 0%, var(--o3) 100%); color:#fff; font-family:'Montserrat',sans-serif; font-weight:900; font-size:13px; letter-spacing:2px; text-transform:uppercase; padding:16px 44px; text-decoration:none; border-radius:12px; box-shadow:0 8px 40px rgba(255,69,0,0.4); transition:transform .2s, box-shadow .2s; }
 .btn-inline:hover { transform:translateY(-3px); box-shadow:0 16px 50px rgba(255,69,0,0.55); }
 
-/* ─── SOCIAL PROOF POPUP ─── */
+/* ─── ANALYTICS FAN CAROUSEL ─── */
+.analytics-carousel {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  pointer-events: all;
+}
+.analytics-perspective {
+  width: 100%;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+}
+.analytics-stage {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: visible;
+}
+.analytics-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 240px; height: 360px;
+  margin-top: -180px; margin-left: -120px;
+  border-radius: 20px;
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  cursor: pointer;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.85), 0 0 0 1px rgba(255,255,255,0.06);
+}
+.analytics-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+.analytics-dots {
+  display: flex; justify-content: center;
+  gap: 8px; margin-top: 24px;
+}
+.analytics-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background .3s, transform .3s;
+  cursor: pointer;
+}
+.analytics-dot.active {
+  background: var(--o1);
+  transform: scale(1.4);
+}
 .sp-popup { position:fixed; bottom:24px; left:20px; z-index:600; display:flex; align-items:center; gap:10px; background:rgba(10,10,10,0.97); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:10px 14px 10px 10px; max-width:255px; box-shadow:0 16px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,69,0,0.08), 0 0 40px rgba(255,69,0,0.06); backdrop-filter:blur(24px); opacity:0; transform:translateY(16px) scale(0.97); transition:opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1); pointer-events:none; }
 .sp-popup.sp-show { opacity:1; transform:translateY(0) scale(1); }
 .sp-popup.sp-hide { opacity:0; transform:translateY(16px) scale(0.97); }
@@ -477,6 +542,68 @@ nav {
   transition:background .2s, border-color .2s;
 }
 .btn-prompts-mobile:hover { background:rgba(255,69,0,0.08); border-color:var(--o1); }
+
+/* ─── SOCIAL PROOF ─── */
+.proof-section {
+  padding: 80px 0;
+  background: var(--dark2);
+  border-top: 1px solid rgba(255,69,0,0.08);
+  border-bottom: 1px solid rgba(255,69,0,0.08);
+  overflow: hidden;
+}
+.proof-track-wrap {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.proof-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+  cursor: grab;
+}
+.proof-track:active { cursor: grabbing; }
+.proof-track.reverse { }
+@keyframes proofScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.proof-card {
+  flex-shrink: 0;
+  width: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,69,0,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.proof-card.small {
+  width: 180px;
+  border-radius: 10px;
+}
+.proof-card:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 20px 50px rgba(255,69,0,0.25);
+  border-color: rgba(255,69,0,0.45);
+}
+.proof-card img {
+  width: 100%; display: block;
+  pointer-events: none;
+}
+/* Seção compacta inline (entre módulos) */
+.proof-inline {
+  padding: 60px 0;
+  background: linear-gradient(180deg, var(--dark) 0%, #0c0200 50%, var(--dark) 100%);
+  overflow: hidden;
+}
+@media(max-width:768px){
+  .proof-section { padding: 48px 0; }
+  .proof-card { width: 220px; }
+  .proof-inline { padding: 40px 0; }
+}
 
 /* ─── FOOTER ─── */
 footer { background:var(--dark2); border-top:1px solid rgba(255,69,0,0.08); padding:0; }
@@ -791,6 +918,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
   <!-- MOBILE CAROUSEL — estrutura limpa, JS cuida de tudo -->
   <div class="mobile-carousel" id="mobileCarousel">
+    <div class="carousel-perspective">
     <div class="carousel-stage" id="carouselStage">
       <div class="carousel-card" data-views="10M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239470/Skeleton_fighting_crocodile_arena_3f79033286_oxq4vs.jpg" alt="" loading="eager"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">10M</span></div></div>
       <div class="carousel-card" data-views="7.8M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239473/Skeleton_gladiator_facing_lion_3ff9df0268_arfznu.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">7.8M</span></div></div>
@@ -799,6 +927,8 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       <div class="carousel-card" data-views="6.4M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">6.4M</span></div></div>
       <div class="carousel-card" data-views="5M"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239402/Skeleton_fighting_tiger_in_arena_5ce90e67ff_jhtvcp.jpg" alt="" loading="lazy"><div class="card-badge"><span class="cb-icon">&#9654;</span><span class="cb-views">5M</span></div></div>
     </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
   </div>
 </section>
 
@@ -861,6 +991,69 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="stat reveal"><div class="stat-n">R$<em>1K</em></div><div class="stat-l">por dia possível<br>postando Shorts</div></div>
   </div>
 </div>
+
+<!-- ═══ ANALYTICS ═══ -->
+<section class="proof-section">
+  <div class="wrap" style="margin-bottom:40px;">
+    <div class="label reveal" style="justify-content:center;">Números reais</div>
+    <h2 class="big-title reveal" style="text-align:center;">Os analytics<br><span style="color:var(--o1);">não mentem</span></h2>
+  </div>
+
+  <!-- FAN CAROUSEL ANALYTICS -->
+  <div class="analytics-carousel" id="analyticsCarousel">
+    <div class="analytics-perspective">
+      <div class="analytics-stage" id="analyticsStage">
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371739/7_hwwgzx.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371740/5_onghpd.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371739/4_mz3dox.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371740/10_yglmtn.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371740/8_zojhrd.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371739/2_morzym.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371739/6_gp79bo.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371741/14_rgy77q.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371741/12_wkvdzf.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371741/13_ckyhog.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371742/15_s3ahnw.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371740/9_r6qjay.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371779/16_au0p74.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371804/17_jxvyxu.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371804/18_llansn.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371805/22_ucrmy7.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371805/21_kebgmb.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371805/19_suuidy.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371805/23_begrte.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371817/25_lofemc.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371817/27_x9hkrn.jpg" alt="" loading="lazy"></div>
+        <div class="analytics-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773371817/26_iahmtm.jpg" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="analytics-dots" id="analyticsDots"></div>
+  </div>
+</section>
+
+<!-- ═══ DEPOIMENTOS ═══ -->
+<section class="proof-section" style="background:linear-gradient(180deg,#0c0200,var(--dark2));">
+  <div class="wrap" style="margin-bottom:32px;">
+    <div class="label reveal" style="justify-content:center;">Quem já aplicou</div>
+    <h2 class="big-title reveal" style="text-align:center;">O que os alunos<br><span style="color:var(--o1);">estão dizendo</span></h2>
+  </div>
+  <div class="proof-track-wrap reveal">
+    <div class="proof-track">
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/4_e3g0ex.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/1_asem3q.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/2_eheriz.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/4_e3g0ex.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/1_asem3q.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/2_eheriz.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/4_e3g0ex.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/1_asem3q.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/2_eheriz.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/4_e3g0ex.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/1_asem3q.webp" alt="" loading="lazy"></div>
+      <div class="proof-card"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/2_eheriz.webp" alt="" loading="lazy"></div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ MODULES ═══ -->
 <section class="section">
@@ -1128,136 +1321,267 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 })();
 
 // ════════════════════════════════════════════════════
-// ─── MOBILE CAROUSEL — fluido com rotação 3D real ───
+// ─── MOBILE CAROUSEL — FAN STACK 3D INFINITO ───
 // ════════════════════════════════════════════════════
 (function(){
   var carousel = document.getElementById('mobileCarousel');
   if(!carousel) return;
-  var stage = document.getElementById('carouselStage');
-  var origCards = Array.from(stage.children);
+  var stage    = document.getElementById('carouselStage');
+  var dotsWrap = document.getElementById('carouselDots');
+  var origCards = Array.from(stage.querySelectorAll('.carousel-card'));
   var N = origCards.length;
 
-  // Clona para loop infinito
-  var CLONES = 4;
-  for(var r = 0; r < CLONES; r++) origCards.forEach(function(c){ stage.appendChild(c.cloneNode(true)); });
-  for(var r = 0; r < CLONES; r++) origCards.forEach(function(c){ stage.insertBefore(c.cloneNode(true), stage.firstChild); });
+  // Cria dots (baseado nos originais)
+  origCards.forEach(function(_, i){
+    var d = document.createElement('div');
+    d.className = 'carousel-dot' + (i===0?' active':'');
+    d.addEventListener('click', function(){ goTo(i); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = Array.from(dotsWrap.children);
 
-  var cards = Array.from(stage.children);
-  var TOTAL = cards.length;
-  var CENTER = N * CLONES; // índice inicial no meio
+  // Auto-avanço a cada 3s
+  // (removido — manual apenas)
 
-  // Espaçamento em px entre centros de cards (largura do card = 160px)
-  var CARD_W   = 210;
-  var SPACING  = 160; // distância px entre centros
+  var pos      = 0;
+  var target   = 0;
+  var inertia  = 0;
+  var dragging = false;
+  var startX = 0, startPos = 0, lastX = 0, lastT = 0, dragVel = 0;
+  var SPACING  = 160;
 
-  // posição visual (float, em unidades de índice)
-  var pos       = CENTER;
-  // alvo do snap (inteiro)
-  var targetIdx = CENTER;
-  // inércia separada do snap — decai sozinha, não oscila
-  var inertia   = 0;
+  function mod(n, m){ return ((n % m) + m) % m; }
 
-  var isDragging = false;
-  var startX    = 0;
-  var startPos  = 0;
-  var lastX     = 0;
-  var lastTime  = 0;
-  var dragVel   = 0; // px/ms
+  function goTo(idx){
+    var cur = Math.round(pos);
+    var diff = idx - cur;
+    target = cur + diff;
+    inertia = 0;
+  }
 
-  var DRAG_SCALE = 1 / SPACING; // px → índice
+  function updateDots(){
+    var idx = mod(Math.round(pos), N);
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+  }
 
   function applyLayout(){
-    cards.forEach(function(card, i){
-      var offset = i - pos;
+    origCards.forEach(function(card, i){
+      // Calcula offset circular: qual o caminho mais curto até este card?
+      var rawOff = i - mod(pos, N);
+      if(rawOff >  N/2) rawOff -= N;
+      if(rawOff < -N/2) rawOff += N;
+      var offset = rawOff - (pos - Math.floor(pos) > 0 ? 0 : 0);
+      // Recalcula com pos contínua
+      var posM = mod(pos, N);
+      offset = i - posM;
+      if(offset >  N/2) offset -= N;
+      if(offset < -N/2) offset += N;
+
       var absOff = Math.abs(offset);
-      if(absOff > 3.5){ card.style.opacity = '0'; card.style.pointerEvents = 'none'; return; }
+
+      if(absOff > 2.8){
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        return;
+      }
+
       var tx  = offset * SPACING;
-      var tz  = -Math.min(absOff, 2) * 80;
-      var ry  = Math.max(-50, Math.min(50, offset * -38));
-      var sc  = Math.max(0.70, 1 - Math.min(absOff, 2) * 0.15);
-      var br  = Math.max(0.30, 1 - Math.min(absOff, 2) * 0.35);
+      var tz  = -absOff * 100;
+      var ry  = Math.max(-55, Math.min(55, offset * -45));
+      var rz  = offset * 6;
+      var sc  = Math.max(0.65, 1 - absOff * 0.18);
       var op  = Math.max(0, 1 - absOff * 0.38);
-      var sat = absOff < 0.5 ? 1.3 : 1.0;
-      var zi  = Math.round(50 - absOff * 15);
-      card.style.transform     = 'translateX('+tx.toFixed(2)+'px) translateZ('+tz.toFixed(2)+'px) rotateY('+ry.toFixed(2)+'deg) scale('+sc.toFixed(3)+')';
+      var br  = Math.max(0.25, 1 - absOff * 0.32);
+
+      card.style.transform     = 'translateX('+tx.toFixed(1)+'px) translateZ('+tz.toFixed(1)+'px) rotateY('+ry.toFixed(1)+'deg) rotateZ('+rz.toFixed(1)+'deg) scale('+sc.toFixed(3)+')';
       card.style.opacity       = op.toFixed(3);
-      card.style.zIndex        = zi;
+      card.style.zIndex        = Math.round(100 - absOff * 20);
       card.style.pointerEvents = absOff < 1.5 ? 'auto' : 'none';
-      card.style.filter        = 'brightness('+br.toFixed(2)+') contrast(1.1) saturate('+sat+')';
-      card.style.boxShadow     = absOff < 0.5 ? '0 40px 80px rgba(0,0,0,0.95), 0 0 0 1.5px rgba(255,100,0,0.35)' : '0 20px 40px rgba(0,0,0,0.7)';
+      card.style.filter        = 'brightness('+br.toFixed(2)+') contrast(1.05) saturate('+(absOff<0.4?1.3:1.0)+')';
+      card.style.boxShadow     = absOff < 0.4
+        ? '0 32px 80px rgba(0,0,0,0.95), 0 0 0 2px rgba(255,100,0,0.5)'
+        : '0 16px 40px rgba(0,0,0,0.75)';
     });
+    updateDots();
   }
 
   function loop(){
-    if(!isDragging){
-      // 1) aplica inércia (decai sozinha — sem oscilação)
-      if(Math.abs(inertia) > 0.001){
-        pos     += inertia;
-        inertia *= 0.88; // fricção: desacelera naturalmente
-        // atualiza o alvo de snap conforme desliza
-        targetIdx = Math.round(pos);
+    if(!dragging){
+      if(Math.abs(inertia) > 0.002){
+        pos += inertia;
+        inertia *= 0.87;
+        target = Math.round(pos);
       } else {
         inertia = 0;
-        // 2) lerp para o snap — nunca oscila
-        var diff = targetIdx - pos;
-        if(Math.abs(diff) < 0.002){
-          pos = targetIdx;
-          // recentra silenciosamente nas bordas
-          if(targetIdx < N * 2){ var s = N*3; targetIdx += s; pos += s; }
-          else if(targetIdx > TOTAL - N*2){ var s = N*3; targetIdx -= s; pos -= s; }
-        } else {
-          pos += diff * 0.12;
-        }
+        var diff = target - pos;
+        pos += Math.abs(diff) < 0.002 ? (pos = target, 0) : diff * 0.11;
       }
     }
     applyLayout();
     requestAnimationFrame(loop);
   }
+  applyLayout();
+  requestAnimationFrame(loop);
 
+  // Clique no card lateral → vai para ele
+  origCards.forEach(function(card, i){
+    card.addEventListener('click', function(e){
+      var posM = mod(pos, N);
+      var off = i - posM;
+      if(off >  N/2) off -= N;
+      if(off < -N/2) off += N;
+      if(Math.abs(off) >= 1){ e.preventDefault(); goTo(Math.round(pos) + off); }
+    });
+  });
+
+  // Touch
+  carousel.addEventListener('touchstart', function(e){
+    dragging = true; inertia = 0;
+    startX = lastX = e.touches[0].clientX;
+    startPos = pos; lastT = Date.now(); dragVel = 0;
+  }, { passive: true });
+
+  carousel.addEventListener('touchmove', function(e){
+    if(!dragging) return;
+    var x = e.touches[0].clientX, dx = x - startX;
+    var now = Date.now(), dt = now - lastT;
+    if(dt > 0) dragVel = (x - lastX) / dt;
+    lastX = x; lastT = now;
+    pos = startPos - dx / SPACING;   // SEM clamp — infinito!
+    if(Math.abs(dx) > 10) e.preventDefault();
+  }, { passive: false });
+
+  carousel.addEventListener('touchend', function(){
+    if(!dragging) return;
+    dragging = false;
+    inertia = -(dragVel * 16) / SPACING;
+    inertia = Math.max(-0.5, Math.min(0.5, inertia));
+    target  = Math.round(pos + inertia * 5);
+  }, { passive: true });
+})();
+
+// ════════════════════════════════════════════════════
+// ─── ANALYTICS FAN CAROUSEL — INFINITO ───
+// ════════════════════════════════════════════════════
+(function(){
+  var carousel = document.getElementById('analyticsCarousel');
+  if(!carousel) return;
+  var stage    = document.getElementById('analyticsStage');
+  var dotsWrap = document.getElementById('analyticsDots');
+  var cards    = Array.from(stage.querySelectorAll('.analytics-card'));
+  var N = cards.length;
+
+  // Dots — mostra só 8 para não ficar gigante
+  var DOT_COUNT = Math.min(N, 8);
+  for(var di=0; di<DOT_COUNT; di++){
+    (function(i){
+      var d = document.createElement('div');
+      d.className = 'analytics-dot' + (i===0?' active':'');
+      d.addEventListener('click', function(){ goTo(Math.round(pos/N)*N + i); });
+      dotsWrap.appendChild(d);
+    })(di);
+  }
+  var dots = Array.from(dotsWrap.children);
+
+  var pos     = 0;
+  var target  = 0;
+  var inertia = 0;
+  var dragging= false;
+  var startX=0, startPos=0, lastX=0, lastT=0, dragVel=0;
+  var SPACING = 170;
+
+  function mod(n,m){ return ((n%m)+m)%m; }
+
+  function goTo(idx){
+    target = idx; inertia = 0;
+  }
+
+  function updateDots(){
+    var idx = mod(Math.round(pos), DOT_COUNT);
+    dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+  }
+
+  function applyLayout(){
+    cards.forEach(function(card, i){
+      var posM = mod(pos, N);
+      var offset = i - posM;
+      if(offset >  N/2) offset -= N;
+      if(offset < -N/2) offset += N;
+      var absOff = Math.abs(offset);
+
+      if(absOff > 2.8){
+        card.style.opacity = '0';
+        card.style.pointerEvents = 'none';
+        return;
+      }
+
+      var tx = offset * SPACING;
+      var tz = -absOff * 110;
+      var ry = Math.max(-55, Math.min(55, offset * -45));
+      var rz = offset * 5;
+      var sc = Math.max(0.65, 1 - absOff * 0.18);
+      var op = Math.max(0, 1 - absOff * 0.38);
+      var br = Math.max(0.25, 1 - absOff * 0.32);
+
+      card.style.transform    = 'translateX('+tx.toFixed(1)+'px) translateZ('+tz.toFixed(1)+'px) rotateY('+ry.toFixed(1)+'deg) rotateZ('+rz.toFixed(1)+'deg) scale('+sc.toFixed(3)+')';
+      card.style.opacity      = op.toFixed(3);
+      card.style.zIndex       = Math.round(100 - absOff*20);
+      card.style.pointerEvents= absOff < 1.5 ? 'auto' : 'none';
+      card.style.filter       = 'brightness('+br.toFixed(2)+') contrast(1.05) saturate('+(absOff<0.4?1.2:1.0)+')';
+      card.style.boxShadow    = absOff < 0.4
+        ? '0 32px 80px rgba(0,0,0,0.95), 0 0 0 2px rgba(255,100,0,0.5)'
+        : '0 16px 40px rgba(0,0,0,0.75)';
+    });
+    updateDots();
+  }
+
+  function loop(){
+    if(!dragging){
+      if(Math.abs(inertia) > 0.002){
+        pos += inertia; inertia *= 0.87; target = Math.round(pos);
+      } else {
+        inertia = 0;
+        var diff = target - pos;
+        pos += Math.abs(diff) < 0.002 ? (pos = target, 0) : diff * 0.11;
+      }
+    }
+    applyLayout();
+    requestAnimationFrame(loop);
+  }
   applyLayout();
   requestAnimationFrame(loop);
 
   cards.forEach(function(card, i){
     card.addEventListener('click', function(e){
-      var off = Math.round(i - pos);
-      if(Math.abs(off) >= 1){ e.preventDefault(); inertia = 0; targetIdx = Math.round(pos) + off; }
+      var posM = mod(pos, N);
+      var off = i - posM;
+      if(off >  N/2) off -= N;
+      if(off < -N/2) off += N;
+      if(Math.abs(off) >= 1){ e.preventDefault(); goTo(Math.round(pos)+off); }
     });
   });
 
-  // ─── Touch ───
   carousel.addEventListener('touchstart', function(e){
-    isDragging = true;
-    inertia    = 0;
-    startX = lastX = e.touches[0].clientX;
-    startPos   = pos;
-    lastTime   = Date.now();
-    dragVel    = 0;
-  }, { passive: true });
-
+    dragging=true; inertia=0;
+    startX=lastX=e.touches[0].clientX; startPos=pos; lastT=Date.now(); dragVel=0;
+  },{passive:true});
   carousel.addEventListener('touchmove', function(e){
-    if(!isDragging) return;
-    var x  = e.touches[0].clientX;
-    var dx = x - startX;
-    var now = Date.now(), dt = now - lastTime;
-    if(dt > 0) dragVel = (x - lastX) / dt;
-    lastX = x; lastTime = now;
-    pos = startPos - dx * DRAG_SCALE;
-    if(Math.abs(dx) > 10) e.preventDefault();
-  }, { passive: false });
-
+    if(!dragging) return;
+    var x=e.touches[0].clientX, dx=x-startX;
+    var now=Date.now(), dt=now-lastT;
+    if(dt>0) dragVel=(x-lastX)/dt;
+    lastX=x; lastT=now;
+    pos = startPos - dx/SPACING;
+    if(Math.abs(dx)>10) e.preventDefault();
+  },{passive:false});
   carousel.addEventListener('touchend', function(){
-    if(!isDragging) return;
-    isDragging = false;
-    // Converte velocidade do gesto em inércia (índices/frame)
-    // dragVel px/ms × (1/SPACING índices/px) × 16ms/frame
-    inertia = -(dragVel * 16) / SPACING;
-    // Limita máximo de inércia (evita voar longe demais)
-    inertia = Math.max(-0.45, Math.min(0.45, inertia));
-    targetIdx = Math.round(pos + inertia * 6);
-  }, { passive: true });
+    if(!dragging) return;
+    dragging=false;
+    inertia = -(dragVel*16)/SPACING;
+    inertia = Math.max(-0.5, Math.min(0.5, inertia));
+    target  = Math.round(pos + inertia*5);
+  },{passive:true});
 })();
-
-// ─── TIMERS ───
 (function(){
   var KEY='ev_countdown_end';
   function pad(n){ return String(n).padStart(2,'0'); }
@@ -1309,7 +1633,100 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   setTimeout(show, 6000+Math.random()*6000);
 })();
 
-// ─── WHATSAPP BTN ───
+
+// ─── PROOF TRACKS — AUTO-SCROLL + DRAG ───
+(function(){
+  document.querySelectorAll('.proof-track-wrap').forEach(function(wrap){
+    var track = wrap.querySelector('.proof-track');
+    if(!track) return;
+
+    var isReverse = track.classList.contains('reverse');
+    var pos       = 0;
+    var vel       = 0;
+    var dragging  = false;
+    var startX    = 0;
+    var startPos  = 0;
+    var lastX     = 0;
+    var lastT     = 0;
+    var dragVel   = 0;
+    var BASE_SPEED = isReverse ? 0.3 : -0.3; // px/frame — muito devagar
+
+    function getHalfW(){
+      return track.scrollWidth / 2;
+    }
+
+    function applyPos(){
+      var half = getHalfW();
+      // loop infinito
+      if(pos <= -half) pos += half;
+      if(pos > 0)      pos -= half;
+      track.style.transform = 'translateX(' + pos.toFixed(2) + 'px)';
+    }
+
+    function loop(){
+      if(!dragging){
+        if(Math.abs(vel) > 0.01){
+          pos += vel;
+          vel *= 0.95;
+        } else {
+          vel = 0;
+          // sem rolagem automática
+        }
+      }
+      applyPos();
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // ── Mouse drag ──
+    wrap.addEventListener('mousedown', function(e){
+      dragging = true;
+      startX = lastX = e.clientX;
+      startPos = pos;
+      lastT = Date.now();
+      dragVel = 0;
+      vel = 0;
+      track.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!dragging) return;
+      var now = Date.now(), dt = now - lastT;
+      if(dt > 0) dragVel = (e.clientX - lastX) / dt;
+      lastX = e.clientX; lastT = now;
+      pos = startPos + (e.clientX - startX);
+    });
+    window.addEventListener('mouseup', function(){
+      if(!dragging) return;
+      dragging = false;
+      vel = dragVel * 12;
+      track.style.cursor = 'grab';
+    });
+
+    // ── Touch drag ──
+    wrap.addEventListener('touchstart', function(e){
+      dragging = true;
+      startX = lastX = e.touches[0].clientX;
+      startPos = pos;
+      lastT = Date.now();
+      dragVel = 0;
+      vel = 0;
+    }, { passive: true });
+    wrap.addEventListener('touchmove', function(e){
+      if(!dragging) return;
+      var now = Date.now(), dt = now - lastT;
+      if(dt > 0) dragVel = (e.touches[0].clientX - lastX) / dt;
+      lastX = e.touches[0].clientX; lastT = now;
+      pos = startPos + (e.touches[0].clientX - startX);
+    }, { passive: true });
+    wrap.addEventListener('touchend', function(){
+      if(!dragging) return;
+      dragging = false;
+      vel = dragVel * 12;
+    });
+  });
+})();
+
 (function(){
   var btn=document.getElementById('whatsappBtn');
   if(!btn) return;
