@@ -640,7 +640,11 @@ async function renderAll() {
     const apiData = await fetchChannelData(canal.id);
     const subs    = apiData ? apiData.subs   : canal.subsManual;
     const avatar  = apiData ? apiData.avatar : canal.avatarUrl;
-    return { canal: { ...canal, avatarUrl: avatar || canal.avatarUrl }, subs };
+
+    // Auto-finaliza se atingiu a meta e ainda estava como active
+    const status = (canal.status === 'active' && subs >= GOAL) ? 'done' : canal.status;
+
+    return { canal: { ...canal, avatarUrl: avatar || canal.avatarUrl, status }, subs };
   });
 
   const results = await Promise.all(promises);
