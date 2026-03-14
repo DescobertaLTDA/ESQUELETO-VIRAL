@@ -22,7 +22,7 @@ const EV_CONFIG = {
   YOUTUBE_API_KEY: 'AIzaSyDmTzgi8Jz7u_RG7kiMX8265EciewwdZPM',
 
   // ── Meta global de inscritos ──
-  GOAL: 100000,
+  GOAL: 1000000,
 
   // ── Lista de canais ──
   CANAIS: [
