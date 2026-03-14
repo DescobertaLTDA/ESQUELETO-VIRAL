@@ -528,17 +528,34 @@ nav {
 
 .hero-prompts-btn { display:none; }
 .btn-prompts-mobile {
-  display:block; width:100%; max-width:320px; margin:0 auto;
-  background:transparent;
-  border:1.5px solid rgba(255,69,0,0.5);
-  color:var(--o2);
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  width:100%; max-width:320px; margin:0 auto;
+  background: transparent;
+  border:1px solid rgba(255,69,0,0.3);
   font-family:'Montserrat',sans-serif;
-  font-weight:800; font-size:12px; letter-spacing:1.5px;
-  text-transform:uppercase; text-decoration:none; text-align:center;
-  padding:14px 20px; border-radius:12px;
+  text-decoration:none;
+  padding:11px 16px; border-radius:10px;
+  white-space:nowrap;
   transition:background .2s, border-color .2s;
 }
-.btn-prompts-mobile:hover { background:rgba(255,69,0,0.08); border-color:var(--o1); }
+.btn-prompts-mobile:hover {
+  background:rgba(255,69,0,0.08);
+  border-color:rgba(255,69,0,0.55);
+}
+.bpm-label {
+  font-size:10px; font-weight:600; letter-spacing:1px;
+  text-transform:uppercase; color:rgba(240,232,216,0.4);
+}
+.bpm-sep {
+  color:rgba(255,69,0,0.35); font-size:10px;
+}
+.bpm-price {
+  font-size:12px; font-weight:700; color:rgba(240,232,216,0.9); letter-spacing:0.3px;
+}
+.bpm-bonus {
+  font-size:10px; font-weight:700; letter-spacing:0.5px;
+  color:var(--o2);
+}
 
 .proof-section {
   padding: 80px 0;
@@ -1040,7 +1057,13 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       </a>
     </div>
     <div class="hero-prompts-btn">
-      <a href="/prompts" class="btn-prompts-mobile">📄 Pack de Prompts</a>
+      <a href="/prompts" class="btn-prompts-mobile">
+        <span class="bpm-label">Prompts</span>
+        <span class="bpm-sep">·</span>
+        <span class="bpm-price">R$14,90</span>
+        <span class="bpm-sep">·</span>
+        <span class="bpm-bonus">🎵 música grátis</span>
+      </a>
     </div>
     <div class="hero-microtrust">
       <div class="microtrust-item"><span>🔒</span> Garantia de 7 dias</div>
