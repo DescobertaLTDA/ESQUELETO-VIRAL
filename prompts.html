@@ -120,11 +120,12 @@ nav {
   text-decoration:line-through; letter-spacing:1px;
 }
 .price-main {
-  font-size:clamp(56px,7vw,80px); font-weight:900; line-height:1;
-  letter-spacing:-3px; color:#fff;
+  font-size:clamp(64px,8vw,96px); font-weight:900; line-height:1;
+  letter-spacing:0px; color:#fff;
+  display:flex; align-items:flex-start; justify-content:center; gap:2px;
 }
-.price-main em { color:var(--o1); font-style:normal; font-size:0.55em; vertical-align:top; margin-top:10px; display:inline-block; letter-spacing:0; }
-.price-main .cents { font-size:0.45em; vertical-align:top; margin-top:14px; display:inline-block; letter-spacing:0; color:var(--o2); }
+.price-main em { color:var(--o1); font-style:normal; font-size:0.48em; vertical-align:top; margin-top:8px; display:inline-block; letter-spacing:0; line-height:1; }
+.price-main .cents { font-size:0.38em; vertical-align:top; margin-top:12px; display:inline-block; letter-spacing:0; color:var(--o2); line-height:1; }
 .price-label { font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(240,232,216,0.3); }
 
 .btn-cta {
@@ -315,9 +316,9 @@ footer {
   /* PRICE BLOCK */
   .price-block { margin-top:32px; gap:6px; }
   .price-old { font-size:13px; }
-  .price-main { font-size:clamp(52px,16vw,72px); letter-spacing:-2px; }
-  .price-main em { font-size:0.5em; margin-top:8px; }
-  .price-main .cents { font-size:0.4em; margin-top:12px; }
+  .price-main { font-size:clamp(60px,18vw,80px); letter-spacing:0px; gap:2px; }
+  .price-main em { font-size:0.46em; margin-top:7px; }
+  .price-main .cents { font-size:0.36em; margin-top:10px; }
   .price-label { font-size:10px; letter-spacing:2px; }
 
   /* CTA BUTTON */
@@ -398,7 +399,7 @@ footer {
 /* Extra small — abaixo de 380px */
 @media(max-width:380px){
   .hero-title { font-size:32px; letter-spacing:-1px; }
-  .price-main { font-size:56px; }
+  .price-main { font-size:60px; letter-spacing:0px; }
   .prompts-grid { grid-template-columns: repeat(2, 1fr); gap:4px; }
   .btn-cta { font-size:12px; padding:16px 20px; }
   .trust-item { font-size:9px; }
@@ -430,14 +431,14 @@ footer {
   </p>
 
   <div class="price-block">
-    <span class="price-old">De R$9,99</span>
+    <span class="price-old">De R$38,99</span>
     <div class="price-main">
-      <em>R$</em>5<span class="cents">,00</span>
+      <em>R$</em>14<span class="cents">,90</span>
     </div>
     <span class="price-label">pagamento único · acesso imediato</span>
   </div>
 
-  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$5,00</a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="btn-cta">🦴 Quero o Pack — R$14,90</a>
 
   <div class="trust-row">
     <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
@@ -500,7 +501,7 @@ footer {
       <!-- Card 4 -->
       <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="prompt-card" style="display:block;text-decoration:none;">
         <div class="prompt-card-bg" style="background:#001a05;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERDE_vmqwys.jpg" alt="Esqueleto Verde" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/VERDE_vmqwys.jpg" alt="Esqueleto Verde" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
         </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
@@ -552,7 +553,7 @@ footer {
       <!-- Card 8 -->
       <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="prompt-card" style="display:block;text-decoration:none;">
         <div class="prompt-card-bg" style="background:#150500;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERMELHO_dcpoyy.jpg" alt="Esqueleto Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/VERMELHO_dcpoyy.jpg" alt="Esqueleto Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
         </div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
@@ -648,7 +649,7 @@ footer {
         </div>
         <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,69,0,0.15);display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(240,232,216,0.3);">Total</span>
-          <span style="font-size:28px;font-weight:900;color:#fff;">R$5<span style="font-size:16px;color:var(--o2);">,00</span></span>
+          <span style="font-size:28px;font-weight:900;color:#fff;">R$14<span style="font-size:16px;color:var(--o2);">,90</span></span>
         </div>
       </div>
     </div>
@@ -659,12 +660,12 @@ footer {
 <section class="cta-section">
   <div style="position:relative;z-index:1;">
     <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
-    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$5,00</span></h2>
+    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$14,90</span></h2>
     <p style="margin-top:20px;font-size:15px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;" class="reveal">
       9 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
     </p>
     <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="btn-cta reveal" style="margin-top:40px;">
-      🦴 Quero o Pack Agora — R$5,00
+      🦴 Quero o Pack Agora — R$14,90
     </a>
     <div class="trust-row reveal" style="margin-top:20px;">
       <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
