@@ -1537,6 +1537,9 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
   </div>
 
+  <div class="pc-urgency-strip reveal">
+    🔥 <span>+1.200 alunos</span> já estão criando vídeos virais com esse método
+  </div>
 </section>
 
 <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
@@ -2283,6 +2286,48 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   });
   wrap.style.cursor = 'grab';
 
+})();
+
+// ════════════════════════════════════════════════════
+// ─── PROPAGAÇÃO DE UTMs NOS LINKS INTERNOS ───
+// Injeta os UTMs salvos na query string dos links
+// internos (ex: /prompts) para preservar rastreio
+// ════════════════════════════════════════════════════
+(function () {
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
+
+  function getUtmParams() {
+    var stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
+    var urlParams = new URLSearchParams(window.location.search);
+    UTM_KEYS.forEach(function (key) {
+      var val = urlParams.get(key);
+      if (val) stored[key] = val;
+    });
+    return stored;
+  }
+
+  function appendUtmsToInternalLinks() {
+    var params = getUtmParams();
+    var keys = Object.keys(params);
+    if (!keys.length) return;
+
+    var query = keys.map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }).join('&');
+
+    document.querySelectorAll('a[href]').forEach(function (el) {
+      var href = el.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+      el.href = href + (href.includes('?') ? '&' : '?') + query;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', appendUtmsToInternalLinks);
+  } else {
+    appendUtmsToInternalLinks();
+  }
 })();
 
 // ════════════════════════════════════════════════════
