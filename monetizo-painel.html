@@ -543,16 +543,23 @@ function remaining(subs) {
   return r > 0 ? formatNum(r) : '0';
 }
 
-async function fetchSubs(channelId) {
+async function fetchChannelData(channelId) {
   // Se não tem API key configurada, usa o valor manual
   if (!YOUTUBE_API_KEY || YOUTUBE_API_KEY === 'SUA_API_KEY_AQUI') return null;
 
   try {
-    const url = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`;
+    const url = `https://www.googleapis.com/youtube/v3/channels?part=statistics,snippet&id=${channelId}&key=${YOUTUBE_API_KEY}`;
     const res = await fetch(url);
     const data = await res.json();
     if (data.items && data.items[0]) {
-      return parseInt(data.items[0].statistics.subscriberCount, 10);
+      const item = data.items[0];
+      return {
+        subs:   parseInt(item.statistics.subscriberCount, 10),
+        avatar: item.snippet.thumbnails?.high?.url
+             || item.snippet.thumbnails?.medium?.url
+             || item.snippet.thumbnails?.default?.url
+             || '',
+      };
     }
   } catch (e) { /* silently fall back */ }
   return null;
@@ -630,9 +637,10 @@ async function renderAll() {
   let countActive = 0, countDone = 0, countWaiting = 0;
 
   const promises = CANAIS.map(async canal => {
-    const apiSubs = await fetchSubs(canal.id);
-    const subs = apiSubs !== null ? apiSubs : canal.subsManual;
-    return { canal, subs };
+    const apiData = await fetchChannelData(canal.id);
+    const subs    = apiData ? apiData.subs   : canal.subsManual;
+    const avatar  = apiData ? apiData.avatar : canal.avatarUrl;
+    return { canal: { ...canal, avatarUrl: avatar || canal.avatarUrl }, subs };
   });
 
   const results = await Promise.all(promises);
