@@ -19,7 +19,7 @@
 const EV_CONFIG = {
 
   // ── Sua chave da YouTube Data API v3 ──
-  YOUTUBE_API_KEY: 'SUA_API_KEY_AQUI',
+  YOUTUBE_API_KEY: 'AIzaSyDmTzgi8Jz7u_RG7kiMX8265EciewwdZPM',
 
   // ── Meta global de inscritos ──
   GOAL: 100000,
@@ -27,12 +27,12 @@ const EV_CONFIG = {
   // ── Lista de canais ──
   CANAIS: [
     {
-      id: 'UC_CHANNEL_ID_1',       // ID do canal YouTube
-      nome: 'Nome do Canal 1',
-      handle: '@handle1',
-      status: 'active',            // active | done | waiting
-      avatarUrl: '',               // URL da foto de perfil (opcional)
-      subsManual: 12400,           // usado se a API não estiver configurada
+      id: 'UCJWArKWSlKLzTOekfIHxOHw',
+      nome: 'Canal Ligado',
+      handle: '@ocanalligado',
+      status: 'active',
+      avatarUrl: '',
+      subsManual: 0,
     },
     {
       id: 'UC_CHANNEL_ID_2',
