@@ -65,56 +65,17 @@ nav {
 .nav-btn-mobile {
   display: none;
   text-decoration: none;
-  background: linear-gradient(135deg, #CC2200 0%, #FF5500 100%);
-  border-radius: 10px;
-  padding: 7px 13px 7px 11px;
-  box-shadow: 0 4px 18px rgba(255,69,0,0.4);
-  transition: transform .2s, box-shadow .2s;
-  position: relative;
-  overflow: hidden;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1px;
-}
-.nav-btn-mobile::before {
-  content: '';
-  position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-  animation: shimmer 2.5s infinite;
-}
-@keyframes shimmer { to { left: 150%; } }
-.nav-btn-mobile:active { transform: scale(0.97); }
-
-.nbm-top {
-  display: flex; align-items: center; gap: 5px;
-}
-.nbm-icon { font-size: 11px; line-height: 1; }
-.nbm-label {
-  font-size: 9px; font-weight: 900; letter-spacing: 1.5px;
-  text-transform: uppercase; color: rgba(255,255,255,0.85);
-  line-height: 1;
-}
-.nbm-bottom {
-  display: flex; align-items: center; gap: 6px;
-  margin-top: 1px;
-}
-.nbm-price {
-  font-size: 15px; font-weight: 900; color: #fff;
-  letter-spacing: -0.5px; line-height: 1;
-}
-.nbm-bonus {
-  font-size: 8px; font-weight: 800; letter-spacing: 1px;
-  text-transform: uppercase;
-  background: rgba(255,255,255,0.18);
+  background: linear-gradient(135deg, var(--o1), var(--o2));
   color: #fff;
-  padding: 2px 6px; border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: opacity .2s, transform .2s;
   white-space: nowrap;
-  line-height: 1.4;
 }
-.nbm-bonus em {
-  font-style: normal;
-  color: #FFE066;
-}
+.nav-btn-mobile:hover { opacity: .85; transform: translateY(-1px); }
 
 /* ─── HERO ─── */
 .hero {
@@ -513,16 +474,9 @@ footer {
     🦴 Comprar Agora
   </a>
 
-  <!-- Botão mobile (rico) -->
+  <!-- Botão mobile -->
   <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-mobile">
-    <div class="nbm-top">
-      <span class="nbm-icon">🦴</span>
-      <span class="nbm-label">Pack de Prompts</span>
-    </div>
-    <div class="nbm-bottom">
-      <span class="nbm-price">R$14,90</span>
-      <span class="nbm-bonus">🎵 música <em>GRÁTIS</em></span>
-    </div>
+    🦴 Comprar Pack
   </a>
 </nav>
 
