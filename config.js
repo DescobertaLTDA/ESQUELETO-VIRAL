@@ -34,30 +34,6 @@ const EV_CONFIG = {
       avatarUrl: '',
       subsManual: 0,
     },
-    {
-      id: 'UC_CHANNEL_ID_2',
-      nome: 'Nome do Canal 2',
-      handle: '@handle2',
-      status: 'active',
-      avatarUrl: '',
-      subsManual: 47800,
-    },
-    {
-      id: 'UC_CHANNEL_ID_3',
-      nome: 'Canal Finalizado',
-      handle: '@handle3',
-      status: 'done',
-      avatarUrl: '',
-      subsManual: 103000,
-    },
-    {
-      id: 'UC_CHANNEL_ID_4',
-      nome: 'Canal em Espera',
-      handle: '@handle4',
-      status: 'waiting',
-      avatarUrl: '',
-      subsManual: 0,
-    },
   ],
 
 };
