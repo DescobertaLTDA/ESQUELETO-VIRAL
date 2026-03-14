@@ -413,11 +413,14 @@ nav {
   /* TABS */
   .tabs-wrap {
     padding:14px 16px 0; gap:0;
-    overflow-x:auto; -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    overflow-x:visible;
   }
-  .tabs-wrap::-webkit-scrollbar { display:none; }
-  .tab { padding:10px 14px; font-size:10px; letter-spacing:1px; flex-shrink:0; white-space:nowrap; gap:5px; }
+  .tab {
+    flex:1; justify-content:center;
+    padding:10px 4px; font-size:9px; letter-spacing:0.5px;
+    gap:4px; white-space:nowrap;
+  }
+  .tab-count { width:16px; height:16px; font-size:8px; }
 
   /* GRID */
   .grid-wrap { padding:12px 16px 60px; }
@@ -510,60 +513,16 @@ nav {
   &nbsp;·&nbsp; Dados via YouTube API · atualização automática a cada 5 min
 </div>
 
+<script src="config.js"></script>
 <script>
 /* ══════════════════════════════════════════════════════════════
-   ▼▼▼  CONFIGURAÇÃO — EDITE AQUI  ▼▼▼
-   
-   Para cada canal você precisa do CHANNEL ID do YouTube.
-   Como encontrar: vá no canal, clique em "Mais" > "Compartilhar canal"
-   ou acesse: https://www.youtube.com/@NomeDoCanal/about
-   O ID começa com "UC..." e aparece na URL.
-   
-   STATUS: "active" | "done" | "waiting"
-   
-   YOUTUBE_API_KEY: crie sua chave gratuita em:
-   https://console.cloud.google.com → Credenciais → API Key
-   (ative a "YouTube Data API v3")
+   Configuração carregada do config.js
+   Edite o arquivo config.js no repositório.
 ══════════════════════════════════════════════════════════════ */
 
-const YOUTUBE_API_KEY = 'SUA_API_KEY_AQUI'; // ← substitua pela sua chave
-
-const CANAIS = [
-  {
-    id: 'UC_CHANNEL_ID_1',          // ← ID do canal YouTube (começa com UC...)
-    nome: 'Nome do Canal 1',
-    handle: '@handle1',
-    status: 'active',               // active | done | waiting
-    avatarUrl: '',                  // URL da foto (deixe vazio para usar inicial)
-    subsManual: 12400,              // fallback se a API falhar
-  },
-  {
-    id: 'UC_CHANNEL_ID_2',
-    nome: 'Nome do Canal 2',
-    handle: '@handle2',
-    status: 'active',
-    avatarUrl: '',
-    subsManual: 47800,
-  },
-  {
-    id: 'UC_CHANNEL_ID_3',
-    nome: 'Canal Finalizado',
-    handle: '@handle3',
-    status: 'done',
-    avatarUrl: '',
-    subsManual: 103000,
-  },
-  {
-    id: 'UC_CHANNEL_ID_4',
-    nome: 'Canal em Espera',
-    handle: '@handle4',
-    status: 'waiting',
-    avatarUrl: '',
-    subsManual: 0,
-  },
-];
-
-const GOAL = 100000;
+const YOUTUBE_API_KEY = EV_CONFIG.YOUTUBE_API_KEY;
+const CANAIS          = EV_CONFIG.CANAIS;
+const GOAL            = EV_CONFIG.GOAL;
 
 /* ══════════════════════════════════════════════════════════════
    ENGINE
