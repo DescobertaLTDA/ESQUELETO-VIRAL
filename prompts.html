@@ -794,6 +794,46 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </div>
 </div>
 
+<!-- ─── PROPAGAÇÃO DE UTMs NOS LINKS INTERNOS ─── -->
+<script>
+(function () {
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
+
+  function getUtmParams() {
+    var stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
+    var urlParams = new URLSearchParams(window.location.search);
+    UTM_KEYS.forEach(function (key) {
+      var val = urlParams.get(key);
+      if (val) stored[key] = val;
+    });
+    return stored;
+  }
+
+  function appendUtmsToInternalLinks() {
+    var params = getUtmParams();
+    var keys = Object.keys(params);
+    if (!keys.length) return;
+
+    var query = keys.map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }).join('&');
+
+    document.querySelectorAll('a[href]').forEach(function (el) {
+      var href = el.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
+      el.href = href + (href.includes('?') ? '&' : '?') + query;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', appendUtmsToInternalLinks);
+  } else {
+    appendUtmsToInternalLinks();
+  }
+})();
+</script>
+
 <!-- ─── UTM TRACKER ─── -->
 <script>
 (function () {
