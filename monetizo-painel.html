@@ -463,7 +463,7 @@ nav {
   <div class="hero-strip-inner">
     <div>
       <div class="hero-label">Painel de Acompanhamento</div>
-      <div class="hero-heading">META: <em>100K</em><br>INSCRITOS</div>
+      <div class="hero-heading">META: <em>1M</em><br>INSCRITOS</div>
     </div>
     <div class="hero-stats">
       <div class="hstat">
@@ -529,8 +529,6 @@ const GOAL            = EV_CONFIG.GOAL;
 ══════════════════════════════════════════════════════════════ */
 
 function formatNum(n) {
-  if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0','') + 'M';
-  if (n >= 1000)    return (n / 1000).toFixed(1).replace('.0','') + 'K';
   return n.toLocaleString('pt-BR');
 }
 
@@ -590,7 +588,7 @@ function buildCard(canal, subs) {
     <div class="card-progress-wrap">
       <div class="card-progress-labels">
         <span class="card-progress-pct">${p}% da meta</span>
-        <span class="card-progress-goal">Meta: 100K</span>
+        <span class="card-progress-goal">Meta: 1.000.000</span>
       </div>
       <div class="card-progress-track">
         <div class="card-progress-fill ${fillClass}" style="width:0%" data-target="${p}"></div>
