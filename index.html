@@ -1474,54 +1474,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
 </section>
 
-<section class="dep-section reveal">
-  <div class="wrap" style="margin-bottom:48px; text-align:center;">
-    <div class="label" style="justify-content:center;">Quem já aplicou</div>
-    <h2 class="big-title">O que os alunos<br><span style="color:var(--o1);">estão dizendo</span></h2>
-  </div>
 
-  <div class="dep-carousel-wrap">
-    <!-- seta esquerda -->
-    <button class="dep-arrow dep-arrow-left" id="depPrev" aria-label="Anterior">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-
-    <!-- stage 3D -->
-    <div class="dep-stage-wrap">
-      <div class="dep-stage" id="depStage">
-        <div class="dep-slide" data-idx="0">
-          <div class="dep-phone">
-            <div class="dep-phone-inner">
-              <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/4_e3g0ex.webp" alt="Depoimento" loading="lazy">
-            </div>
-          </div>
-        </div>
-        <div class="dep-slide" data-idx="1">
-          <div class="dep-phone">
-            <div class="dep-phone-inner">
-              <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/1_asem3q.webp" alt="Depoimento" loading="lazy">
-            </div>
-          </div>
-        </div>
-        <div class="dep-slide" data-idx="2">
-          <div class="dep-phone">
-            <div class="dep-phone-inner">
-              <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773369952/2_eheriz.webp" alt="Depoimento" loading="lazy">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- seta direita -->
-    <button class="dep-arrow dep-arrow-right" id="depNext" aria-label="Próximo">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-
-  <!-- dots -->
-  <div class="dep-dots" id="depDots"></div>
-</section>
 
 <section class="section">
   <div class="wrap">
@@ -1553,7 +1506,11 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       <div class="reveal">
         <div class="forwho-img-wrap">
           <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773239895/Skeleton_gladiator_fights_trex_e2665aab2e_dngr6u.jpg" class="forwho-img" alt="Esqueleto Viral">
-          <div class="forwho-img-overlay"></div>
+          <div class="forwho-img-overlay" style="background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 35%, transparent 65%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:28px 24px;pointer-events:none;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--o2);margin-bottom:8px;">Método Testado</div>
+            <div style="font-size:20px;font-weight:900;line-height:1.2;letter-spacing:-0.5px;text-transform:uppercase;color:#fff;">300 milhões de views.<br>Sem aparecer uma vez.</div>
+          </div>
         </div>
       </div>
       <div class="reveal">
@@ -1621,7 +1578,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 /* ─── PRICING REDESIGN ─── */
 .pricing-section {
   background: linear-gradient(180deg, #060606 0%, #0e0400 50%, #060606 100%);
-  padding: 100px 20px 120px;
+  padding: 100px 20px 60px;
   position: relative; overflow: hidden; text-align: center;
 }
 .pricing-section::before {
@@ -1823,9 +1780,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
   </div>
 
-  <div class="pc-urgency-strip reveal">
-    🔥 <span>+1.200 alunos</span> já estão criando vídeos virais com esse método
-  </div>
+  
 </section>
 
 <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
