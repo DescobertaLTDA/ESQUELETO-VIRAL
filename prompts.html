@@ -383,10 +383,6 @@ footer {
   .checklist li { font-size:14px; gap:12px; }
   .check-icon { width:20px; height:20px; font-size:10px; border-radius:5px; }
 
-  .forwho-section .wrap > div > div:last-child {
-    padding:28px 20px !important;
-  }
-
   .cta-section { padding:64px 20px; }
   .cta-section .big-title { font-size:clamp(28px,9vw,42px); }
   .cta-section p { font-size:14px; }
@@ -403,8 +399,6 @@ footer {
   .prompts-grid { grid-template-columns: repeat(2, 1fr); gap:4px; }
   .btn-cta { font-size:12px; padding:16px 20px; }
   .trust-item { font-size:9px; }
-  .nbm-price { font-size:13px; }
-  .nbm-label { font-size:8px; }
 }
 
 /* ─── SOCIAL PROOF POPUP ─── */
@@ -441,282 +435,12 @@ footer {
   .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
 }
 
-/* ─── HAMBURGER MENU ─── */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 36px; height: 36px;
-  padding: 4px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  margin-left: 10px;
-  flex-shrink: 0;
-  z-index: 600;
-}
-.hamburger span {
-  display: block;
-  width: 22px; height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: transform .3s ease, opacity .3s ease, width .3s ease;
-  transform-origin: center;
-}
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-.nav-drawer {
-  position: fixed;
-  top: 0; left: 0; bottom: 0;
-  width: 260px;
-  background: #111;
-  border-right: 1px solid rgba(255,255,255,0.06);
-  z-index: 800;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  transform: translateX(-100%);
-  transition: transform .35s cubic-bezier(.16,1,.3,1);
-  overflow-y: auto;
-}
-.nav-drawer.open { transform: translateX(0); }
-
-.nav-drawer-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.65);
-  z-index: 799; opacity: 0; pointer-events: none;
-  transition: opacity .35s ease;
-}
-.nav-drawer-overlay.open { opacity: 1; pointer-events: all; }
-
-.nav-drawer-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 16px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  flex-shrink: 0;
-}
-.nav-drawer-brand {
-  display: flex; align-items: center; gap: 8px;
-  font-weight: 900; font-size: 12px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--text);
-  text-decoration: none;
-}
-.nav-drawer-brand span { color: var(--o1); }
-.nav-drawer-close {
-  background: rgba(255,255,255,0.05); border: none; cursor: pointer;
-  color: rgba(240,232,216,0.4);
-  width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 6px;
-  transition: background .2s, color .2s;
-}
-.nav-drawer-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
-
-.ndl-section-label {
-  padding: 16px 16px 6px;
-  font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(240,232,216,0.2);
-}
-
-.nav-drawer-links {
-  display: flex; flex-direction: column;
-  gap: 1px; padding: 4px 8px;
-}
-.nav-drawer-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 10px;
-  font-size: 13px; font-weight: 600; letter-spacing: .2px;
-  text-decoration: none;
-  color: rgba(240,232,216,0.5);
-  border-radius: 8px;
-  transition: background .15s, color .15s;
-  white-space: nowrap;
-}
-.nav-drawer-link:hover {
-  background: rgba(255,255,255,0.05);
-  color: rgba(240,232,216,0.9);
-}
-.nav-drawer-link.active {
-  background: rgba(255,69,0,0.13);
-  color: var(--o2);
-}
-.ndl-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  background: rgba(255,255,255,0.05);
-  color: rgba(240,232,216,0.45);
-  transition: background .15s, color .15s;
-}
-.nav-drawer-link:hover .ndl-icon {
-  background: rgba(255,255,255,0.08);
-  color: rgba(240,232,216,0.8);
-}
-.nav-drawer-link.active .ndl-icon {
-  background: rgba(255,69,0,0.2);
-  color: var(--o1);
-}
-
-.ndl-divider {
-  height: 1px;
-  background: rgba(255,255,255,0.05);
-  margin: 8px 16px;
-}
-
-.nav-drawer-footer {
-  flex-shrink: 0; margin-top: auto;
-  padding: 14px 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex; align-items: center; gap: 10px;
-}
-.ndf-avatar {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--o1), var(--o3));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; flex-shrink: 0;
-}
-.ndf-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.ndf-name { font-size: 13px; font-weight: 900; color: #fff; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; }
-.ndf-role { font-size: 10px; color: rgba(240,232,216,0.3); }
-
-@media(max-width:768px){
-  .hamburger { display: flex; }
-}
-
-/* ─── DRAWER RESET ─── */
-.nav-drawer {
-  position: fixed;
-  top: 0; left: 0; bottom: 0;
-  width: 260px;
-  background: #111;
-  border-right: 1px solid rgba(255,255,255,0.06);
-  z-index: 800;
-  display: flex;
-  flex-direction: column;
-  transform: translateX(-100%);
-  transition: transform .35s cubic-bezier(.16,1,.3,1);
-  overflow-y: auto;
-}
-.nav-drawer.open { transform: translateX(0); }
-.nav-drawer-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.65);
-  z-index: 799; opacity: 0; pointer-events: none;
-  transition: opacity .35s ease;
-}
-.nav-drawer-overlay.open { opacity: 1; pointer-events: all; }
-.nav-drawer-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 16px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  flex-shrink: 0;
-}
-.nav-drawer-brand {
-  display: flex; align-items: center; gap: 8px;
-  font-weight: 900; font-size: 12px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--text); text-decoration: none;
-}
-.nav-drawer-brand span { color: var(--o1); }
-.nav-drawer-close {
-  background: rgba(255,255,255,0.05); border: none; cursor: pointer;
-  color: rgba(240,232,216,0.4);
-  width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 6px; transition: background .2s, color .2s;
-}
-.nav-drawer-close:hover { background: rgba(255,255,255,0.1); color: #fff; }
-.ndl-section-label {
-  padding: 16px 16px 4px;
-  font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
-  text-transform: uppercase; color: rgba(240,232,216,0.2);
-}
-.nav-drawer-links {
-  display: flex; flex-direction: column;
-  gap: 1px; padding: 4px 8px;
-}
-.nav-drawer-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 9px 10px;
-  font-size: 13px; font-weight: 600;
-  text-decoration: none;
-  color: rgba(240,232,216,0.5);
-  border-radius: 8px;
-  transition: background .15s, color .15s;
-  white-space: nowrap;
-}
-.nav-drawer-link:hover { background: rgba(255,255,255,0.05); color: rgba(240,232,216,0.9); }
-.nav-drawer-link.active { background: rgba(255,69,0,0.13); color: var(--o2); }
-.ndl-icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  background: rgba(255,255,255,0.05);
-  color: rgba(240,232,216,0.4);
-  transition: background .15s, color .15s;
-}
-.nav-drawer-link:hover .ndl-icon { background: rgba(255,255,255,0.08); color: rgba(240,232,216,0.8); }
-.nav-drawer-link.active .ndl-icon { background: rgba(255,69,0,0.2); color: var(--o1); }
-.ndl-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 8px 16px; }
-.nav-drawer-footer {
-  flex-shrink: 0; margin-top: auto;
-  padding: 14px 16px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex; align-items: center; gap: 10px;
-}
-.ndf-avatar {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--o1), var(--o3));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 17px; flex-shrink: 0;
-}
-.ndf-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.ndf-name { font-size: 13px; font-weight: 900; color: #fff; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; }
-.ndf-role { font-size: 10px; color: rgba(240,232,216,0.3); }
-
-.nav-drawer-cta-wrap {
-  padding: 16px 12px 24px;
-  flex-shrink: 0;
-}
-.nav-drawer-cta-btn {
-  display: block;
-  background: linear-gradient(135deg, var(--o1), var(--o2));
-  color: #fff; font-family: 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 13px; letter-spacing: 1.5px;
-  text-transform: uppercase; text-decoration: none;
-  padding: 16px; border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 6px 24px rgba(255,69,0,0.35);
-  transition: opacity .2s, transform .2s;
-}
-.nav-drawer-cta-btn:hover { opacity: .88; transform: translateY(-1px); }
-/* Simplify link style - no icon boxes */
-.nav-drawer-link {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 10px;
-  font-size: 14px; font-weight: 600;
-  text-decoration: none;
-  color: rgba(240,232,216,0.55);
-  border-radius: 8px;
-  transition: background .15s, color .15s;
-}
-.nav-drawer-link:hover { background: rgba(255,255,255,0.04); color: rgba(240,232,216,0.9); }
-.nav-drawer-link svg { flex-shrink: 0; opacity: 0.5; }
-.nav-drawer-link:hover svg { opacity: 0.8; }
 </style>
 </head>
 <body>
 
-<!-- ═══ NAV ═══ -->
 <nav>
   <div style="display:flex;align-items:center;gap:12px;">
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
     <a href="/" class="nav-logo">
       <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:34px;width:auto;">
       ESQUELETO<span>VIRAL</span>
@@ -730,23 +454,8 @@ footer {
   <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-mobile">
     🦴 Comprar Pack
   </a>
-
 </nav>
 
-<!-- ═══ NAV DRAWER ═══ -->
-<div class="nav-drawer" id="navDrawer">
-
-  <div class="nav-drawer-header">
-    <span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(240,232,216,0.2);">MENU</span>
-    <button class="nav-drawer-close" onclick="document.getElementById('hamburger').click()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-
-</div>
-<div class="nav-drawer-overlay" id="navOverlay"></div>
-
-<!-- ═══ HERO ═══ -->
 <section class="hero">
   <div class="hero-eyebrow"><span class="dot"></span>Pack Digital · Entrega Imediata</div>
   <h1 class="hero-title">
@@ -778,7 +487,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ═══ PROMPTS GRID ═══ -->
 <section class="section" id="prompts">
   <div class="wrap">
     <div class="label reveal">O que está incluído</div>
@@ -810,106 +518,8 @@ footer {
           <span class="prompt-card-color" style="background:rgba(0,100,255,0.2);color:#4da6ff;">#0055FF</span>
         </div>
       </a>
+      </div>
 
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#0a001a;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROXO_t21m9z.jpg" alt="Esqueleto Roxo" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 03</div>
-          <div class="prompt-card-name">Esqueleto Roxo</div>
-          <span class="prompt-card-color" style="background:rgba(140,0,255,0.2);color:#b366ff;">#7B00FF</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#001a05;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/VERDE_vmqwys.jpg" alt="Esqueleto Verde" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 04</div>
-          <div class="prompt-card-name">Esqueleto Verde</div>
-          <span class="prompt-card-color" style="background:rgba(0,200,80,0.2);color:#33ff88;">#00C850</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#1a0010;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROSA_a5xvt1.jpg" alt="Esqueleto Rosa" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 05</div>
-          <div class="prompt-card-name">Esqueleto Rosa</div>
-          <span class="prompt-card-color" style="background:rgba(255,0,120,0.2);color:#ff66b2;">#FF0078</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#1a1500;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/DOURADO_hfhtsf.jpg" alt="Esqueleto Dourado" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 06</div>
-          <div class="prompt-card-name">Esqueleto Dourado</div>
-          <span class="prompt-card-color" style="background:rgba(255,200,0,0.2);color:#ffd700;">#FFD700</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#001517;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/CIANO_mfhw0f.jpg" alt="Esqueleto Ciano" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 07</div>
-          <div class="prompt-card-name">Esqueleto Ciano</div>
-          <span class="prompt-card-color" style="background:rgba(0,220,220,0.2);color:#00e5e5;">#00DCDC</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#150500;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/VERMELHO_dcpoyy.jpg" alt="Esqueleto Vermelho" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 08</div>
-          <div class="prompt-card-name">Esqueleto Vermelho</div>
-          <span class="prompt-card-color" style="background:rgba(220,0,0,0.2);color:#ff4444;">#DC0000</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#1a0a00;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/LARANJA_vjzoia.jpg" alt="Esqueleto Laranja" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 09</div>
-          <div class="prompt-card-name">Esqueleto Laranja</div>
-          <span class="prompt-card-color" style="background:rgba(255,69,0,0.2);color:#FF6B00;">#FF4500</span>
-        </div>
-      </a>
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#100a00;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/BRONZE_nuhn8s.jpg" alt="Esqueleto Bronze" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
-        <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-body">
-          <div class="prompt-card-num">Prompt 10</div>
-          <div class="prompt-card-name">Esqueleto Bronze</div>
-          <span class="prompt-card-color" style="background:rgba(200,130,30,0.2);color:#cd7f32;">#CD7F32</span>
-        </div>
-      </a>
-
-    </div>
-
-    <!-- BÔNUS MÚSICA -->
     <div class="bonus-block reveal">
       <div class="bonus-icon">🎵</div>
       <div class="bonus-body">
@@ -928,7 +538,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- ═══ PARA QUEM É ═══ -->
 <section class="section forwho-section" id="forwho">
   <div class="wrap">
     <div class="forwho-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
@@ -973,7 +582,6 @@ footer {
   </div>
 </section>
 
-<!-- ═══ CTA BOTTOM ═══ -->
 <section class="cta-section" id="cta-section">
   <div style="position:relative;z-index:1;">
     <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
@@ -992,46 +600,12 @@ footer {
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="foot-logo">ESQUELETO<span>VIRAL</span></div>
   <p class="foot-copy">© 2025 Esqueleto Viral · L.G.S Descoberta Mental LTDA · Todos os direitos reservados</p>
 </footer>
 
 <script>
-// ─── HAMBURGER ───
-(function(){
-  var btn     = document.getElementById('hamburger');
-  var drawer  = document.getElementById('navDrawer');
-  var overlay = document.getElementById('navOverlay');
-  if(!btn || !drawer) return;
-
-  function openMenu(){
-    btn.classList.add('open');
-    drawer.classList.add('open');
-    if(overlay) overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMenu(){
-    btn.classList.remove('open');
-    drawer.classList.remove('open');
-    if(overlay) overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  btn.addEventListener('click', function(e){
-    e.stopPropagation();
-    drawer.classList.contains('open') ? closeMenu() : openMenu();
-  });
-
-  if(overlay) overlay.addEventListener('click', closeMenu);
-
-  // fecha links internos do drawer
-  drawer.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', closeMenu);
-  });
-})();
-
 // INTERSECTION OBSERVER
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
@@ -1103,7 +677,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 </script>
 
-<!-- ═══ SOCIAL PROOF POPUP ═══ -->
 <div class="sp-popup" id="spPopup">
   <div class="sp-avatar" id="spAvatar"></div>
   <div class="sp-body">
@@ -1113,11 +686,9 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </div>
 </div>
 
-<!-- ─── PROPAGAÇÃO DE UTMs NOS LINKS INTERNOS ─── -->
 <script>
 (function () {
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
-
   function getUtmParams() {
     var stored = {};
     try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
@@ -1128,23 +699,19 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
     return stored;
   }
-
   function appendUtmsToInternalLinks() {
     var params = getUtmParams();
     var keys = Object.keys(params);
     if (!keys.length) return;
-
     var query = keys.map(function (k) {
       return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
     }).join('&');
-
     document.querySelectorAll('a[href]').forEach(function (el) {
       var href = el.getAttribute('href');
       if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
       el.href = href + (href.includes('?') ? '&' : '?') + query;
     });
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', appendUtmsToInternalLinks);
   } else {
@@ -1153,24 +720,19 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 })();
 </script>
 
-<!-- ─── UTM TRACKER ─── -->
 <script>
 (function () {
   var BASE_URL = 'https://pay.kiwify.com.br/KcIzyzK';
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
-
   function readParams() {
     var params = {};
-    var search = window.location.search;
-    if (!search) return params;
-    var urlParams = new URLSearchParams(search);
+    var urlParams = new URLSearchParams(window.location.search);
     UTM_KEYS.forEach(function (key) {
       var val = urlParams.get(key);
       if (val) params[key] = val;
     });
     return params;
   }
-
   function saveParams(params) {
     var stored = {};
     try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
@@ -1178,7 +740,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     sessionStorage.setItem('ev_utm', JSON.stringify(stored));
     return stored;
   }
-
   function buildCheckoutUrl(params) {
     var keys = Object.keys(params);
     if (!keys.length) return BASE_URL;
@@ -1187,20 +748,17 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }).join('&');
     return BASE_URL + '?' + query;
   }
-
   function updateLinks(url) {
     document.querySelectorAll('a.kiwify-link').forEach(function (el) {
       el.href = url;
     });
   }
-
   function init() {
     var fromUrl = readParams();
     var merged  = saveParams(fromUrl);
-    var url     = buildCheckoutUrl(merged);
+    var url      = buildCheckoutUrl(merged);
     updateLinks(url);
   }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
