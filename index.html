@@ -967,7 +967,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
   <div style="display:flex;align-items:center;gap:12px;">
     <a href="/prompts" class="nav-btn nav-prompts" style="background:transparent;border:none;color:rgba(240,232,216,0.7);">📄 Pack de Prompts</a>
-    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn">Quero o Curso</a>
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="nav-btn kiwify-link">Quero o Curso</a>
   </div>
 </nav>
 
@@ -1030,7 +1030,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       Usando ChatGPT, Flow AI, ElevenLabs e CapCut. Qualquer pessoa consegue. Nenhuma experiência necessária.
     </p>
     <div class="hero-ctas">
-      <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero" style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 40px;">
+      <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-hero kiwify-link" style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 40px;">
         <span style="font-size:11px;letter-spacing:2px;font-weight:700;opacity:0.85;">🦴 QUERO COMEÇAR AGORA</span>
         <span style="display:flex;align-items:center;gap:10px;">
           <span style="font-size:13px;font-weight:600;opacity:0.6;text-decoration:line-through;letter-spacing:0;">R$197,00</span>
@@ -1242,7 +1242,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
 </section>
 
-<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Quero Começar Agora</a></div>
+<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section kiwify-link">🦴 &nbsp;Quero Começar Agora</a></div>
 
 <section class="section">
   <div class="wrap">
@@ -1281,7 +1281,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
 </section>
 
-<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section">🦴 &nbsp;Garantir Minha Vaga</a></div>
+<div class="section-cta"><a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-section kiwify-link">🦴 &nbsp;Garantir Minha Vaga</a></div>
 
 <div class="tools-bg">
   <div class="tools-inner">
@@ -1339,7 +1339,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     <div class="pricing-from">De R$197,00</div>
     <div class="pricing-value">R$<em>89</em><span style="font-size:0.42em;letter-spacing:0;">,99</span></div>
     <div class="pricing-installment">ou <strong>6x de R$15,00</strong> sem juros no cartão</div>
-    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy">🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA</a>
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy kiwify-link">🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA</a>
     <div class="pricing-guarantee">🔒 &nbsp;Garantia de 7 dias · Reembolso sem perguntas</div>
     <div class="pricing-includes">
       <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">7 aulas completas</strong> — do roteiro à edição final</span></div>
@@ -1683,7 +1683,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     updateDots();
   }
 
-  // CORREÇÃO: só redesenha quando pos realmente muda
   var _lastPos = null;
   function loop(){
     if(!dragging){
@@ -1917,9 +1916,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 
   var slides = Array.from(stage.querySelectorAll('.dep-slide'));
   var N = slides.length;
-  var SPACING = 1; // unidade de pos = 1 slide
+  var SPACING = 1;
 
-  // pos contínua (0 = primeiro, 1 = segundo, etc.)
   var pos     = 0;
   var target  = 0;
   var inertia = 0;
@@ -1927,7 +1925,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   var startX = 0, startPos = 0, lastX = 0, lastT = 0, dragVel = 0;
   var _lastPos = null;
 
-  // Cria dots
   slides.forEach(function(_, i){
     var d = document.createElement('div');
     d.className = 'dep-dot' + (i===0?' active':'');
@@ -1955,10 +1952,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
         border:'rgba(255,100,0,0.45)',
         shadow:'0 40px 100px rgba(0,0,0,0.95)' };
     }
-    // interpola suavemente entre posições
     var isMob = window.innerWidth <= 768;
     var sideTx = isMob ? 100 : 260;
-    var t = Math.min(absOff, 2) / 2; // 0..1
     var tx  = sign * (sideTx + (sideTx*0.6)*Math.min(absOff-1,1));
     var tz  = -(160 + (300-160)*Math.min(Math.max(absOff-1,0),1));
     var ry  = sign * -(38  + (55-38)*Math.min(Math.max(absOff-1,0),1));
@@ -1966,9 +1961,8 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     var op  = Math.max(0,    0.55 - (0.55)*Math.min(Math.max(absOff-1,0),1));
     var br  = Math.max(0.3,  0.55 - (0.55-0.3)*Math.min(Math.max(absOff-1,0),1));
 
-    // interpolação suave para card imediatamente ao lado
     if(absOff <= 1){
-      var f = absOff; // 0..1
+      var f = absOff;
       tx  = sign * sideTx * f;
       tz  = -60 * f;
       ry  = sign * -22 * f;
@@ -2012,7 +2006,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
       phone.style.boxShadow    = p.shadow + ', 0 0 0 6px #1a1a1a, 0 0 0 7px rgba(255,255,255,0.04), inset 0 0 0 1px rgba(255,255,255,0.03)';
     });
 
-    // dots
     var cur = mod(Math.round(pos), N);
     dots.forEach(function(d,i){ d.classList.toggle('active', i===cur); });
   }
@@ -2040,11 +2033,9 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   applyLayout();
   requestAnimationFrame(loop);
 
-  // setas
   prevBtn.addEventListener('click', function(){ goTo(mod(Math.round(pos)-1, N)); });
   nextBtn.addEventListener('click', function(){ goTo(mod(Math.round(pos)+1, N)); });
 
-  // clique no card lateral
   slides.forEach(function(slide, i){
     slide.addEventListener('click', function(e){
       var posM = mod(pos, N);
@@ -2055,7 +2046,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     });
   });
 
-  // Touch + Mouse — mesma física do analytics carousel
   var wrap = stage.parentElement.parentElement;
 
   function onDragStart(x){
@@ -2080,7 +2070,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
     target  = Math.round(pos + inertia * 5);
   }
 
-  // Touch
   wrap.addEventListener('touchstart', function(e){
     onDragStart(e.touches[0].clientX);
   }, {passive:true});
@@ -2090,7 +2079,6 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   }, {passive:false});
   wrap.addEventListener('touchend', onDragEnd, {passive:true});
 
-  // Mouse (desktop)
   wrap.addEventListener('mousedown', function(e){
     onDragStart(e.clientX);
     wrap.style.cursor = 'grabbing';
@@ -2107,6 +2095,69 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   });
   wrap.style.cursor = 'grab';
 
+})();
+
+// ════════════════════════════════════════════════════
+// ─── UTM TRACKER ───
+// Captura parâmetros UTM da URL, salva no sessionStorage
+// e aplica em todos os links com a classe .kiwify-link
+// ════════════════════════════════════════════════════
+(function () {
+  var BASE_URL = 'https://pay.kiwify.com.br/HM1g0Nv';
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
+
+  // 1. Lê parâmetros UTM da URL atual
+  function readParams() {
+    var params = {};
+    var search = window.location.search;
+    if (!search) return params;
+    var urlParams = new URLSearchParams(search);
+    UTM_KEYS.forEach(function (key) {
+      var val = urlParams.get(key);
+      if (val) params[key] = val;
+    });
+    return params;
+  }
+
+  // 2. Faz merge e salva no sessionStorage (preserva entre navegações internas)
+  function saveParams(params) {
+    var stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
+    Object.assign(stored, params);
+    sessionStorage.setItem('ev_utm', JSON.stringify(stored));
+    return stored;
+  }
+
+  // 3. Monta a URL final do checkout com os parâmetros
+  function buildCheckoutUrl(params) {
+    var keys = Object.keys(params);
+    if (!keys.length) return BASE_URL;
+    var query = keys.map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }).join('&');
+    return BASE_URL + '?' + query;
+  }
+
+  // 4. Atualiza o href de todos os links .kiwify-link
+  function updateLinks(url) {
+    document.querySelectorAll('a.kiwify-link').forEach(function (el) {
+      el.href = url;
+    });
+  }
+
+  // 5. Inicializa o rastreio
+  function init() {
+    var fromUrl = readParams();
+    var merged  = saveParams(fromUrl);
+    var url     = buildCheckoutUrl(merged);
+    updateLinks(url);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 </script>
 </body>
