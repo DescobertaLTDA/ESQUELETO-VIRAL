@@ -405,6 +405,40 @@ footer {
   .trust-item { font-size:9px; }
 }
 
+/* ─── SOCIAL PROOF POPUP ─── */
+.sp-popup {
+  position:fixed; bottom:24px; left:20px; z-index:600;
+  display:flex; align-items:center; gap:10px;
+  background:rgba(10,10,10,0.97);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px; padding:10px 14px 10px 10px;
+  max-width:255px;
+  box-shadow:0 16px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,69,0,0.08), 0 0 40px rgba(255,69,0,0.06);
+  backdrop-filter:blur(24px);
+  opacity:0; transform:translateY(16px) scale(0.97);
+  transition:opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;
+}
+.sp-popup.sp-show { opacity:1; transform:translateY(0) scale(1); }
+.sp-popup.sp-hide { opacity:0; transform:translateY(16px) scale(0.97); }
+.sp-avatar {
+  width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg, var(--o1) 0%, var(--o3) 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:900; color:#fff; flex-shrink:0;
+  text-transform:uppercase; box-shadow:0 0 0 2px rgba(255,69,0,0.25);
+}
+.sp-body { display:flex; flex-direction:column; gap:2px; min-width:0; }
+.sp-name { font-size:12px; font-weight:800; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.3; }
+.sp-action { font-size:11px; color:rgba(240,232,216,0.4); line-height:1.3; display:flex; align-items:center; gap:5px; }
+.sp-action strong { color:var(--o2); font-weight:700; }
+.sp-footer { display:flex; align-items:center; gap:5px; margin-top:3px; }
+.sp-dot { width:5px; height:5px; border-radius:50%; background:#3ecf4c; flex-shrink:0; box-shadow:0 0 6px rgba(62,207,76,0.8); animation:pulse 2s infinite; }
+.sp-time { font-size:10px; color:rgba(240,232,216,0.22); }
+@media(max-width:768px){
+  .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
+}
+
 </style>
 </head>
 <body>
@@ -717,6 +751,50 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   window.addEventListener('resize', resize);
   init(); draw();
 })();
+
+// ─── SOCIAL PROOF POPUP ───
+(function(){
+  var people=[
+    {name:'Gabriel S.',city:'São Paulo, SP'},{name:'Larissa M.',city:'Belo Horizonte, MG'},
+    {name:'Felipe R.',city:'Curitiba, PR'},{name:'Camila O.',city:'Fortaleza, CE'},
+    {name:'Diego N.',city:'Rio de Janeiro, RJ'},{name:'Isabela T.',city:'Recife, PE'},
+    {name:'Lucas A.',city:'Goiânia, GO'},{name:'Mariana C.',city:'Porto Alegre, RS'},
+    {name:'Thiago B.',city:'Manaus, AM'},{name:'Juliana F.',city:'Salvador, BA'},
+    {name:'Rafael P.',city:'Campinas, SP'},{name:'Amanda L.',city:'Natal, RN'},
+    {name:'Bruno V.',city:'Florianópolis, SC'},{name:'Fernanda K.',city:'Belém, PA'},
+    {name:'Henrique M.',city:'São Luís, MA'},{name:'Priscila G.',city:'João Pessoa, PB'},
+  ];
+  var times=['agora mesmo','há 1 min','há 2 min','há 3 min','há 5 min','há 7 min','há 10 min'];
+  var popup=document.getElementById('spPopup');
+  var avatar=document.getElementById('spAvatar');
+  var nameEl=document.getElementById('spName');
+  var timeEl=document.getElementById('spTime');
+  if(!popup) return;
+  var lastIdx=-1;
+  function show(){
+    var idx; do{ idx=Math.floor(Math.random()*people.length); }while(idx===lastIdx);
+    lastIdx=idx;
+    var p=people[idx];
+    avatar.textContent=p.name.charAt(0);
+    nameEl.textContent=p.name+' · '+p.city;
+    timeEl.textContent=times[Math.floor(Math.random()*times.length)];
+    popup.classList.remove('sp-hide');
+    popup.classList.add('sp-show');
+    setTimeout(function(){ popup.classList.remove('sp-show'); popup.classList.add('sp-hide'); }, 4500);
+    setTimeout(show, 18000+Math.random()*14000);
+  }
+  setTimeout(show, 5000+Math.random()*5000);
+})();
 </script>
+<!-- ═══ SOCIAL PROOF POPUP ═══ -->
+<div class="sp-popup" id="spPopup">
+  <div class="sp-avatar" id="spAvatar"></div>
+  <div class="sp-body">
+    <div class="sp-name" id="spName"></div>
+    <div class="sp-action">🦴 <strong>Acabou de garantir</strong> o pack</div>
+    <div class="sp-footer"><div class="sp-dot"></div><div class="sp-time" id="spTime"></div></div>
+  </div>
+</div>
+
 </body>
 </html>
