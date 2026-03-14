@@ -528,10 +528,10 @@ nav {
 
 .hero-prompts-btn { display:none; }
 .btn-prompts-mobile {
-  display:flex; align-items:center; justify-content:center; gap:6px;
+  display:flex; align-items:center; justify-content:center; gap:5px;
   width:100%; max-width:320px; margin:0 auto;
-  background: transparent;
-  border:1px solid rgba(255,69,0,0.3);
+  background:transparent;
+  border:1px solid rgba(255,69,0,0.35);
   font-family:'Montserrat',sans-serif;
   text-decoration:none;
   padding:11px 16px; border-radius:10px;
@@ -542,20 +542,14 @@ nav {
   background:rgba(255,69,0,0.08);
   border-color:rgba(255,69,0,0.55);
 }
+.btn-prompts-mobile { color:inherit; }
 .bpm-label {
   font-size:10px; font-weight:600; letter-spacing:1px;
   text-transform:uppercase; color:rgba(240,232,216,0.4);
 }
-.bpm-sep {
-  color:rgba(255,69,0,0.35); font-size:10px;
-}
-.bpm-price {
-  font-size:12px; font-weight:700; color:rgba(240,232,216,0.9); letter-spacing:0.3px;
-}
-.bpm-bonus {
-  font-size:10px; font-weight:700; letter-spacing:0.5px;
-  color:var(--o2);
-}
+.bpm-sep { color:rgba(255,69,0,0.35); font-size:10px; }
+.bpm-price { font-size:12px; font-weight:700; color:rgba(240,232,216,0.9); letter-spacing:0.3px; }
+.bpm-bonus { font-size:10px; font-weight:700; letter-spacing:0.5px; color:var(--o2); }
 
 .proof-section {
   padding: 80px 0;
@@ -990,7 +984,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 
 <div class="urgency-banner">
   <span class="urg-desktop" style="display:inline-flex;align-items:center;gap:14px;">
-    🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$89,99</strong> — apenas até o contador zerar
+    🔥 <strong>Promoção de lançamento:</strong> de R$197 por <strong>R$97,00</strong> — apenas até o contador zerar
     <span style="display:flex;align-items:center;gap:4px;margin-left:4px;font-variant-numeric:tabular-nums;">
       <span style="display:flex;flex-direction:column;align-items:center;min-width:28px;">
         <span style="font-size:16px;font-weight:900;color:#fff;line-height:1;letter-spacing:-0.5px;" id="ban-hh">00</span>
@@ -1051,8 +1045,8 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
         <span style="font-size:11px;letter-spacing:2px;font-weight:700;opacity:0.85;">🦴 QUERO COMEÇAR AGORA</span>
         <span style="display:flex;align-items:center;gap:10px;">
           <span style="font-size:13px;font-weight:600;opacity:0.6;text-decoration:line-through;letter-spacing:0;">R$197,00</span>
-          <span style="font-size:26px;font-weight:900;letter-spacing:-0.5px;line-height:1;">R$89,99</span>
-          <span style="background:rgba(255,255,255,0.2);font-size:10px;font-weight:800;padding:3px 7px;border-radius:4px;letter-spacing:1px;">-54%</span>
+          <span style="font-size:26px;font-weight:900;letter-spacing:-0.5px;line-height:1;">R$97,00</span>
+          <span style="background:rgba(255,255,255,0.2);font-size:10px;font-weight:800;padding:3px 7px;border-radius:4px;letter-spacing:1px;">-51%</span>
         </span>
       </a>
     </div>
@@ -1060,7 +1054,7 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
       <a href="/prompts" class="btn-prompts-mobile">
         <span class="bpm-label">Prompts</span>
         <span class="bpm-sep">·</span>
-        <span class="bpm-price">R$14,90</span>
+        <span class="bpm-price">R$19,90</span>
         <span class="bpm-sep">·</span>
         <span class="bpm-bonus">🎵 música grátis</span>
       </a>
@@ -1337,41 +1331,212 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   </div>
 </section>
 
+<style>
+/* ─── PRICING REDESIGN ─── */
+.pricing-section {
+  background: linear-gradient(180deg, #060606 0%, #0e0400 50%, #060606 100%);
+  padding: 100px 20px 120px;
+  position: relative; overflow: hidden; text-align: center;
+}
+.pricing-section::before {
+  content:''; position:absolute; top:-100px; left:50%;
+  transform:translateX(-50%);
+  width:900px; height:900px;
+  background:radial-gradient(ellipse, rgba(255,69,0,0.09) 0%, transparent 65%);
+  pointer-events:none;
+}
+.pricing-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:10px; font-weight:700; letter-spacing:4px;
+  text-transform:uppercase; color:var(--o2);
+  margin-bottom:12px;
+}
+.pricing-eyebrow::before, .pricing-eyebrow::after {
+  content:''; width:20px; height:1px; background:var(--o2); opacity:0.5;
+}
+.pricing-headline {
+  font-size:clamp(32px,5vw,52px); font-weight:900;
+  letter-spacing:-1.5px; text-transform:uppercase;
+  color:#fff; margin-bottom:6px; line-height:1;
+}
+.pricing-headline em { color:var(--o1); font-style:normal; }
+.pricing-sub {
+  font-size:14px; color:var(--muted); margin-bottom:48px; line-height:1.6;
+}
+
+/* Card */
+.pricing-card {
+  position:relative; max-width:520px; margin:0 auto;
+  background:linear-gradient(160deg, #161616 0%, #0f0f0f 100%);
+  border:1px solid rgba(255,69,0,0.2);
+  border-radius:20px;
+  padding:40px 36px 36px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 40px 80px rgba(0,0,0,0.7),
+    0 0 80px rgba(255,69,0,0.06);
+}
+.pricing-card::before {
+  content:''; position:absolute; top:0; left:50%;
+  transform:translateX(-50%);
+  width:50%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,100,0,0.7), transparent);
+}
+
+/* Timer minimalista */
+.pc-timer {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  margin-bottom:28px;
+}
+.pc-timer-label {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:rgba(240,232,216,0.3);
+}
+.pc-timer-count {
+  font-size:13px; font-weight:900; font-variant-numeric:tabular-nums;
+  color:var(--o2); letter-spacing:2px;
+  background:rgba(255,69,0,0.08);
+  border:1px solid rgba(255,69,0,0.18);
+  padding:4px 12px; border-radius:6px;
+}
+
+/* Price block */
+.pc-price-block {
+  margin-bottom:6px;
+}
+.pc-from {
+  font-size:13px; color:rgba(240,232,216,0.25);
+  text-decoration:line-through; margin-bottom:4px;
+  letter-spacing:.5px;
+}
+.pc-value {
+  font-size:88px; font-weight:900; line-height:1;
+  letter-spacing:-4px; color:#fff;
+}
+.pc-value em { color:var(--o1); font-style:normal; }
+.pc-value .cents { font-size:0.4em; letter-spacing:0; vertical-align:top; margin-top:14px; display:inline-block; }
+.pc-installment {
+  font-size:13px; color:rgba(240,232,216,0.4);
+  margin-bottom:32px; letter-spacing:.3px;
+}
+.pc-installment strong { color:rgba(240,232,216,0.75); }
+
+/* CTA button */
+.pc-btn {
+  display:block; width:100%;
+  background:linear-gradient(135deg, #e03800 0%, #ff7200 100%);
+  color:#fff; font-family:'Montserrat',sans-serif;
+  font-weight:900; font-size:14px; letter-spacing:2.5px;
+  text-transform:uppercase; text-decoration:none;
+  padding:20px 16px; border-radius:14px;
+  position:relative; overflow:hidden;
+  box-shadow:0 8px 40px rgba(220,56,0,0.5), 0 2px 0 rgba(255,255,255,0.08) inset;
+  transition:transform .2s, box-shadow .2s;
+  margin-bottom:14px;
+}
+.pc-btn::after {
+  content:''; position:absolute; top:0; left:-100%; width:60%; height:100%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transition:left .5s;
+}
+.pc-btn:hover { transform:translateY(-3px); box-shadow:0 18px 55px rgba(220,56,0,0.65); }
+.pc-btn:hover::after { left:160%; }
+.pc-btn-sub {
+  font-size:11px; font-weight:600; opacity:0.7;
+  letter-spacing:1px; display:block; margin-top:4px;
+  text-transform:none;
+}
+
+/* Guarantee */
+.pc-guarantee {
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  font-size:10px; color:rgba(240,232,216,0.2);
+  letter-spacing:1.5px; text-transform:uppercase;
+  margin-bottom:28px;
+}
+
+/* Divider */
+.pc-divider {
+  height:1px; background:rgba(255,255,255,0.04); margin-bottom:24px;
+}
+
+/* Includes */
+.pc-includes {
+  display:flex; flex-direction:column; gap:12px; text-align:left;
+}
+.pc-item {
+  display:flex; align-items:flex-start; gap:12px;
+  font-size:13px; color:rgba(240,232,216,0.65); line-height:1.5;
+}
+.pc-check {
+  flex-shrink:0; width:18px; height:18px; margin-top:1px;
+  background:rgba(255,69,0,0.1); border:1px solid rgba(255,69,0,0.3);
+  border-radius:50%; font-size:8px; font-weight:900; color:var(--o1);
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* Urgency strip below card */
+.pc-urgency-strip {
+  margin-top:28px;
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-size:11px; font-weight:700; color:rgba(240,232,216,0.3);
+  letter-spacing:1px;
+}
+.pc-urgency-strip span { color:var(--o2); }
+
+@media(max-width:768px){
+  .pricing-section { padding:60px 16px 80px; }
+  .pricing-card { padding:28px 20px 24px; border-radius:16px; }
+  .pc-value { font-size:64px; }
+  .pc-btn { font-size:12px; padding:18px 12px; }
+  .pc-timer { margin-bottom:20px; }
+}
+</style>
+
 <section class="pricing-section" id="cta">
-  <div class="label reveal" style="justify-content:center; margin-bottom:16px;">Oferta de Lançamento</div>
-  <h2 class="big-title reveal" style="text-align:center; margin-bottom:8px;">Comece hoje.</h2>
-  <p class="reveal" style="text-align:center; font-size:15px; color:var(--muted); margin-bottom:56px;">Seu primeiro vídeo pode estar publicado essa semana.</p>
+  <div class="pricing-eyebrow reveal">Oferta de Lançamento</div>
+  <h2 class="pricing-headline reveal">Comece <em>hoje.</em></h2>
+  <p class="pricing-sub reveal">Seu primeiro vídeo pode estar publicado essa semana.</p>
 
   <div class="pricing-card reveal">
-    <div class="pricing-badge">🔥 Desconto de Lançamento — Encerra em Breve</div>
-    <div class="pricing-countdown" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:28px;">
-      <span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(240,232,216,0.4);">⚡ Oferta expira em</span>
-      <div style="display:flex;align-items:center;gap:4px;">
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,69,0,0.1);border:1px solid rgba(255,69,0,0.25);padding:6px 12px;min-width:46px;border-radius:6px;">
-          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px;" id="price-mm">15</div>
-          <div style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">min</div>
-        </div>
-        <div style="font-size:24px;font-weight:900;color:var(--o1);margin-bottom:12px;opacity:0.7;">:</div>
-        <div style="display:flex;flex-direction:column;align-items:center;background:rgba(255,69,0,0.1);border:1px solid rgba(255,69,0,0.25);padding:6px 12px;min-width:46px;border-radius:6px;">
-          <div style="font-size:28px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px;" id="price-ss">00</div>
-          <div style="font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,232,216,0.3);margin-top:2px;">seg</div>
-        </div>
-      </div>
+
+    <!-- Timer minimalista -->
+    <div class="pc-timer pricing-countdown">
+      <span class="pc-timer-label">⏳ Oferta expira em</span>
+      <span class="pc-timer-count" id="price-mm">15</span>
+      <span style="color:rgba(255,69,0,0.4);font-weight:900;">:</span>
+      <span class="pc-timer-count" id="price-ss">00</span>
     </div>
-    <div class="pricing-title">Acesso Completo ao Curso</div>
-    <div class="pricing-from">De R$197,00</div>
-    <div class="pricing-value">R$<em>89</em><span style="font-size:0.42em;letter-spacing:0;">,99</span></div>
-    <div class="pricing-installment">ou <strong>6x de R$15,00</strong> sem juros no cartão</div>
-    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="btn-buy kiwify-link">🦴 &nbsp;QUERO CRIAR VÍDEOS VIRAIS AGORA</a>
-    <div class="pricing-guarantee">🔒 &nbsp;Garantia de 7 dias · Reembolso sem perguntas</div>
-    <div class="pricing-includes">
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">7 aulas completas</strong> — do roteiro à edição final</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">4 ferramentas de IA</strong> ensinadas do zero</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">O prompt secreto</strong> de consistência visual</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Grupo VIP no WhatsApp</strong> — desafio 100K em 45 dias</span></div>
-      <div class="pricing-include-item"><div class="pricing-check">✓</div><span><strong style="color:var(--text);">Acesso vitalício</strong> incluindo atualizações futuras</span></div>
+
+    <!-- Preço -->
+    <div class="pc-price-block">
+      <div class="pc-from">De R$197,00</div>
+      <div class="pc-value">R$<em>97</em><span class="cents">,00</span></div>
     </div>
+    <div class="pc-installment">ou <strong>12x de R$8,08</strong> sem juros no cartão</div>
+
+    <!-- CTA -->
+    <a href="https://pay.kiwify.com.br/HM1g0Nv" target="_blank" rel="noopener" class="pc-btn kiwify-link">
+      🦴 Quero Criar Vídeos Virais
+      <span class="pc-btn-sub">Acesso imediato · Cancele quando quiser</span>
+    </a>
+
+    <!-- Garantia -->
+    <div class="pc-guarantee">🔒 Garantia de 7 dias · Reembolso sem perguntas</div>
+
+    <div class="pc-divider"></div>
+
+    <!-- Inclui -->
+    <div class="pc-includes">
+      <div class="pc-item"><div class="pc-check">✓</div><span><strong style="color:var(--text);">7 aulas completas</strong> — do roteiro à edição final</span></div>
+      <div class="pc-item"><div class="pc-check">✓</div><span><strong style="color:var(--text);">4 ferramentas de IA</strong> ensinadas do zero</span></div>
+      <div class="pc-item"><div class="pc-check">✓</div><span><strong style="color:var(--text);">Prompt secreto</strong> de consistência visual</span></div>
+      <div class="pc-item"><div class="pc-check">✓</div><span><strong style="color:var(--text);">Grupo VIP WhatsApp</strong> — desafio 100K em 45 dias</span></div>
+      <div class="pc-item"><div class="pc-check">✓</div><span><strong style="color:var(--text);">Acesso vitalício</strong> + atualizações futuras grátis</span></div>
+    </div>
+
   </div>
+
 </section>
 
 <a href="https://whatsapp.com/channel/0029VbBq7gzKmCPScpRpQc09" target="_blank" rel="noopener" id="whatsappBtn" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;z-index:700;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--o1),var(--o3));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(255,69,0,0.5),0 2px 8px rgba(0,0,0,0.5);transition:transform .2s,box-shadow .2s;">
