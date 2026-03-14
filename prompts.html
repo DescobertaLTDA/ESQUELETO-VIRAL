@@ -49,7 +49,6 @@ nav {
 .nav-logo { font-weight:900; font-size:18px; letter-spacing:3px; text-transform:uppercase; display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
 .nav-logo span { color:var(--o1); }
 
-/* ─── NAV BTN DESKTOP (original) ─── */
 .nav-btn-desktop {
   background:linear-gradient(135deg, var(--o1), var(--o2));
   color:#fff; font-family:'Montserrat',sans-serif;
@@ -61,7 +60,6 @@ nav {
 }
 .nav-btn-desktop:hover { opacity:.85; transform:translateY(-1px); }
 
-/* ─── NAV BTN MOBILE (rico) ─── */
 .nav-btn-mobile {
   display: none;
   text-decoration: none;
@@ -314,24 +312,18 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:768px){
-
-  /* NAV */
   nav { height:56px; padding:0 14px; }
   .nav-logo { font-size:11px; letter-spacing:1.5px; gap:6px; }
   .nav-logo img { height:24px !important; width:auto; }
-
-  /* Esconde o botão desktop, mostra o mobile */
   .nav-btn-desktop { display: none !important; }
   .nav-btn-mobile  { display: flex !important; }
 
-  /* HERO */
   .hero { padding:88px 20px 56px; min-height:auto; }
   .hero-eyebrow { font-size:9px; letter-spacing:2px; padding:6px 14px; margin-bottom:20px; }
   .hero-title { font-size:clamp(36px,11vw,54px); letter-spacing:-1.5px; line-height:.95; }
   .hero-title .white, .hero-title .orange, .hero-title .gradient { display:block; }
   .hero-sub { font-size:14px; line-height:1.7; margin-top:18px; max-width:100%; }
 
-  /* PRICE BLOCK */
   .price-block { margin-top:32px; gap:6px; }
   .price-old { font-size:13px; }
   .price-main { font-size:clamp(60px,18vw,80px); letter-spacing:0px; gap:2px; }
@@ -339,7 +331,6 @@ footer {
   .price-main .cents { font-size:0.36em; margin-top:10px; }
   .price-label { font-size:10px; letter-spacing:2px; }
 
-  /* CTA BUTTON */
   .btn-cta {
     margin-top:24px;
     font-size:13px; letter-spacing:1.5px;
@@ -348,17 +339,14 @@ footer {
     display:block; margin-left:auto; margin-right:auto;
   }
 
-  /* TRUST ROW */
   .trust-row { gap:12px; margin-top:16px; }
   .trust-item { font-size:10px; gap:4px; }
 
-  /* SECTION / WRAP */
   .section { padding:56px 0; }
   .wrap { padding:0 16px; }
   .big-title { font-size:clamp(26px,8vw,36px); letter-spacing:-1px; }
   .label { font-size:9px; letter-spacing:3px; }
 
-  /* PROMPTS GRID — 2 colunas no mobile */
   .prompts-grid {
     grid-template-columns: repeat(2, 1fr);
     gap:6px;
@@ -370,7 +358,6 @@ footer {
   .prompt-card-name { font-size:12px; }
   .prompt-card-color { font-size:8px; padding:3px 8px; margin-top:6px; }
 
-  /* BONUS BLOCK */
   .bonus-block {
     flex-direction:column;
     padding:24px 16px;
@@ -388,7 +375,6 @@ footer {
   }
   .bonus-value .val-free { font-size:22px; }
 
-  /* FOR WHOM SECTION */
   .forwho-grid {
     grid-template-columns: 1fr !important;
     gap:32px !important;
@@ -397,24 +383,20 @@ footer {
   .checklist li { font-size:14px; gap:12px; }
   .check-icon { width:20px; height:20px; font-size:10px; border-radius:5px; }
 
-  /* O QUE VOCÊ RECEBE BOX */
   .forwho-section .wrap > div > div:last-child {
     padding:28px 20px !important;
   }
 
-  /* CTA SECTION */
   .cta-section { padding:64px 20px; }
   .cta-section .big-title { font-size:clamp(28px,9vw,42px); }
   .cta-section p { font-size:14px; }
   .cta-section .btn-cta { width:100%; max-width:320px; font-size:13px; }
 
-  /* FOOTER */
   footer { padding:28px 16px; }
   .foot-logo { font-size:13px; letter-spacing:2px; }
   .foot-copy { font-size:10px; line-height:1.6; }
 }
 
-/* Extra small — abaixo de 380px */
 @media(max-width:380px){
   .hero-title { font-size:32px; letter-spacing:-1px; }
   .price-main { font-size:60px; letter-spacing:0px; }
@@ -469,12 +451,10 @@ footer {
     ESQUELETO<span>VIRAL</span>
   </a>
 
-  <!-- Botão desktop (original) -->
   <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-desktop">
     🦴 Comprar Agora
   </a>
 
-  <!-- Botão mobile -->
   <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-mobile">
     🦴 Comprar Pack
   </a>
@@ -495,12 +475,12 @@ footer {
   <div class="price-block">
     <span class="price-old">De R$38,99</span>
     <div class="price-main">
-      <em>R$</em>14<span class="cents">,90</span>
+      <em>R$</em>19<span class="cents">,90</span>
     </div>
     <span class="price-label">pagamento único · acesso imediato</span>
   </div>
 
-  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link btn-cta">🦴 Quero o Pack — R$14,90</a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link btn-cta">🦴 Quero o Pack — R$19,90</a>
 
   <div class="trust-row">
     <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
@@ -700,7 +680,7 @@ footer {
         </div>
         <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,69,0,0.15);display:flex;justify-content:space-between;align-items:center;">
           <span style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(240,232,216,0.3);">Total</span>
-          <span style="font-size:28px;font-weight:900;color:#fff;">R$14<span style="font-size:16px;color:var(--o2);">,90</span></span>
+          <span style="font-size:28px;font-weight:900;color:#fff;">R$19<span style="font-size:16px;color:var(--o2);">,90</span></span>
         </div>
       </div>
     </div>
@@ -711,12 +691,12 @@ footer {
 <section class="cta-section">
   <div style="position:relative;z-index:1;">
     <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
-    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$14,90</span></h2>
+    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$19,90</span></h2>
     <p style="margin-top:20px;font-size:15px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;" class="reveal">
       9 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
     </p>
     <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link btn-cta reveal" style="margin-top:40px;">
-      🦴 Quero o Pack Agora — R$14,90
+      🦴 Quero o Pack Agora — R$19,90
     </a>
     <div class="trust-row reveal" style="margin-top:20px;">
       <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
@@ -813,7 +793,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     <div class="sp-footer"><div class="sp-dot"></div><div class="sp-time" id="spTime"></div></div>
   </div>
 </div>
-
 
 <!-- ─── UTM TRACKER ─── -->
 <script>
