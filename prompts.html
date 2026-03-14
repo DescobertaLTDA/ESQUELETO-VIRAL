@@ -109,9 +109,7 @@ nav {
   position:relative; z-index:1;
 }
 .hero-title .white { color:#fff; display:block; }
-.hero-title .orange {
-  display:block; color:var(--o1);
-}
+.hero-title .orange { display:block; color:var(--o1); }
 .hero-title .gradient {
   display:block;
   background:linear-gradient(90deg, var(--o1) 0%, var(--o3) 50%, #fff 100%);
@@ -172,599 +170,293 @@ nav {
 }
 .trust-item { display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600; letter-spacing:.5px; color:rgba(240,232,216,0.3); }
 
-/* ─── DIVIDER ─── */
-.divider { height:1px; background:linear-gradient(90deg, transparent, rgba(255,69,0,0.25), transparent); margin:0; }
-
-/* ─── WHAT'S INSIDE ─── */
+/* ─── PROMPTS GRID ─── */
 .section { padding:100px 0; }
 .wrap { max-width:1100px; margin:0 auto; padding:0 60px; }
-
-.label {
-  font-size:10px; font-weight:700; letter-spacing:4px;
-  text-transform:uppercase; color:var(--o1);
-  display:flex; align-items:center; gap:10px; margin-bottom:20px;
-}
+.label { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--o1); display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .label::before { content:''; width:24px; height:2px; background:var(--o1); }
+.big-title { font-size:clamp(32px,4vw,56px); font-weight:900; line-height:1.0; letter-spacing:-1.5px; text-transform:uppercase; }
 
-.big-title {
-  font-size:clamp(32px,4vw,56px);
-  font-weight:900; line-height:1.0;
-  letter-spacing:-1.5px; text-transform:uppercase;
-}
-
-/* ─── PROMPTS GRID ─── */
 .prompts-grid {
   margin-top:56px;
-  display:grid; grid-template-columns:repeat(5, 1fr); gap:3px;
+  display:grid; grid-template-columns:repeat(5, 1fr); gap:8px;
 }
 
 .prompt-card {
   position:relative; aspect-ratio:2/3; overflow:hidden;
-  cursor:pointer;
-  transition:transform .3s ease, box-shadow .3s ease;
+  cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
+  background: #000; border-radius: 8px;
 }
 .prompt-card:hover { transform:scale(1.04); z-index:10; box-shadow:0 8px 40px rgba(255,69,0,0.4); }
+.prompt-card-bg { position:absolute; inset:0; }
+.prompt-card-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); }
+.prompt-card-body { position:absolute; bottom:0; left:0; right:0; padding:20px 16px; }
+.prompt-card-num { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px; }
+.prompt-card-name { font-size:13px; font-weight:800; color:#fff; line-height:1.3; text-transform:uppercase; letter-spacing:.5px; }
+.prompt-card-color { display:inline-block; margin-top:8px; font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 10px; border-radius:20px; }
+.prompt-card-badge { position:absolute; top:12px; left:12px; z-index:10; background:linear-gradient(135deg, var(--o1), var(--o3)); color:#fff; font-size:9px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; border-radius:20px; box-shadow:0 2px 12px rgba(255,69,0,0.5); }
 
-.prompt-card-badge {
-  position:absolute; top:12px; left:12px; z-index:10;
-  background:linear-gradient(135deg, var(--o1), var(--o3));
-  color:#fff; font-size:9px; font-weight:800;
-  letter-spacing:1.5px; text-transform:uppercase;
-  padding:4px 10px; border-radius:20px;
-  box-shadow:0 2px 12px rgba(255,69,0,0.5);
-}
-
-.prompt-card-bg {
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  font-size:80px; line-height:1;
-}
-.prompt-card-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-}
-.prompt-card-body {
-  position:absolute; bottom:0; left:0; right:0;
-  padding:20px 16px;
-}
-.prompt-card-num {
-  font-size:9px; font-weight:700; letter-spacing:3px;
-  text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:6px;
-}
-.prompt-card-name {
-  font-size:13px; font-weight:800; color:#fff; line-height:1.3;
-  text-transform:uppercase; letter-spacing:.5px;
-}
-.prompt-card-color {
-  display:inline-block; margin-top:8px;
-  font-size:9px; font-weight:700; letter-spacing:2px;
-  text-transform:uppercase; padding:3px 10px; border-radius:20px;
-}
-
-/* ─── MUSIC BONUS ─── */
-.bonus-block {
-  margin-top:3px;
-  background:var(--dark3);
-  border:1px solid rgba(255,69,0,0.2);
-  padding:40px 48px;
-  display:flex; align-items:center; gap:40px;
-  position:relative; overflow:hidden;
-}
-.bonus-block::before {
-  content:''; position:absolute; top:-60px; right:-60px;
-  width:220px; height:220px;
-  background:radial-gradient(circle, rgba(255,69,0,0.12) 0%, transparent 70%);
-  pointer-events:none;
-}
-.bonus-icon { font-size:64px; flex-shrink:0; line-height:1; }
+/* ─── BONUS ─── */
+.bonus-block { margin-top:40px; background:var(--dark3); border:1px solid rgba(255,69,0,0.2); padding:40px 48px; display:flex; align-items:center; gap:40px; position:relative; overflow:hidden; }
+.bonus-icon { font-size:64px; flex-shrink:0; }
 .bonus-body { flex:1; }
-.bonus-tag {
-  display:inline-flex; align-items:center; gap:6px;
-  background:rgba(255,69,0,0.12); border:1px solid rgba(255,69,0,0.3);
-  padding:4px 12px; font-size:9px; font-weight:700; letter-spacing:3px;
-  text-transform:uppercase; color:var(--o2); margin-bottom:14px;
-}
-.bonus-title { font-size:22px; font-weight:900; letter-spacing:-0.5px; text-transform:uppercase; }
+.bonus-tag { display:inline-flex; align-items:center; gap:6px; background:rgba(255,69,0,0.12); border:1px solid rgba(255,69,0,0.3); padding:4px 12px; font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--o2); margin-bottom:14px; }
+.bonus-title { font-size:22px; font-weight:900; text-transform:uppercase; }
 .bonus-desc { margin-top:8px; font-size:14px; color:var(--muted); line-height:1.7; }
-.bonus-value {
-  flex-shrink:0; text-align:center;
-}
-.bonus-value .val-label { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(240,232,216,0.25); display:block; margin-bottom:4px; }
-.bonus-value .val-old { font-size:14px; font-weight:700; color:rgba(240,232,216,0.25); text-decoration:line-through; display:block; }
-.bonus-value .val-free { font-size:28px; font-weight:900; color:var(--o2); letter-spacing:-1px; }
-
-/* ─── FOR WHOM ─── */
-.forwho-section { background:var(--dark2); border-top:1px solid var(--faint); border-bottom:1px solid var(--faint); }
-.checklist { list-style:none; display:flex; flex-direction:column; gap:16px; margin-top:36px; }
-.checklist li { display:flex; align-items:flex-start; gap:14px; font-size:15px; color:rgba(240,232,216,0.8); line-height:1.55; }
-.check-icon { width:22px; height:22px; flex-shrink:0; background:linear-gradient(135deg, var(--o1), var(--o3)); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; color:#fff; margin-top:1px; border-radius:6px; }
-
-/* ─── CTA BOTTOM ─── */
-.cta-section {
-  padding:120px 60px;
-  text-align:center;
-  background:linear-gradient(180deg, var(--dark) 0%, #0e0300 50%, var(--dark) 100%);
-  position:relative; overflow:hidden;
-}
-.cta-section::before {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255,69,0,0.1) 0%, transparent 70%);
-  pointer-events:none;
-}
-.cta-section .big-title { font-size:clamp(36px,5vw,68px); }
-
-/* ─── FOOTER ─── */
-footer {
-  background:var(--dark2);
-  border-top:1px solid rgba(255,255,255,0.04);
-  padding:40px 60px;
-  text-align:center;
-}
-.foot-copy { font-size:11px; color:rgba(240,232,216,0.3); }
-.foot-logo { font-weight:900; font-size:16px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,232,216,0.3); margin-bottom:12px; }
-.foot-logo span { color:rgba(255,69,0,0.7); }
-
-/* ─── ANIMATIONS ─── */
-@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
-.reveal { opacity:0; transform:translateY(32px); transition:opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:768px){
-  nav { height:56px; padding:0 14px; }
-  .nav-logo { font-size:11px; letter-spacing:1.5px; gap:6px; }
-  .nav-logo img { height:24px !important; width:auto; }
-  .nav-btn-desktop { display: none !important; }
-  .nav-btn-mobile  { display: flex !important; }
-
-  .hero { padding:88px 20px 56px; min-height:auto; }
-  .hero-eyebrow { font-size:9px; letter-spacing:2px; padding:6px 14px; margin-bottom:20px; }
-  .hero-title { font-size:clamp(36px,11vw,54px); letter-spacing:-1.5px; line-height:.95; }
-  .hero-title .white, .hero-title .orange, .hero-title .gradient { display:block; }
-  .hero-sub { font-size:14px; line-height:1.7; margin-top:18px; max-width:100%; }
-
-  .price-block { margin-top:32px; gap:6px; }
-  .price-old { font-size:13px; }
-  .price-main { font-size:clamp(60px,18vw,80px); letter-spacing:0px; gap:2px; }
-  .price-main em { font-size:0.46em; margin-top:7px; }
-  .price-main .cents { font-size:0.36em; margin-top:10px; }
-  .price-label { font-size:10px; letter-spacing:2px; }
-
-  .btn-cta {
-    margin-top:24px;
-    font-size:13px; letter-spacing:1.5px;
-    padding:18px 28px; width:100%; max-width:320px;
-    text-align:center; border-radius:12px;
-    display:block; margin-left:auto; margin-right:auto;
-  }
-
-  .trust-row { gap:12px; margin-top:16px; }
-  .trust-item { font-size:10px; gap:4px; }
-
-  .section { padding:56px 0; }
-  .wrap { padding:0 16px; }
-  .big-title { font-size:clamp(26px,8vw,36px); letter-spacing:-1px; }
-  .label { font-size:9px; letter-spacing:3px; }
-
-  .prompts-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap:6px;
-    margin-top:32px;
-  }
-  .prompt-card-bg { font-size:52px; }
-  .prompt-card-body { padding:14px 12px; }
-  .prompt-card-num { font-size:8px; letter-spacing:2px; }
-  .prompt-card-name { font-size:12px; }
-  .prompt-card-color { font-size:8px; padding:3px 8px; margin-top:6px; }
-
-  .bonus-block {
-    flex-direction:column;
-    padding:24px 16px;
-    gap:16px;
-    margin-top:6px;
-  }
-  .bonus-icon { font-size:44px; }
-  .bonus-title { font-size:18px; }
-  .bonus-desc { font-size:13px; line-height:1.6; }
-  .bonus-value {
-    width:100%;
-    display:flex; align-items:center; justify-content:space-between;
-    padding-top:16px;
-    border-top:1px solid rgba(255,69,0,0.15);
-  }
-  .bonus-value .val-free { font-size:22px; }
-
-  .forwho-grid {
-    grid-template-columns: 1fr !important;
-    gap:32px !important;
-  }
-  .checklist { gap:14px; margin-top:24px; }
-  .checklist li { font-size:14px; gap:12px; }
-  .check-icon { width:20px; height:20px; font-size:10px; border-radius:5px; }
-
-  .cta-section { padding:64px 20px; }
-  .cta-section .big-title { font-size:clamp(28px,9vw,42px); }
-  .cta-section p { font-size:14px; }
-  .cta-section .btn-cta { width:100%; max-width:320px; font-size:13px; }
-
-  footer { padding:28px 16px; }
-  .foot-logo { font-size:13px; letter-spacing:2px; }
-  .foot-copy { font-size:10px; line-height:1.6; }
-}
-
-@media(max-width:380px){
-  .hero-title { font-size:32px; letter-spacing:-1px; }
-  .price-main { font-size:60px; letter-spacing:0px; }
-  .prompts-grid { grid-template-columns: repeat(2, 1fr); gap:4px; }
-  .btn-cta { font-size:12px; padding:16px 20px; }
-  .trust-item { font-size:9px; }
-}
+.bonus-value { flex-shrink:0; text-align:center; }
+.val-free { font-size:28px; font-weight:900; color:var(--o2); }
 
 /* ─── SOCIAL PROOF POPUP ─── */
 .sp-popup {
   position:fixed; bottom:24px; left:20px; z-index:600;
-  display:flex; align-items:center; gap:10px;
-  background:rgba(10,10,10,0.97);
-  border:1px solid rgba(255,255,255,0.06);
-  border-radius:14px; padding:10px 14px 10px 10px;
-  max-width:255px;
-  box-shadow:0 16px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,69,0,0.08), 0 0 40px rgba(255,69,0,0.06);
-  backdrop-filter:blur(24px);
-  opacity:0; transform:translateY(16px) scale(0.97);
-  transition:opacity .4s cubic-bezier(.16,1,.3,1), transform .4s cubic-bezier(.16,1,.3,1);
+  display:flex; align-items:center; gap:12px;
+  background:rgba(10,10,10,0.98);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px; padding:12px 18px 12px 12px;
+  max-width:280px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.8), 0 0 20px rgba(255,69,0,0.1);
+  backdrop-filter:blur(20px);
+  opacity:0; transform:translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events:none;
 }
-.sp-popup.sp-show { opacity:1; transform:translateY(0) scale(1); }
-.sp-popup.sp-hide { opacity:0; transform:translateY(16px) scale(0.97); }
-.sp-avatar {
-  width:36px; height:36px; border-radius:50%;
-  background:linear-gradient(135deg, var(--o1) 0%, var(--o3) 100%);
-  display:flex; align-items:center; justify-content:center;
-  font-size:14px; font-weight:900; color:#fff; flex-shrink:0;
-  text-transform:uppercase; box-shadow:0 0 0 2px rgba(255,69,0,0.25);
-}
-.sp-body { display:flex; flex-direction:column; gap:2px; min-width:0; }
-.sp-name { font-size:12px; font-weight:800; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; line-height:1.3; }
-.sp-action { font-size:11px; color:rgba(240,232,216,0.4); line-height:1.3; display:flex; align-items:center; gap:5px; }
-.sp-action strong { color:var(--o2); font-weight:700; }
-.sp-footer { display:flex; align-items:center; gap:5px; margin-top:3px; }
-.sp-dot { width:5px; height:5px; border-radius:50%; background:#3ecf4c; flex-shrink:0; box-shadow:0 0 6px rgba(62,207,76,0.8); animation:pulse 2s infinite; }
-.sp-time { font-size:10px; color:rgba(240,232,216,0.22); }
+.sp-popup.sp-show { opacity:1; transform:translateY(0); }
+.sp-avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg, var(--o1), var(--o3)); display:flex; align-items:center; justify-content:center; font-weight:900; color:#fff; flex-shrink:0; }
+.sp-body { display:flex; flex-direction:column; gap:2px; }
+.sp-name { font-size:12px; font-weight:800; color:#fff; }
+.sp-action { font-size:11px; color:rgba(240,232,216,0.6); }
+.sp-action strong { color:var(--o2); }
+.sp-footer { display:flex; align-items:center; gap:6px; margin-top:2px; }
+.sp-dot { width:6px; height:6px; border-radius:50%; background:#3ecf4c; box-shadow:0 0 8px rgba(62,207,76,0.6); }
+.sp-time { font-size:10px; color:rgba(240,232,216,0.3); }
+
+/* ─── RESPONSIVE ─── */
 @media(max-width:768px){
-  .sp-popup { bottom:20px; left:12px; max-width:calc(100vw - 24px); }
+  nav { padding:0 20px; }
+  .nav-btn-desktop { display:none; }
+  .nav-btn-mobile { display:flex; }
+  .prompts-grid { grid-template-columns: repeat(2, 1fr); }
+  .wrap { padding:0 20px; }
 }
 
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(0.8)} }
+.reveal { opacity:0; transform:translateY(30px); transition: 0.8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 </style>
 </head>
 <body>
 
 <nav>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <a href="/" class="nav-logo">
-      <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Esqueleto Viral" style="height:34px;width:auto;">
-      ESQUELETO<span>VIRAL</span>
-    </a>
-  </div>
-
-  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-desktop">
-    🦴 Comprar Agora
+  <a href="/" class="nav-logo">
+    <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773106811/logo_ijcbfj.png" alt="Logo" style="height:34px;">
+    ESQUELETO<span>VIRAL</span>
   </a>
-
-  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link nav-btn-mobile">
-    🦴 Comprar Pack
-  </a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link nav-btn-desktop">🦴 Comprar Agora</a>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link nav-btn-mobile">🦴 Pack 10</a>
 </nav>
 
 <section class="hero">
   <div class="hero-eyebrow"><span class="dot"></span>Pack Digital · Entrega Imediata</div>
   <h1 class="hero-title">
-    <span class="white">9 PROMPTS</span>
+    <span class="white">10 PROMPTS</span>
     <span class="orange">DO ESQUELETO</span>
     <span class="gradient">+ MÚSICA</span>
   </h1>
   <p class="hero-sub">
-    Os prompts exatos para gerar o personagem esqueleto — <strong>9 cores únicas</strong>, prontos para Flow AI ou qualquer gerador de imagem IA. Com a música do canal inclusa.
+    Os prompts exatos para gerar o personagem esqueleto — <strong>10 cores únicas</strong>, prontos para Flow AI ou Midjourney. Com a música do canal inclusa.
   </p>
-
   <div class="price-block">
     <span class="price-old">De R$38,99</span>
-    <div class="price-main">
-      <em>R$</em>19<span class="cents">,90</span>
-    </div>
-    <span class="price-label">pagamento único · acesso imediato</span>
+    <div class="price-main"><em>R$</em>19<span class="cents">,90</span></div>
   </div>
-
-  <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link btn-cta">🦴 Quero o Pack — R$19,90</a>
-
-  <div class="trust-row">
-    <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
-    <div class="trust-item"><span>⚡</span> Acesso imediato</div>
-    <div class="trust-item"><span>♾️</span> Seu para sempre</div>
-    <div class="trust-item"><span>✅</span> Garantia de 7 dias</div>
-  </div>
+  <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link btn-cta">🦴 Quero o Pack — R$19,90</a>
 </section>
 
-<div class="divider"></div>
-
-<section class="section" id="prompts">
+<section class="section">
   <div class="wrap">
     <div class="label reveal">O que está incluído</div>
-    <h2 class="big-title reveal">9 personagens.<br><span style="color:var(--o1);">9 cores únicas.</span></h2>
+    <h2 class="big-title reveal">10 personagens.<br><span style="color:var(--o1);">10 cores únicas.</span></h2>
 
     <div class="prompts-grid reveal">
-
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#0a0a0a;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/TRANSPARENTE_x3uto3.jpg" alt="Esqueleto Transparente" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-badge">⭐ Original</div>
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/TRANSPARENTE_x3uto3.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="prompt-card-overlay"></div>
-        <div class="prompt-card-badge">⭐ Mais Usado</div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 01</div>
-          <div class="prompt-card-name">Esqueleto Transparente</div>
-          <span class="prompt-card-color" style="background:rgba(255,255,255,0.1);color:#e0e0e0;">#TRANSPARENT</span>
+          <div class="prompt-card-name">Transparente</div>
+          <span class="prompt-card-color" style="background:rgba(255,255,255,0.1);color:#fff;">#CLEAR</span>
         </div>
       </a>
 
-      <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link prompt-card" style="display:block;text-decoration:none;">
-        <div class="prompt-card-bg" style="background:#000d1a;">
-          <img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/AZUL_bil1k7.jpg" alt="Esqueleto Azul" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
-        </div>
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/AZUL_bil1k7.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="prompt-card-overlay"></div>
         <div class="prompt-card-body">
           <div class="prompt-card-num">Prompt 02</div>
-          <div class="prompt-card-name">Esqueleto Azul</div>
-          <span class="prompt-card-color" style="background:rgba(0,100,255,0.2);color:#4da6ff;">#0055FF</span>
+          <div class="prompt-card-name">Azul</div>
+          <span class="prompt-card-color" style="background:rgba(0,100,255,0.2);color:#4da6ff;">#BLUE</span>
         </div>
       </a>
-      </div>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERDE_vmqwys.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 03</div>
+          <div class="prompt-card-name">Verde</div>
+          <span class="prompt-card-color" style="background:rgba(0,255,100,0.15);color:#4dff88;">#GREEN</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325938/VERMELHO_dcpoyy.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 04</div>
+          <div class="prompt-card-name">Vermelho</div>
+          <span class="prompt-card-color" style="background:rgba(255,50,50,0.2);color:#ff4d4d;">#RED</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROXO_t21m9z.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 05</div>
+          <div class="prompt-card-name">Roxo</div>
+          <span class="prompt-card-color" style="background:rgba(180,50,255,0.2);color:#cc66ff;">#PURPLE</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-badge">✨ Raro</div>
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/DOURADO_hfhtsf.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 06</div>
+          <div class="prompt-card-name">Dourado</div>
+          <span class="prompt-card-color" style="background:rgba(255,215,0,0.2);color:#ffd700;">#GOLD</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/ROSA_a5xvt1.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 07</div>
+          <div class="prompt-card-name">Rosa</div>
+          <span class="prompt-card-color" style="background:rgba(255,100,200,0.2);color:#ff66cc;">#PINK</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/CIANO_mfhw0f.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 08</div>
+          <div class="prompt-card-name">Ciano</div>
+          <span class="prompt-card-color" style="background:rgba(0,255,255,0.15);color:#66ffff;">#CYAN</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/LARANJA_vjzoia.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 09</div>
+          <div class="prompt-card-name">Laranja</div>
+          <span class="prompt-card-color" style="background:rgba(255,107,0,0.2);color:#ff8c00;">#ORANGE</span>
+        </div>
+      </a>
+
+      <a href="https://pay.kiwify.com.br/KcIzyzK" class="kiwify-link prompt-card">
+        <div class="prompt-card-bg"><img src="https://res.cloudinary.com/dxzgkrshw/image/upload/v1773325937/BRONZE_nuhn8s.jpg" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="prompt-card-overlay"></div>
+        <div class="prompt-card-body">
+          <div class="prompt-card-num">Prompt 10</div>
+          <div class="prompt-card-name">Bronze</div>
+          <span class="prompt-card-color" style="background:rgba(205,127,50,0.25);color:#cd7f32;">#BRONZE</span>
+        </div>
+      </a>
+    </div>
 
     <div class="bonus-block reveal">
       <div class="bonus-icon">🎵</div>
       <div class="bonus-body">
-        <div class="bonus-tag"><span>⚡</span> Bônus incluído</div>
+        <div class="bonus-tag">Bônus incluído</div>
         <div class="bonus-title">A Música do Canal</div>
-        <div class="bonus-desc">A trilha sonora usada nos vídeos virais do esqueleto — produzida por um artista exclusivo. Quem comprar o pack recebe a música junto, como bônus especial.</div>
+        <div class="bonus-desc">A trilha sonora exclusiva dos vídeos virais inclusa no pack.</div>
       </div>
-      <div class="bonus-value">
-        <span class="val-label">Valor</span>
-        <span class="val-old">R$19,90</span>
-        <span class="val-free">GRÁTIS</span>
-      </div>
+      <div class="bonus-value"><span class="val-free">GRÁTIS</span></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<section class="section forwho-section" id="forwho">
-  <div class="wrap">
-    <div class="forwho-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
-      <div class="reveal">
-        <div class="label">Para quem é</div>
-        <h2 class="big-title">Você vai usar<br><span style="color:var(--o1);">se...</span></h2>
-        <ul class="checklist">
-          <li><div class="check-icon">✓</div>Quer criar vídeos com o personagem esqueleto em cores diferentes</li>
-          <li><div class="check-icon">✓</div>Usa Flow AI, MidJourney, Leonardo ou qualquer gerador de imagem IA</li>
-          <li><div class="check-icon">✓</div>Quer consistência visual no personagem de vídeo para vídeo</li>
-          <li><div class="check-icon">✓</div>Precisa de uma trilha sonora pronta, sem risco de copyright</li>
-          <li><div class="check-icon">✓</div>Quer economizar horas tentando acertar o prompt do zero</li>
-        </ul>
-      </div>
-      <div class="reveal" style="background:var(--dark3);padding:48px 40px;border-left:3px solid rgba(255,69,0,0.2);">
-        <div style="font-size:48px;margin-bottom:20px;">🦴</div>
-        <div style="font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--o2);margin-bottom:16px;">O que você recebe</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
-            <span style="font-size:14px;color:var(--muted);">9 prompts de personagem</span>
-            <span style="font-size:13px;font-weight:800;color:#fff;">✓</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
-            <span style="font-size:14px;color:var(--muted);">9 cores únicas</span>
-            <span style="font-size:13px;font-weight:800;color:#fff;">✓</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--faint);">
-            <span style="font-size:14px;color:var(--muted);">Música do canal (bônus)</span>
-            <span style="font-size:13px;font-weight:800;color:var(--o2);">GRÁTIS</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;">
-            <span style="font-size:14px;color:var(--muted);">Acesso vitalício</span>
-            <span style="font-size:13px;font-weight:800;color:#fff;">✓</span>
-          </div>
-        </div>
-        <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,69,0,0.15);display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(240,232,216,0.3);">Total</span>
-          <span style="font-size:28px;font-weight:900;color:#fff;">R$19<span style="font-size:16px;color:var(--o2);">,90</span></span>
-        </div>
-      </div>
+<div class="sp-popup" id="spPopup">
+  <div class="sp-avatar" id="spAvatar">G</div>
+  <div class="sp-body">
+    <div class="sp-name" id="spName">Gabriel S. · São Paulo</div>
+    <div class="sp-action">🦴 <strong>Acabou de comprar</strong> o pack</div>
+    <div class="sp-footer">
+      <div class="sp-dot"></div>
+      <div class="sp-time" id="spTime">agora mesmo</div>
     </div>
   </div>
-</section>
-
-<section class="cta-section" id="cta-section">
-  <div style="position:relative;z-index:1;">
-    <div class="label reveal" style="justify-content:center;">Oferta por tempo limitado</div>
-    <h2 class="big-title reveal" style="text-align:center;">Pegue agora<br><span style="color:var(--o1);">por R$19,90</span></h2>
-    <p style="margin-top:20px;font-size:15px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;" class="reveal">
-      9 prompts + música. Acesso imediato. Garantia de 7 dias ou seu dinheiro de volta.
-    </p>
-    <a href="https://pay.kiwify.com.br/KcIzyzK" target="_blank" rel="noopener" class="kiwify-link btn-cta reveal" style="margin-top:40px;">
-      🦴 Quero o Pack Agora — R$19,90
-    </a>
-    <div class="trust-row reveal" style="margin-top:20px;">
-      <div class="trust-item"><span>🔒</span> Pagamento seguro</div>
-      <div class="trust-item"><span>⚡</span> Acesso imediato</div>
-      <div class="trust-item"><span>✅</span> Garantia de 7 dias</div>
-    </div>
-  </div>
-</section>
+</div>
 
 <footer>
-  <div class="foot-logo">ESQUELETO<span>VIRAL</span></div>
-  <p class="foot-copy">© 2025 Esqueleto Viral · L.G.S Descoberta Mental LTDA · Todos os direitos reservados</p>
+  <p>© 2026 Esqueleto Viral · L.G.S Descoberta Mental LTDA</p>
 </footer>
 
 <script>
-// INTERSECTION OBSERVER
+// Animações ao rolar
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// DUST PARTICLES
+// Lógica da Prova Social (Aparecer e sumir)
 (function(){
-  const hero = document.querySelector('.hero');
-  if(!hero) return;
-  const canvas = document.createElement('canvas');
-  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
-  hero.insertBefore(canvas, hero.firstChild);
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
-  const NUM = 80;
-  function resize(){ W = canvas.width = hero.offsetWidth; H = canvas.height = hero.offsetHeight; }
-  function rp(){ return { x:W*Math.random(), y:H*Math.random(), r:Math.random()*2+0.3, opacity:Math.random()*0.2+0.03, vx:(Math.random()-.5)*.1, vy:(Math.random()-.5)*.07 }; }
-  function init(){ resize(); particles = Array.from({length:NUM}, rp); }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<-4)p.x=W+4; if(p.x>W+4)p.x=-4;
-      if(p.y<-4)p.y=H+4; if(p.y>H+4)p.y=-4;
-      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      g.addColorStop(0,`rgba(255,90,0,${p.opacity})`);
-      g.addColorStop(1,`rgba(255,40,0,0)`);
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize', resize);
-  init(); draw();
-})();
-
-// ─── SOCIAL PROOF POPUP ───
-(function(){
-  var people=[
-    {name:'Gabriel S.',city:'São Paulo, SP'},{name:'Larissa M.',city:'Belo Horizonte, MG'},
-    {name:'Felipe R.',city:'Curitiba, PR'},{name:'Camila O.',city:'Fortaleza, CE'},
-    {name:'Diego N.',city:'Rio de Janeiro, RJ'},{name:'Isabela T.',city:'Recife, PE'},
-    {name:'Lucas A.',city:'Goiânia, GO'},{name:'Mariana C.',city:'Porto Alegre, RS'},
-    {name:'Thiago B.',city:'Manaus, AM'},{name:'Juliana F.',city:'Salvador, BA'},
-    {name:'Rafael P.',city:'Campinas, SP'},{name:'Amanda L.',city:'Natal, RN'},
-    {name:'Bruno V.',city:'Florianópolis, SC'},{name:'Fernanda K.',city:'Belém, PA'},
-    {name:'Henrique M.',city:'São Luís, MA'},{name:'Priscila G.',city:'João Pessoa, PB'},
+  const people = [
+    {n:'Gabriel S.', c:'São Paulo, SP'}, {n:'Larissa M.', c:'Belo Horizonte, MG'},
+    {n:'Felipe R.', c:'Curitiba, PR'}, {n:'Camila O.', c:'Fortaleza, CE'},
+    {n:'Diego N.', c:'Rio de Janeiro, RJ'}, {n:'Rafael P.', c:'Campinas, SP'},
+    {n:'Juliana F.', c:'Salvador, BA'}, {n:'Bruno V.', c:'Florianópolis, SC'}
   ];
-  var times=['agora mesmo','há 1 min','há 2 min','há 3 min','há 5 min','há 7 min','há 10 min'];
-  var popup=document.getElementById('spPopup');
-  var avatar=document.getElementById('spAvatar');
-  var nameEl=document.getElementById('spName');
-  var timeEl=document.getElementById('spTime');
-  if(!popup) return;
-  var lastIdx=-1;
-  function show(){
-    var idx; do{ idx=Math.floor(Math.random()*people.length); }while(idx===lastIdx);
-    lastIdx=idx;
-    var p=people[idx];
-    avatar.textContent=p.name.charAt(0);
-    nameEl.textContent=p.name+' · '+p.city;
-    timeEl.textContent=times[Math.floor(Math.random()*times.length)];
-    popup.classList.remove('sp-hide');
+  const popup = document.getElementById('spPopup');
+  const avatar = document.getElementById('spAvatar');
+  const nameEl = document.getElementById('spName');
+  
+  function showNext(){
+    const p = people[Math.floor(Math.random()*people.length)];
+    avatar.textContent = p.n.charAt(0);
+    nameEl.textContent = p.n + ' · ' + p.c;
+    
     popup.classList.add('sp-show');
-    setTimeout(function(){ popup.classList.remove('sp-show'); popup.classList.add('sp-hide'); }, 4500);
-    setTimeout(show, 18000+Math.random()*14000);
+    
+    setTimeout(() => {
+      popup.classList.remove('sp-show');
+      setTimeout(showNext, Math.random() * 15000 + 10000); // Próximo entre 10-25s
+    }, 5000); // Fica visível por 5s
   }
-  setTimeout(show, 5000+Math.random()*5000);
+  
+  setTimeout(showNext, 3000); // Começa após 3s
 })();
-</script>
 
-<div class="sp-popup" id="spPopup">
-  <div class="sp-avatar" id="spAvatar"></div>
-  <div class="sp-body">
-    <div class="sp-name" id="spName"></div>
-    <div class="sp-action">🦴 <strong>Acabou de garantir</strong> o pack</div>
-    <div class="sp-footer"><div class="sp-dot"></div><div class="sp-time" id="spTime"></div></div>
-  </div>
-</div>
-
-<script>
-(function () {
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
-  function getUtmParams() {
-    var stored = {};
-    try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
-    var urlParams = new URLSearchParams(window.location.search);
-    UTM_KEYS.forEach(function (key) {
-      var val = urlParams.get(key);
-      if (val) stored[key] = val;
+// Sincronização de links Kiwify com UTMs
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const utms = urlParams.toString();
+  if (utms) {
+    document.querySelectorAll('.kiwify-link').forEach(link => {
+      const base = link.href.split('?')[0];
+      link.href = `${base}?${utms}`;
     });
-    return stored;
-  }
-  function appendUtmsToInternalLinks() {
-    var params = getUtmParams();
-    var keys = Object.keys(params);
-    if (!keys.length) return;
-    var query = keys.map(function (k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
-    }).join('&');
-    document.querySelectorAll('a[href]').forEach(function (el) {
-      var href = el.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto')) return;
-      el.href = href + (href.includes('?') ? '&' : '?') + query;
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', appendUtmsToInternalLinks);
-  } else {
-    appendUtmsToInternalLinks();
   }
 })();
 </script>
 
-<script>
-(function () {
-  var BASE_URL = 'https://pay.kiwify.com.br/KcIzyzK';
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'src'];
-  function readParams() {
-    var params = {};
-    var urlParams = new URLSearchParams(window.location.search);
-    UTM_KEYS.forEach(function (key) {
-      var val = urlParams.get(key);
-      if (val) params[key] = val;
-    });
-    return params;
-  }
-  function saveParams(params) {
-    var stored = {};
-    try { stored = JSON.parse(sessionStorage.getItem('ev_utm') || '{}'); } catch (e) {}
-    Object.assign(stored, params);
-    sessionStorage.setItem('ev_utm', JSON.stringify(stored));
-    return stored;
-  }
-  function buildCheckoutUrl(params) {
-    var keys = Object.keys(params);
-    if (!keys.length) return BASE_URL;
-    var query = keys.map(function (k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
-    }).join('&');
-    return BASE_URL + '?' + query;
-  }
-  function updateLinks(url) {
-    document.querySelectorAll('a.kiwify-link').forEach(function (el) {
-      el.href = url;
-    });
-  }
-  function init() {
-    var fromUrl = readParams();
-    var merged  = saveParams(fromUrl);
-    var url      = buildCheckoutUrl(merged);
-    updateLinks(url);
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
 </body>
 </html>
