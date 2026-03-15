@@ -34,6 +34,38 @@ const EV_CONFIG = {
       avatarUrl: '',
       subsManual: 0,
     },
+    {
+      id: 'UCH3j4xGNhaW-5B5Z_v9Xi0Q',
+      nome: 'Ponto Misterioso',
+      handle: '@pontomisterioso',
+      status: 'active',
+      avatarUrl: '',
+      subsManual: 0,
+    },
+    {
+      id: 'UC7-aLlDxhvb0qHg-BP8oGrA',
+      nome: 'Mistério Central',
+      handle: '@MisterioCentral',
+      status: 'active',
+      avatarUrl: '',
+      subsManual: 0,
+    },
+    {
+      id: 'UCk2EZnodn4tgn4P2KpW_3Ow',
+      nome: 'Socrátes Bizarro',
+      handle: '@socratesbizarro',
+      status: 'active',
+      avatarUrl: '',
+      subsManual: 0,
+    },
+    {
+      id: 'UCs63xwBLfXrzT09lt31pOow',
+      nome: 'Primal Reverse',
+      handle: '@Primalreverse',
+      status: 'active',
+      avatarUrl: '',
+      subsManual: 0,
+    },
   ],
 
 };
