@@ -674,7 +674,6 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
   .nav-btn { font-size:9px !important; padding:8px 12px !important; letter-spacing:1px !important; }
   .nav-prompts { display:none !important; }
   .nav-countdown { display:none !important; }
-  /* hamburger removido */
   .urgency-banner { margin-top:52px; }
   .urg-desktop { display: none !important; }
   .urg-mobile  { display: inline !important; }
@@ -1533,6 +1532,11 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
 </footer>
 
 <script>
+// ─── ESCONDER BOTÕES MONETIZO ───
+document.querySelectorAll('[data-monetizo]').forEach(function(el){
+  el.style.display = 'none';
+});
+
 // ─── VAGAS POPUP ───
 (function(){
   var popup   = document.getElementById('vagasPopup');
@@ -1550,15 +1554,12 @@ body.owl-theme { --o1:#3a8a3a; --o2:#4db84d; --o3:#66cc66; }
     document.body.style.overflow = '';
   }
 
-  // Fecha clicando no backdrop
   popup.addEventListener('click', function(e){ if(e.target === popup) fechar(); });
   if(btnClose) btnClose.addEventListener('click', fechar);
   if(btnSec)   btnSec.addEventListener('click', fechar);
 
-  // ESC fecha
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fechar(); });
 
-  // Intercepta todos os elementos com data-monetizo
   document.querySelectorAll('[data-monetizo]').forEach(function(el){
     el.addEventListener('click', abrir);
   });
